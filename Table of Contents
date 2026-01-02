@@ -27,3 +27,11 @@ Top TOC
 #toc-list li::before { content: "★"; position: absolute; left: 0; color: #8b6fb3; }
 #toc-list li.toc-sub { margin-left: 20px; }
 </style>
+
+Middle TOC
+<div class="toc-container">
+  <button class="toc-title" onclick="toggleTOC()">📚 Table of Contents ▼</button>
+  <div id="toc-content" class="toc-content">
+    <ul id="toc-list"></ul>
+  </div>
+</div>
