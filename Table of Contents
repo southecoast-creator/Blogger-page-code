@@ -35,3 +35,43 @@ Middle TOC
     <ul id="toc-list"></ul>
   </div>
 </div>
+
+Bottom TOC
+<script>
+function createTOC() {
+  const tocList = document.getElementById("toc-list");
+  const headings = document.querySelectorAll("h2, h3");
+  let counter = 1;
+
+  headings.forEach(h => {
+    // Remove any extra weird characters from heading text
+    const headingText = h.textContent.trim();
+
+    // Add ID if missing
+    if (!h.id) {
+      h.id = "toc-" + counter;
+      counter++;
+    }
+
+    // Create list item
+    const li = document.createElement("li");
+    if (h.tagName === "H3") li.classList.add("toc-sub");
+
+    // Create clickable link
+    const link = document.createElement("a");
+    link.href = "#" + h.id;        // jumps to heading
+    link.textContent = headingText; // only clean heading text
+
+    li.appendChild(link);
+    tocList.appendChild(li);
+  });
+}
+
+function toggleTOC() {
+  const tocBox = document.getElementById("toc-content");
+  tocBox.style.display = tocBox.style.display === "block" ? "none" : "block";
+}
+
+// Initialize TOC on page load
+document.addEventListener("DOMContentLoaded", createTOC);
+</script>
