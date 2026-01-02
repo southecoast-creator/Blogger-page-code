@@ -24,7 +24,12 @@ Top TOC
 }
 #toc-list { margin: 0; padding-left: 0; }
 #toc-list li { list-style: none; margin: 8px 0; font-size: 15px; position: relative; padding-left: 22px; }
-#toc-list li::before { content: "★"; position: absolute; left: 0; color: #8b6fb3; }
+#toc-list li::before {
+  content: "\2605"; /* Unicode star */
+  position: absolute;
+  left: 0;
+  color: #8b6fb3;
+}
 #toc-list li.toc-sub { margin-left: 20px; }
 </style>
 
