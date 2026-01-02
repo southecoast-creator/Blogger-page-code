@@ -33,6 +33,17 @@ Thought bubbles for special words
 </span>
 
 Tip-box
-
 <div class="tip-box">
 <strong>Tip:</strong>X<\div>
+
+Notebox
+<div class="note-box">
+<strong>Note:</strong>X<\div>
+
+Warning box
+<div class="warning-box">
+<strong>Warning:</strong>X<\div>
+
+Fun fact box
+<div class="funfact-box">
+<strong>Fun fact:</strong>X<\div>
