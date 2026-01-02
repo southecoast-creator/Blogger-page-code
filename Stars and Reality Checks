@@ -1,1 +1,20 @@
+Reality Checks
+<small style="color:#6a4bc4;">
+  Reality check ✓
+</small>
 
+<svg width="26" height="26" viewBox="0 0 100 100"
+     style="vertical-align: middle; margin-left:6px;">
+  <polygon
+    points="50,5 61,38 95,38 67,58 78,91 50,71 22,91 33,58 5,38 39,38"
+    fill="none"
+    stroke="#b48cff"
+    stroke-width="4"
+    stroke-linejoin="round"
+  />
+</svg>
+
+<p>
+You don’t need <strong>WordPress, plugins, or another $1,000</strong>
+to start out as a beginner blogger.
+</p>
