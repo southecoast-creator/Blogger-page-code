@@ -73,3 +73,72 @@ This post is for you box
   </ul>
 
 </div>
+
+Takeaways 
+<div class="takeaway-box">
+  <div class="takeaway-title">Take-Away</div>
+  <p>
+    Progress, no matter how small, is still progress.<br>
+    Celebrate every little win!
+  </p>
+  
+  <!-- Sparkles as DIVs -->
+  <div class="spark sparkle1"></div>
+  <div class="spark sparkle2"></div>
+  <div class="spark sparkle3"></div>
+  <div class="spark sparkle4"></div>
+</div>
+
+<style>
+.takeaway-box {
+  background: linear-gradient(145deg, #fff8f2, #ffe7e0);
+  border-radius: 20px;
+  padding: 25px 30px;
+  margin: 30px auto;
+  max-width: 400px;
+  font-family: "Georgia", serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #333;
+  text-align: center;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.takeaway-box:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+}
+
+.takeaway-title {
+  font-weight: bold;
+  font-size: 18px;
+  margin-bottom: 12px;
+  color: #e07c7c;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+/* Sparkles as real CSS elements (no emoji, no text) */
+.spark {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: #fff9c4;
+  border-radius: 50%;
+  box-shadow: 0 0 6px #fff9c4, 0 0 12px #fff59d;
+  animation: twinkle 2s infinite ease-in-out alternate;
+}
+
+.spark1 { top: 15px; left: 25px; }
+.spark2 { top: 60px; right: 20px; }
+.spark3 { bottom: 25px; left: 40px; }
+.spark4 { bottom: 20px; right: 35px; }
+
+@keyframes twinkle {
+  0% { transform: scale(0.6); opacity: 0.5; }
+  50% { transform: scale(1.2); opacity: 1; }
+  100% { transform: scale(0.8); opacity: 0.7; }
+}
+</style>
