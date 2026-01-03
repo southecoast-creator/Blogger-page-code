@@ -47,3 +47,29 @@ Warning box
 Fun fact box
 <div class="funfact-box">
 <strong>Fun fact:</strong>X<\div>
+
+
+
+This post is for you box
+<div style="
+  border: 1.5px solid rgba(180, 140, 255, 0.6);
+  border-left: 4px solid rgba(180, 140, 255, 0.9);
+  background: transparent;
+  padding: 16px 18px;
+  margin: 22px 0;
+  border-radius: 8px;
+">
+
+  <strong style="color:#7a5bd6; font-size:16px;">
+    This post is for you if:
+  </strong>
+
+  <ul style="margin-top:10px; padding-left:18px;">
+    <li>You’re a beginner blogger with little or no traffic</li>
+    <li>You don’t want to spend money before you understand blogging</li>
+    <li>You feel discouraged by “invest first” advice</li>
+    <li>You want a calm, low-pressure way to start blogging</li>
+    <li>You care more about value than fancy tools</li>
+  </ul>
+
+</div>
