@@ -32,3 +32,62 @@ Blogger doesn’t receive frequent flashy updates, and official support is minim
 <strong>Workaround:</strong><br>
 Blogger’s simplicity is its strength. Fewer updates mean fewer things breaking. Community tutorials, forums, and experimentation fill the gap effectively.
 </div>
+
+
+Nice Square Note
+<div class="torn-note">
+  <p>
+    Write your quote, note, or extra blog message here.
+    <br><br>
+    You can add multiple lines, thoughts, reminders, or quotes.
+  </p>
+</div>
+
+<style>
+.torn-note {
+  background: 
+    repeating-linear-gradient(
+      to bottom,
+      #fdfcf8,
+      #fdfcf8 26px,
+      #e3e3e3 27px
+    );
+  padding: 30px 25px;
+  margin: 30px 0;
+  font-family: "Georgia", serif;
+  font-size: 16px;
+  line-height: 1.7;
+  color: #333;
+  position: relative;
+  border-left: 3px solid #d6cfc4;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+}
+
+/* Torn top edge */
+.torn-note::before {
+  content: "";
+  position: absolute;
+  top: -12px;
+  left: 0;
+  width: 100%;
+  height: 14px;
+  background:
+    radial-gradient(circle at 10px 10px, transparent 12px, #fdfcf8 13px),
+    radial-gradient(circle at 30px 0, transparent 10px, #fdfcf8 11px);
+  background-size: 40px 14px;
+}
+
+/* Torn bottom edge */
+.torn-note::after {
+  content: "";
+  position: absolute;
+  bottom: -12px;
+  left: 0;
+  width: 100%;
+  height: 14px;
+  background:
+    radial-gradient(circle at 20px 0, transparent 10px, #fdfcf8 11px),
+    radial-gradient(circle at 40px 10px, transparent 12px, #fdfcf8 13px);
+  background-size: 40px 14px;
+}
+</style>
