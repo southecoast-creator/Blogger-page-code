@@ -227,7 +227,7 @@ Takeaways
     }
   }
 </style>
-
+Open a Blogger Boost 
 <button class="blogger-boost-btn" onclick="openBoost()">
   🎁 Open a Blogger Boost
 </button>
