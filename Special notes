@@ -195,3 +195,62 @@ Dogeared Circle
   pointer-events: none;
 }
 </style>
+
+FAQ text
+<h2 style="
+  color:#A899C9;
+  font-family:'Georgia', serif;
+  font-size:28px;
+  font-weight:bold;
+  text-align:left;
+  letter-spacing:1.2px;
+  margin-top:40px;
+  margin-bottom:20px;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+">
+  FAQs
+</h2>
+
+
+
+FAQ questions 
+<!-- FAQ Container -->
+<div style="max-width:800px;margin:30px auto;font-family:Arial,sans-serif;">
+
+  <!-- FAQ Item 1 -->
+  <button onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='block'?'none':'block';"
+    style="width:100%;background:#f4edf8;color:#3a2a4d;font-weight:bold;
+    padding:14px 18px;border:none;border-radius:10px;
+    text-align:left;font-size:16px;cursor:pointer;margin-bottom:6px;">
+    ❓ Can Blogger blogs really rank on Google?
+  </button>
+  <div style="display:none;padding:12px 18px;background:#fff;border-radius:10px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.05);margin-bottom:12px;color:#555;font-size:14px;">
+    Yes. Blogger blogs can rank high on Google when proper SEO practices are applied. The platform itself is stable and Google-friendly.
+  </div>
+
+  <!-- FAQ Item 2 -->
+  <button onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='block'?'none':'block';"
+    style="width:100%;background:#f4edf8;color:#3a2a4d;font-weight:bold;
+    padding:14px 18px;border:none;border-radius:10px;
+    text-align:left;font-size:16px;cursor:pointer;margin-bottom:6px;">
+    ❓ How long does it take to rank on Google?
+  </button>
+  <div style="display:none;padding:12px 18px;background:#fff;border-radius:10px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.05);margin-bottom:12px;color:#555;font-size:14px;">
+    Ranking depends on content quality, consistency, and competition. Usually a few weeks to a few months.
+  </div>
+
+  <!-- FAQ Item 3 -->
+  <button onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display==='block'?'none':'block';"
+    style="width:100%;background:#f4edf8;color:#3a2a4d;font-weight:bold;
+    padding:14px 18px;border:none;border-radius:10px;
+    text-align:left;font-size:16px;cursor:pointer;margin-bottom:6px;">
+    ❓ Do I need paid tools to rank?
+  </button>
+  <div style="display:none;padding:12px 18px;background:#fff;border-radius:10px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.05);margin-bottom:12px;color:#555;font-size:14px;">
+    No. Free tools like Google Search Console, Google Trends, and keyword research can help you optimize your Blogger blog effectively.
+  </div>
+
+</div>
