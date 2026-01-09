@@ -304,3 +304,33 @@ Like Box
     <span id="like-count">0</span>
   </div>
 </div>
+
+
+Suggestion Box
+<div class="suggestion-box">
+  <p class="suggestion-title">What would you like me to write about next?</p>
+
+  <div class="suggestion-tags">
+    <button onclick="openSuggestion('Writing Tips')">Writing Tips</button>
+    <button onclick="openSuggestion('SEO')">SEO</button>
+    <button onclick="openSuggestion('Story Ideas')">Story Ideas</button>
+    <button onclick="openSuggestion('Blogger Help')">Blogger Help</button>
+  </div>
+
+  <div id="suggestion-form" style="display:none;">
+    <p id="selected-topic"></p>
+
+<!-- Google Form Embed -->
+    <iframe
+      src="https://docs.google.com/forms/d/e/YOUR_FORM_ID/viewform?embedded=true"
+      width="100%"
+      height="420"
+      frameborder="0"
+      marginheight="0"
+      marginwidth="0">
+      Loading…
+    </iframe>
+    <textarea placeholder="Tell me what you’d like to read next..."></textarea>
+    <button class="submit-btn">Submit</button>
+  </div>
+</div>
