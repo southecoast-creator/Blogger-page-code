@@ -259,3 +259,19 @@ special codes
 <pre><code>
 PASTE YOUR CODE HERE
 </code></pre>
+
+
+Author Bio
+<div style="margin-top:40px;padding:20px;border-top:1px solid #eee;display:flex;align-items:center;gap:15px;font-family:inherit;">
+  
+  <img src="PASTE-YOUR-IMAGE-LINK-HERE"
+       style="width:90px;height:90px;border-radius:50%;object-fit:cover;border:3px solid #c9b6ff;" />
+
+  <div>
+    <p style="margin:0;font-size:15px;line-height:1.6;">
+      Hi, I’m <strong>Your Name</strong> 💜  
+      A writer, thinker, and lover of soft chaos. I share thoughts, guides, and quiet reflections for curious minds and gentle souls.
+    </p>
+  </div>
+
+</div>
