@@ -294,3 +294,13 @@ Reading Time
   font-family: inherit;
 }
 </style>
+
+Like Box
+<div class="star-like-box">
+  <p class="star-question">Was this article helpful?</p>
+
+  <div class="star-like" onclick="likePost()">
+    <span id="star">☆</span>
+    <span id="like-count">0</span>
+  </div>
+</div>
