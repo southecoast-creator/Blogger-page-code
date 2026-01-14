@@ -334,3 +334,10 @@ Suggestion Box
     <button class="submit-btn">Submit</button>
   </div>
 </div>
+<script>
+function openSuggestion(topic) {
+  document.getElementById("suggestion-form").style.display = "block";
+  document.getElementById("selected-topic").innerText =
+    "Topic selected: " + topic;
+}
+</script>
