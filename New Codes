@@ -6,3 +6,35 @@ Star Vote
     <span id="like-count">0</span>
   </div>
 </div>
+
+
+Special Boxes
+<div class="info-box tip-box">
+  <span class="box-icon">💡</span>
+  <strong>Tip</strong>
+  Use internal links to keep readers on your blog longer.
+</div>
+
+<div class="info-box note-box">
+  <span class="box-icon">📝</span>
+  <strong>Note</strong>
+  This method works best for beginner bloggers.
+</div>
+
+<div class="info-box warning-box">
+  <span class="box-icon">📣</span>
+  <strong>Warning</strong>
+  Avoid copying content from other blogs. Google penalizes it.
+</div>
+
+<div class="info-box funfact-box">
+  <span class="box-icon">🎉</span>
+  <strong>Fun Fact</strong>
+  Bloggers who post consistently grow traffic faster.
+</div>
+
+<div class="info-box extras-box">
+  <span class="box-icon">⭐</span>
+  <strong>Extras</strong>
+  Download my free blog checklist below.
+</div>
