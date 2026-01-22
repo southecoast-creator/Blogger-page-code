@@ -98,3 +98,26 @@ Star Course Linking
 <div class="quote-circle">
 "High-performing blog posts are written to readers in a moment, not to search engines."
 </div>
+
+<div style="margin-top: 20px; font-size: 18px; display: flex; align-items: center; gap: 10px;">
+  <span id="star" style="cursor: pointer; color: #b7aee3; font-size: 24px;">☆</span>
+  <span id="likeCount">0</span>
+</div>
+
+<script>
+  let likes = 0;
+  let liked = false;
+
+  const star = document.getElementById("star");
+  const count = document.getElementById("likeCount");
+
+  star.onclick = function() {
+    if (!liked) {
+      likes++;
+      liked = true;
+      star.textContent = "\u2B50"; // Unicode for filled star
+      star.style.color = "#8375a3"; // optional filled color
+      count.textContent = likes;
+    }
+  }
+</script>
