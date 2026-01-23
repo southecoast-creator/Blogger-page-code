@@ -121,3 +121,33 @@ Star Course Linking
     }
   }
 </script>
+Follow Us
+<!-- Soft snippet -->
+<div id="followSnippet" style="background-color:#E8DFFF; padding:10px 15px; border-radius:12px; display:inline-block; cursor:pointer; color:#4B0082; font-weight:bold; text-align:center;">
+  Follow me for more 💜
+</div>
+
+<!-- Pop-up modal -->
+<div id="followModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background-color:rgba(0,0,0,0.5); justify-content:center; align-items:center;">
+  <div style="background-color:#fff; padding:20px; border-radius:15px; text-align:center; min-width:250px;">
+    <h3 style="color:#4B0082;">Follow me on</h3>
+    <div style="display:flex; flex-direction:column; gap:10px; margin-top:10px;">
+      <a href="https://medium.com/@yourusername" target="_blank" style="padding:10px; background-color:#000; color:#fff; border-radius:8px; text-decoration:none;">Medium</a>
+      <a href="https://www.pinterest.com/yourusername" target="_blank" style="padding:10px; background-color:#E60023; color:#fff; border-radius:8px; text-decoration:none;">Pinterest</a>
+      <a href="https://www.quora.com/profile/yourusername" target="_blank" style="padding:10px; background-color:#B92B27; color:#fff; border-radius:8px; text-decoration:none;">Quora</a>
+      <a href="https://yournewsletter.substack.com" target="_blank" style="padding:10px; background-color:#000; color:#fff; border-radius:8px; text-decoration:none;">Substack</a>
+      <a href="https://www.reddit.com/user/yourusername" target="_blank" style="padding:10px; background-color:#FF4500; color:#fff; border-radius:8px; text-decoration:none;">Reddit</a>
+    </div>
+    <button id="closeModal" style="margin-top:15px; padding:5px 10px; border:none; border-radius:8px; cursor:pointer;">Close</button>
+  </div>
+</div>
+
+<script>
+  const snippet = document.getElementById('followSnippet');
+  const modal = document.getElementById('followModal');
+  const close = document.getElementById('closeModal');
+
+  snippet.onclick = () => modal.style.display = 'flex';
+  close.onclick = () => modal.style.display = 'none';
+  window.onclick = (e) => { if(e.target == modal) modal.style.display = 'none'; }
+</script>
