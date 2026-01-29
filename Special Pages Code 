@@ -137,3 +137,48 @@ Sliding Book images
     </a>
   </div>
 </section>
+
+Board sliders
+<div class="board-slider" id="boardSlider">
+  <a href="LINK1" class="board">
+    <img src="IMAGE1" alt="Board 1">
+    <span>See what the club’s discussing</span>
+  </a>
+
+  <a href="LINK2" class="board">
+    <img src="IMAGE2" alt="Board 2">
+    <span>Curated Picks</span>
+  </a>
+
+  <a href="LINK3" class="board">
+    <img src="IMAGE3" alt="Board 3">
+    <span>Reader Favorites</span>
+  </a>
+
+  <a href="LINK4" class="board">
+    <img src="IMAGE4" alt="Board 4">
+    <span>Freshly Brewed</span>
+  </a>
+</div>
+<script>
+const slider = document.getElementById('boardSlider');
+
+let scrollAmount = 0;
+const scrollStep = 191; // board width + gap
+const scrollDelay = 3000;
+
+setInterval(() => {
+  if (!slider) return;
+
+  if (scrollAmount >= slider.scrollWidth - slider.clientWidth) {
+    scrollAmount = 0;
+  } else {
+    scrollAmount += scrollStep;
+  }
+
+  slider.scrollTo({
+    left: scrollAmount,
+    behavior: 'smooth'
+  });
+}, scrollDelay);
+</script>
