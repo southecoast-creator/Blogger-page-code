@@ -106,3 +106,34 @@ sliding IMAGES
     <img src="IMAGE-URL-4" alt="Book 4">
   </div>
 </div>
+
+Sliding Book images 
+<section class="book-slider">
+  <div class="book-card">
+    <a href="BOOK1-LINK">
+      <img src="BOOK1-IMAGE" alt="Book 1">
+      <p>Book Title 1</p>
+    </a>
+  </div>
+
+  <div class="book-card">
+    <a href="BOOK2-LINK">
+      <img src="BOOK2-IMAGE" alt="Book 2">
+      <p>Book Title 2</p>
+    </a>
+  </div>
+
+  <div class="book-card">
+    <a href="BOOK3-LINK">
+      <img src="BOOK3-IMAGE" alt="Book 3">
+      <p>Book Title 3</p>
+    </a>
+  </div>
+
+  <div class="book-card">
+    <a href="BOOK4-LINK">
+      <img src="BOOK4-IMAGE" alt="Book 4">
+      <p>Book Title 4</p>
+    </a>
+  </div>
+</section>
