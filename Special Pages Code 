@@ -24,3 +24,85 @@
   <!-- Repeat until you have 12 books -->
 
 </div>
+
+4 books per page image
+<div class="book-grid">
+
+  <div class="book-item">
+    <a href="BOOK-LINK-1">
+      <img src="IMAGE-URL-1" class="book-cover" alt="Book Title 1">
+      <div class="book-title">Book Title 1</div>
+    </a>
+  </div>
+
+  <div class="book-item">
+    <a href="BOOK-LINK-2">
+      <img src="IMAGE-URL-2" class="book-cover" alt="Book Title 2">
+      <div class="book-title">Book Title 2</div>
+    </a>
+  </div>
+
+  <div class="book-item">
+    <a href="BOOK-LINK-3">
+      <img src="IMAGE-URL-3" class="book-cover" alt="Book Title 3">
+      <div class="book-title">Book Title 3</div>
+    </a>
+  </div>
+
+  <div class="book-item">
+    <a href="BOOK-LINK-4">
+      <img src="IMAGE-URL-4" class="book-cover" alt="Book Title 4">
+      <div class="book-title">Book Title 4</div>
+    </a>
+  </div>
+
+</div>
+4 books per page image 
+<div class="book-grid">
+
+  <div class="book-item">
+    <a href="BOOK-LINK-1">
+      <img src="IMAGE-URL-1" class="book-cover" alt="Book Title 1">
+      <div class="book-title">Book Title 1</div>
+    </a>
+  </div>
+
+  <div class="book-item">
+    <a href="BOOK-LINK-2">
+      <img src="IMAGE-URL-2" class="book-cover" alt="Book Title 2">
+      <div class="book-title">Book Title 2</div>
+    </a>
+  </div>
+
+  <div class="book-item">
+    <a href="BOOK-LINK-3">
+      <img src="IMAGE-URL-3" class="book-cover" alt="Book Title 3">
+      <div class="book-title">Book Title 3</div>
+    </a>
+  </div>
+
+  <div class="book-item">
+    <a href="BOOK-LINK-4">
+      <img src="IMAGE-URL-4" class="book-cover" alt="Book Title 4">
+      <div class="book-title">Book Title 4</div>
+    </a>
+  </div>
+
+</div>
+
+
+sliding IMAGES
+<div class="bookstore-slider">
+  <div class="slider-track">
+    <img src="IMAGE-URL-1" alt="Book 1">
+    <img src="IMAGE-URL-2" alt="Book 2">
+    <img src="IMAGE-URL-3" alt="Book 3">
+    <img src="IMAGE-URL-4" alt="Book 4">
+    
+    <!-- Duplicate images for seamless looping -->
+    <img src="IMAGE-URL-1" alt="Book 1">
+    <img src="IMAGE-URL-2" alt="Book 2">
+    <img src="IMAGE-URL-3" alt="Book 3">
+    <img src="IMAGE-URL-4" alt="Book 4">
+  </div>
+</div>
