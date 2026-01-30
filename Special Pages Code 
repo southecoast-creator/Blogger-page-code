@@ -183,4 +183,70 @@ setInterval(() => {
 }, scrollDelay);
 </script>
 
-Other stuffs book board 
+Ebooks section 
+<div class="my-bookstore">
+  <!-- HERO / JUMBOTRON -->
+<div class="jumbotron">
+  <h1>Access Endless Stories by The Weirdo</h1>
+  <p>Discover premium books and free originals. Click any book to explore it fully in Notion.</p>
+</div>
+
+<!-- SECTION 1: BOOKS YOU CAN BUY (Amazon Premium) -->
+<div class="bookstore-section">
+  <div class="section-banner">Books You Can Buy</div>
+  
+  <!-- FICTION SUBSECTION -->
+  <h3>Fiction</h3>
+  <div class="book-grid">
+    <!-- Example Book Card -->
+    <div class="book-card">
+      <img src="COVER-IMAGE-URL-HERE" alt="Book Title">
+      <div class="book-title">Fiction Book 1</div>
+      <div class="book-hook">A thrilling tale of mystery and adventure.</div>
+      <a href="NOTION-BOOK-TEMPLATE-LINK" class="view-btn">View Book</a>
+    </div>
+
+    <!-- Repeat book cards as needed -->
+  </div>
+
+  <!-- NONFICTION SUBSECTION -->
+  <h3>Nonfiction</h3>
+  <div class="book-grid">
+    <div class="book-card">
+      <img src="COVER-IMAGE-URL-HERE" alt="Book Title">
+      <div class="book-title">Nonfiction Book 1</div>
+      <div class="book-hook">Learn practical skills and real-life strategies.</div>
+      <a href="NOTION-BOOK-TEMPLATE-LINK" class="view-btn">View Book</a>
+    </div>
+  </div>
+
+</div>
+
+<!-- SECTION 2: BOOKS YOU CAN READ ONLINE -->
+<div class="bookstore-section">
+  <div class="section-banner">Books You Can Read Online</div>
+
+  <!-- NOVELS SUBSECTION -->
+  <h3>Novels</h3>
+  <div class="book-grid">
+    <div class="book-card">
+      <img src="COVER-IMAGE-URL-HERE" alt="Novel Title">
+      <div class="book-title">Novel 1</div>
+      <div class="book-hook">An immersive journey through love and chaos.</div>
+      <a href="NOTION-BOOK-TEMPLATE-LINK" class="view-btn">Read Book</a>
+    </div>
+  </div>
+
+  <!-- MINI NOVELS / NOVELLAS SUBSECTION -->
+  <h3>Mini Novels</h3>
+  <div class="book-grid">
+    <div class="book-card">
+      <img src="COVER-IMAGE-URL-HERE" alt="Mini Novel Title">
+      <div class="book-title">Mini Novel 1</div>
+      <div class="book-hook">Short but powerful story to read in one sitting.</div>
+      <a href="NOTION-BOOK-TEMPLATE-LINK" class="view-btn">Read Book</a>
+    </div>
+  </div>
+
+</div>
+</div>
