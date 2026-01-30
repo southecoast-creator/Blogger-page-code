@@ -360,3 +360,106 @@ Book Board
   </div>
 
 </div>
+
+<!-- BEGIN BOARD SLIDER -->
+<style>
+.board-slider {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding: 20px 10px;
+  white-space: nowrap;
+  scroll-snap-type: x mandatory;
+}
+
+.board-slider .board {
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+  text-align: center;
+  text-decoration: none;
+  color: inherit;
+}
+
+.board-slider img {
+  display: block;
+  width: 200px; /* adjust if needed */
+  height: auto;
+  border-radius: 10px;
+}
+
+.board-slider span {
+  display: block;
+  margin-top: 5px;
+  font-size: 14px;
+  text-align: center;
+}
+</style>
+
+<div class="board-slider">
+  <a href="#" class="board">
+    <img src="IMAGE1" alt="Board 1">
+    <span>See what the club’s discussing</span>
+  </a>
+  <a href="#" class="board">
+    <img src="IMAGE2" alt="Board 2">
+    <span>Curated Picks</span>
+  </a>
+  <a href="#" class="board">
+    <img src="IMAGE3" alt="Board 3">
+    <span>Reader Favorites</span>
+  </a>
+  <a href="#" class="board">
+    <img src="IMAGE4" alt="Board 4">
+    <span>Freshly Brewed</span>
+  </a>
+</div>
+
+<div class="board-slider">
+  <a href="#" class="board">
+    <img src="IMAGE5" alt="Board 5">
+    <span>New Arrivals</span>
+  </a>
+  <a href="#" class="board">
+    <img src="IMAGE6" alt="Board 6">
+    <span>Top Rated</span>
+  </a>
+  <a href="#" class="board">
+    <img src="IMAGE7" alt="Board 7">
+    <span>Staff Picks</span>
+  </a>
+</div>
+
+<script>
+window.addEventListener('load', () => {
+  const sliders = document.querySelectorAll('.board-slider');
+  sliders.forEach(slider => {
+    let scrollAmount = 0;
+    const board = slider.querySelector('.board');
+    if (!board) return;
+    const scrollStep = board.offsetWidth + 20; // board width + gap
+    const scrollDelay = 3000;
+    let intervalId;
+
+    const startScroll = () => {
+      intervalId = setInterval(() => {
+        if (scrollAmount >= slider.scrollWidth - slider.clientWidth) {
+          scrollAmount = 0;
+        } else {
+          scrollAmount += scrollStep;
+        }
+        slider.scrollTo({ left: scrollAmount, behavior: 'smooth' });
+      }, scrollDelay);
+    };
+
+    const stopScroll = () => {
+      clearInterval(intervalId);
+    };
+
+    startScroll();
+    slider.addEventListener('mouseenter', stopScroll);
+    slider.addEventListener('mouseleave', startScroll);
+  });
+});
+</script>
+<!-- END BOARD SLIDER -->
