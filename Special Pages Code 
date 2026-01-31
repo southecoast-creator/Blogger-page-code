@@ -467,5 +467,18 @@ window.addEventListener('load', () => {
 Drop down
 <details class="dropdown-box">
   <summary>Browse the Boards</summary>
-  <!-- hidden content -->
+  <div class="bookstore-slider">
+  <div class="slider-track">
+    <img src="IMAGE-URL-1" alt="Book 1">
+    <img src="IMAGE-URL-2" alt="Book 2">
+    <img src="IMAGE-URL-3" alt="Book 3">
+    <img src="IMAGE-URL-4" alt="Book 4">
+
+    <!-- Duplicate images for seamless looping -->
+    <img src="IMAGE-URL-1" alt="Book 1">
+    <img src="IMAGE-URL-2" alt="Book 2">
+    <img src="IMAGE-URL-3" alt="Book 3">
+    <img src="IMAGE-URL-4" alt="Book 4">
+  </div>
+</div>
 </details>
