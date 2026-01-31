@@ -556,4 +556,113 @@ Adventure
 
 </span></b></h4>
 
+<div id="bookBoardWrapper">
+
+  <style>
+
+  /* FULLY SCOPED — NOTHING LEAKS */
+
+  #bookBoardWrapper {
+
+    background: #f8f8f8;
+
+    padding: 24px;
+
+  }
+
+  #bookBoardWrapper .board {
+
+    display: grid;
+
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+
+    gap: 20px;
+
+  }
+
+  #bookBoardWrapper .item {
+
+    text-align: center;
+
+  }
+
+  #bookBoardWrapper img {
+
+    width: 100%;
+
+    height: auto;
+
+    aspect-ratio: 4 / 3; /* 600x800 */
+
+    object-fit: cover;
+
+    border-radius: 8px;
+
+    display: block;
+
+  }
+
+  #bookBoardWrapper a {
+
+    text-decoration: none;
+
+    color: #222;
+
+  }
+
+  #bookBoardWrapper .title {
+
+    margin-top: 6px;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+  }
+
+  @media (max-width: 568px) {
+
+    #bookBoardWrapper .board {
+
+      grid-template-columns: repeat(2, 1fr);
+
+    }
+
+  }
+
+  </style>
+<div class="board">
+
+    <!-- BOOK -->
+
+    <div class="item">
+
+      <a href="#">
+
+        <img src="IMAGE-1">
+
+        <div class="title">Book Title 1</div>
+
+      </a>
+
+    </div>
+
+    <!-- COPY THIS BLOCK 20 TIMES -->
+
+    <div class="item">
+
+      <a href="#">
+
+        <img src="IMAGE-2">
+
+        <div class="title">Book Title 2</div>
+
+      </a>
+
+    </div>
+
+  </div>
+
+</div>
+
 </details>
