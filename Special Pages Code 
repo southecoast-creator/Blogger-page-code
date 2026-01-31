@@ -647,7 +647,61 @@ Adventure
 
     </div>
 
-    <!-- COPY THIS BLOCK 20 TIMES -->
+        <!-- BOOK -->
+
+    <div class="item">
+
+      <a href="#">
+
+        <img src="IMAGE-1">
+
+        <div class="title">Book Title 1</div>
+
+      </a>
+
+    </div>
+
+    <!-- BOOK -->
+
+    <div class="item">
+
+      <a href="#">
+
+        <img src="IMAGE-1">
+
+        <div class="title">Book Title 1</div>
+
+      </a>
+
+    </div>
+
+    <!-- BOOK -->
+
+    <div class="item">
+
+      <a href="#">
+
+        <img src="IMAGE-1">
+
+        <div class="title">Book Title 1</div>
+
+      </a>
+
+    </div>
+
+    <!-- BOOK -->
+
+    <div class="item">
+
+      <a href="#">
+
+        <img src="IMAGE-1">
+
+        <div class="title">Book Title 1</div>
+
+      </a>
+
+    </div>
 
     <div class="item">
 
