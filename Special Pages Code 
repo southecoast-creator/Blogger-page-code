@@ -463,3 +463,9 @@ window.addEventListener('load', () => {
 });
 </script>
 <!-- END BOARD SLIDER -->
+
+Drop down
+<details class="dropdown-box">
+  <summary>Browse the Boards</summary>
+  <!-- hidden content -->
+</details>
