@@ -748,3 +748,13 @@ For The Shop
     <div class="btn-group">
 
       <a href="PRODUCT_LINK_1" class="view-btn">View</a>
+
+<a href="CART_LINK_1" class="cart-btn">Add to Cart</a>
+
+    </div>
+
+  </div>
+
+  <!-- DUPLICATE THIS CARD FOR MORE PRODUCTS -->
+
+</div>
