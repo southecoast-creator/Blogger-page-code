@@ -879,5 +879,38 @@ display: inline-block;
 
 </div>
 
+
+
 <style>
+
+.horizontal-scroll {
+
+  display: flex;
+
+  gap: 16px;
+
+  overflow-x: auto;
+
+  padding: 20px;
+
+  scroll-snap-type: x mandatory;
+
+  -webkit-overflow-scrolling: touch;
+
+}
+
+.horizontal-scroll::-webkit-scrollbar {
+
+  display: none;
+
+}
+
+.promo-card {
+
+  min-width: 280px;
+
+  background: #f6d6dc;
+
+  border-radius: 18px;
+
 
