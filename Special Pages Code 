@@ -1154,4 +1154,22 @@ font-size: 14px;
 
       </div>
 
+</div>
+
+    <div class="promo-card" style="background-image:url('IMAGE-2');">
+
+      <div class="promo-overlay">
+
+        <h2>Calm Journals</h2>
+
+        <a href="#">Explore</a>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
 
