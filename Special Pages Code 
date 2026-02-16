@@ -758,3 +758,32 @@ For The Shop
   <!-- DUPLICATE THIS CARD FOR MORE PRODUCTS -->
 
 </div>
+
+Scroll Products Card
+<div class="scroll-row">
+
+  <div class="scroll-card">
+
+    <img src="IMAGE_1" alt="Product name">
+
+    <h4>Product Name</h4>
+
+    <p class="price">$19.99</p>
+
+    <a href="BUY_LINK_1" class="buy-now">Buy Now</a>
+    
+    
+
+  </div>
+
+  <div class="scroll-card">
+
+    <img src="IMAGE_2" alt="Product name">
+
+    <h4>Product Name</h4>
+
+    <p class="price">$24.99</p>
+    
+    
+
+    <a href="BUY_LINK_2" class="buy-now">Buy Now</a>
