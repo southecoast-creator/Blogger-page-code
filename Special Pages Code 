@@ -1208,4 +1208,34 @@ font-size: 14px;
 
 }
 
+.product-card:hover {
+
+  transform: translateY(-6px);
+
+  box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+
+}
+
+.product-card img {
+
+  width: 100%;
+
+  height: auto;
+
+  display: block;
+
+}
+
+.product-content {
+
+  padding: 20px;
+
+}
+
+.product-title {
+
+  font-size: 18px;
+
+  font-weight: 600;
+
 
