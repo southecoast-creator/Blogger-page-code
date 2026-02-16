@@ -1173,3 +1173,39 @@ font-size: 14px;
 </div>
 
 
+
+
+
+
+
+<style>
+
+.product-grid {
+
+  display: grid;
+
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+
+  gap: 30px;
+
+  margin: 40px 0;
+
+}
+
+.product-card {
+
+  background: #ffffff;
+
+  border-radius: 16px;
+
+  overflow: hidden;
+
+  box-shadow: 0 10px 25px rgba(0,0,0,0.06);
+
+  transition: all 0.3s ease;
+
+  text-align: center;
+
+}
+
+
