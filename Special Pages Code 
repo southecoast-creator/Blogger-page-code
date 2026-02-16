@@ -1018,4 +1018,34 @@ text-decoration: none;
 
 .promo-card {
 
+min-width: 280px;
+
+  height: 180px;
+
+  border-radius: 18px;
+
+  position: relative;
+
+  background-size: cover;
+
+  background-position: center;
+
+  flex-shrink: 0;
+
+  overflow: hidden;
+
+}
+
+.promo-overlay {
+
+  position: absolute;
+
+  inset: 0;
+
+  background: rgba(246, 214, 220, 0.65);
+
+  display: flex;
+
+  flex-direction: column;
+
 
