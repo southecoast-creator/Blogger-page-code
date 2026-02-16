@@ -981,3 +981,41 @@ text-decoration: none;
 </div>
 
 
+
+
+
+
+
+
+
+<style>
+
+.auto-scroll-wrapper {
+
+  overflow: hidden;
+
+  width: 100%;
+
+  padding: 25px 0;
+
+}
+
+.auto-scroll-track {
+
+  display: flex;
+
+  gap: 20px;
+
+  animation: scroll 30s linear infinite;
+
+}
+
+.auto-scroll-wrapper:hover .auto-scroll-track {
+
+  animation-play-state: paused;
+
+}
+
+.promo-card {
+
+
