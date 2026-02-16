@@ -1266,11 +1266,29 @@ margin-bottom: 10px;
 
   color: #000;
 
-}
-
 .product-button {
 
-background: #444;
+  display: inline-block;
+
+  padding: 10px 24px;
+
+  background: #000;
+
+  color: #fff;
+
+  text-decoration: none;
+
+  border-radius: 30px;
+
+  font-size: 14px;
+
+  transition: background 0.3s ease;
+
+}
+
+.product-button:hover {
+
+  background: #444;
 
 }
 
