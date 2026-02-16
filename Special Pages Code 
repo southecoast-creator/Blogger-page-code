@@ -1318,6 +1318,32 @@ margin-bottom: 10px;
 
   </div>
 
+<div class="product-card">
+
+    <img src="PASTE-YOUR-IMAGE-LINK-HERE" alt="Blog Post Kit">
+
+    <div class="product-content">
+
+      <div class="product-title">Blog Post Kit</div>
+
+      <div class="product-description">
+
+        A complete template and checklist system to create high-quality blog posts effortlessly.
+
+      </div>
+
+      <div class="product-price">$9</div>
+
+      <a href="#" class="product-button">View Product</a>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+
 
 
 
