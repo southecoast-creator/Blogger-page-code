@@ -1294,6 +1294,31 @@ margin-bottom: 10px;
 
 </style>
 
+<div class="product-grid">
+
+  <div class="product-card">
+
+    <img src="PASTE-YOUR-IMAGE-LINK-HERE" alt="Steady Serenity Journal">
+
+    <div class="product-content">
+
+      <div class="product-title">Steady Serenity Journal</div>
+
+      <div class="product-description">
+
+        A calming guided journal designed to help you manage anxiety and build emotional stability.
+
+      </div>
+
+      <div class="product-price">$19</div>
+
+      <a href="#" class="product-button">View Product</a>
+
+    </div>
+
+  </div>
+
+
 
 
 
