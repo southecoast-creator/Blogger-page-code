@@ -913,4 +913,36 @@ display: inline-block;
 
   border-radius: 18px;
 
+padding: 25px 20px;
+
+  flex-shrink: 0;
+
+  scroll-snap-align: start;
+
+  text-align: center;
+
+}
+
+.promo-card h2 {
+
+  font-size: 22px;
+
+  margin-bottom: 12px;
+
+  color: #222;
+
+}
+
+.promo-card a {
+
+  display: inline-block;
+
+  background: #111;
+
+  color: #fff;
+
+  padding: 10px 22px;
+
+  border-radius: 30px;
+
 
