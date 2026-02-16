@@ -1048,4 +1048,36 @@ min-width: 280px;
 
   flex-direction: column;
 
+justify-content: center;
+
+  align-items: center;
+
+  text-align: center;
+
+  padding: 20px;
+
+}
+
+.promo-overlay h2 {
+
+  font-size: 22px;
+
+  color: #222;
+
+  margin-bottom: 12px;
+
+}
+
+.promo-overlay a {
+
+  background: #111;
+
+  color: #fff;
+
+  padding: 10px 22px;
+
+  border-radius: 30px;
+
+  text-decoration: none;
+
 
