@@ -787,3 +787,31 @@ Scroll Products Card
     
 
     <a href="BUY_LINK_2" class="buy-now">Buy Now</a>
+
+</div>
+
+  <div class="scroll-card">
+
+    <img src="IMAGE_3" alt="Product name">
+
+    <h4>Product Name</h4>
+
+    <p class="price">$29.99</p>
+
+    <a href="BUY_LINK_3" class="buy-now">Buy Now</a>
+
+  </div>
+
+  <div class="scroll-card">
+
+    <img src="IMAGE_4" alt="Product name">
+
+    <h4>Product Name</h4>
+
+    <p class="price">$34.99</p>
+
+    <a href="BUY_LINK_4" class="buy-now">Buy Now</a>
+
+  </div>
+
+</div>
