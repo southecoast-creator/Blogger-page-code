@@ -952,5 +952,32 @@ text-decoration: none;
 }
 
 </style>
+<div class="horizontal-scroll">
+
+  <div class="promo-card">
+
+    <h2>Best Digital Planners</h2>
+
+    <a href="#">Shop now</a>
+
+  </div>
+
+  <div class="promo-card">
+
+    <h2>Top Journals & Workbooks</h2>
+
+    <a href="#">Explore</a>
+
+  </div>
+
+  <div class="promo-card">
+
+    <h2>Creator Favorites</h2>
+
+    <a href="#">View picks</a>
+
+  </div>
+
+</div>
 
 
