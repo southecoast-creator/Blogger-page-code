@@ -720,3 +720,31 @@ Adventure
 </div>
 
 </details>
+
+
+For The Shop
+<div class="product-grid">
+
+  <div class="product-card">
+
+    <span class="badge">SALE</span>
+
+    <div class="img-wrap">
+
+      <img src="IMAGE_FRONT_1" class="img-front">
+
+      <img src="IMAGE_BACK_1" class="img-back">
+
+    </div>
+
+    <h3>Product Name</h3>
+
+    <p class="price">
+
+      <span class="old-price">$39.99</span> $29.99
+
+    </p>
+
+    <div class="btn-group">
+
+      <a href="PRODUCT_LINK_1" class="view-btn">View</a>
