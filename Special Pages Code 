@@ -1102,4 +1102,30 @@ font-size: 14px;
 
 </style>
 
+<div class="auto-scroll-wrapper">
+
+  <div class="auto-scroll-track">
+
+    <div class="promo-card" style="background-image:url('https://i.postimg.cc/YS1cxh6P/work-178548753-throw-pillow-(3).jpg');">
+
+      <div class="promo-overlay">
+
+        <h2>Digital Planners</h2>
+
+        <a href="#">Shop now</a>
+
+      </div>
+
+    </div>
+
+    <div class="promo-card" style="background-image:url('IMAGE-2');">
+
+      <div class="promo-overlay">
+
+        <h2>Calm Journals</h2>
+
+        <a href="#">Explore</a>
+
+      </div>
+
 
