@@ -1128,4 +1128,30 @@ font-size: 14px;
 
       </div>
 
+</div>
+
+    <div class="promo-card" style="background-image:url('IMAGE-3');">
+
+      <div class="promo-overlay">
+
+        <h2>Creator Favorites</h2>
+
+        <a href="#">View picks</a>
+
+      </div>
+
+    </div>
+
+    <!-- DUPLICATE FOR SMOOTH LOOP -->
+
+    <div class="promo-card" style="background-image:url('https://i.postimg.cc/YS1cxh6P/work-178548753-throw-pillow-(3).jpg');">
+
+      <div class="promo-overlay">
+
+        <h2>Digital Planners</h2>
+
+        <a href="#">Shop now</a>
+
+      </div>
+
 
