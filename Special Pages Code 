@@ -1699,6 +1699,30 @@ font-size: 14px;
 
   <div class="hero-slide" style="background:#ffe4cc;">
 
+<h1>Create an Inspiring Impression with our Arts and Decor!</h1>
+
+    <a href="#shop">View</a>
+
+  </div>
+
+  <div class="hero-slide" style="background:#f6d6dc;">
+
+    <h1>Level Up your Skills with Our Courses</h1>
+
+    <a href="#shop">Level up now!</a>
+
+  </div>
+
+  <div class="hero-slide" style="background:#d6e8f6;">
+
+    <h1>Back-to-School Academic Kits</h1>
+
+    <a href="#shop">Ace with us!</a>
+
+  </div>
+
+  <div class="hero-slide" style="background:#f6efd6;">
+
 
 
 
