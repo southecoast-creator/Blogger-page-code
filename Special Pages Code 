@@ -1402,6 +1402,34 @@ Images
 
     width: 100%;
 
+max-width: 1200px; /* adjust as needed */
+
+    margin: auto;
+
+  }
+
+  .banner-track {
+
+    display: flex;
+
+    flex-wrap: nowrap; /* Keep all images in a single row */
+
+    transition: transform 0.5s ease;
+
+  }
+
+  .banner-track a {
+
+    flex: 0 0 auto; /* prevent shrinking */
+
+    margin-right: 10px;
+
+  }
+
+  .banner-track img {
+
+    width: 350px;
+
 
 
 
