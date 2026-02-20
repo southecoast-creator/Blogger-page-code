@@ -1494,6 +1494,29 @@ height: 200px;
 
     <a href="https://example.com/product9"><img src="https://via.placeholder.com/350x200?text=9" alt="9"></a>
 
+<a href="https://example.com/product10"><img src="https://via.placeholder.com/350x200?text=10" alt="10"></a>
+
+  </div>
+
+</div>
+
+<script>
+
+  const track = document.getElementById('bannerTrack');
+
+  let currentIndex = 0;
+
+  const totalImages = track.children.length;
+
+  const scrollAmount = track.children[0].offsetWidth + 10;
+
+  function autoScrollFunc() {
+
+    currentIndex++;
+
+    if (currentIndex >= totalImages) currentIndex = 0;
+
+
 
 
 
