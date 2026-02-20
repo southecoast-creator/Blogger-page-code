@@ -1563,6 +1563,38 @@ track.style.transform = `translateX(${-scrollAmount * currentIndex}px)`;
 
   padding: 30px 20px;
 
+text-align: center;
+
+  scroll-snap-align: start;
+
+}
+
+.hero-slide h1 {
+
+  font-size: 20px;
+
+  font-weight: 600;
+
+  color: #222;
+
+  margin-bottom: 15px;
+
+}
+
+.hero-slide a {
+
+  display: inline-block;
+
+  background: #111;
+
+  color: #fff;
+
+  padding: 10px 22px;
+
+  border-radius: 30px;
+
+  text-decoration: none;
+
 
 
 
