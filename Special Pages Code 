@@ -1472,6 +1472,28 @@ height: 200px;
 
 <body>
 
+<div class="banner-container">
+
+  <div class="banner-track" id="bannerTrack">
+
+    <a href="https://example.com/product1"><img src="https://i.postimg.cc/Jnkxmyqx/Clothing.jpg" alt="1"></a>
+
+    <a href="https://example.com/product2"><img src="https://i.postimg.cc/Jnkxmyqx/Clothing.jpg" alt="2"></a>
+
+    <a href="https://example.com/product3"><img src="https://via.placeholder.com/350x200?text=3" alt="3"></a>
+
+    <a href="https://example.com/product4"><img src="https://via.placeholder.com/350x200?text=4" alt="4"></a>
+
+    <a href="https://example.com/product5"><img src="https://via.placeholder.com/350x200?text=5" alt="5"></a>
+
+    <a href="https://example.com/product6"><img src="https://via.placeholder.com/350x200?text=6" alt="6"></a>
+
+    <a href="https://example.com/product7"><img src="https://via.placeholder.com/350x200?text=7" alt="7"></a>
+
+    <a href="https://example.com/product8"><img src="https://via.placeholder.com/350x200?text=8" alt="8"></a>
+
+    <a href="https://example.com/product9"><img src="https://via.placeholder.com/350x200?text=9" alt="9"></a>
+
 
 
 
