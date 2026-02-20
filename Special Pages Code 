@@ -1345,6 +1345,34 @@ margin-bottom: 10px;
 
 
 
+THE LIBRARY SHOP
+<style>
+
+.shop-section-title {
+
+  background: #f6d6dc;
+
+  padding: 12px 20px;
+
+  border-radius: 12px;
+
+  text-align: center;
+
+  font-size: 24px;
+
+  font-weight: 600;
+
+  margin: 20px 0;
+
+}
+
+</style>
+<!-- Templates Section -->
+
+<h2 id="templates" class="shop-section-title">Templates</h2>
+
+
+
 
 
 
