@@ -2070,6 +2070,22 @@ flex-direction: column;
 
 </style>
 
+<div class="hero-style3">
+
+  <div class="hero-image"></div>
+
+  <div class="hero-text">
+
+    <h1>Discover Luxury Digital Products</h1>
+
+    <p>From journals to planners, find curated tools designed to elevate your daily workflow and creativity.</p>
+
+    <a href="#shop">Shop Now</a>
+
+  </div>
+
+</div>
+
 
 
 
