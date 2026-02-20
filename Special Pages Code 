@@ -2086,6 +2086,34 @@ flex-direction: column;
 
 </div>
 
+<style>
+
+.sample-row {
+
+  display: flex;
+
+  overflow-x: auto;
+
+  gap: 12px;
+
+  padding: 20px;
+
+  scroll-snap-type: x mandatory;
+
+  -webkit-overflow-scrolling: touch;
+
+}
+
+.sample-row::-webkit-scrollbar {
+
+  display: none; /* hides the scrollbar for clean look */
+
+}
+
+.sample-card {
+
+  flex: 0 0 150px; /* width of each square image */
+
 
 
 
