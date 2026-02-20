@@ -1863,3 +1863,45 @@ padding: 50px;
 
 
 
+<style>
+
+.hero-banner {
+
+  background: #f6d6dc;
+
+  border-radius: 18px;
+
+  padding: 30px 20px;
+
+  text-align: center;
+
+  margin: 20px auto;
+
+  max-width: 1000px;
+
+}
+
+.hero-banner h1 {
+
+  font-size: 32px;
+
+  font-weight: 600;
+
+  color: #222;
+
+  margin-bottom: 15px;
+
+}
+
+.hero-banner a {
+
+display: inline-block;
+
+
+
+
+
+
+
+
+
