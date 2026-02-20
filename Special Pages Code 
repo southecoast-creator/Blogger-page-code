@@ -1516,6 +1516,18 @@ height: 200px;
 
     if (currentIndex >= totalImages) currentIndex = 0;
 
+track.style.transform = `translateX(${-scrollAmount * currentIndex}px)`;
+
+  }
+
+  setInterval(autoScrollFunc, 3000);
+
+</script>
+
+</body>
+
+</html>
+
 
 
 
