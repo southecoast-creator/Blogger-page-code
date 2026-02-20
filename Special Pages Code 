@@ -2020,6 +2020,38 @@ justify-content: center;
 
   color: #555;
 
+line-height: 1.4;
+
+}
+
+.hero-style3 .hero-text a {
+
+  display: inline-block;
+
+  padding: 14px 28px;
+
+  background: #111;
+
+  color: #fff;
+
+  border-radius: 30px;
+
+  text-decoration: none;
+
+  font-size: 18px;
+
+}
+
+.hero-style3 .hero-text a:hover {
+
+  opacity: 0.85;
+
+}
+
+@media (max-width: 1024px) {
+
+  .hero-style3 {
+
 
 
 
