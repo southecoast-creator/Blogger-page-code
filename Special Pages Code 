@@ -1649,6 +1649,30 @@ font-size: 14px;
 
   </div>
 
+<div class="hero-slide" style="background:#ffe4cc;">
+
+    <h1>Convenience you can Carry</h1>
+
+    <a href="#shop">Get Accessories</a>
+
+  </div>
+
+  <div class="hero-slide" style="background:#f6d6dc;">
+
+    <h1>Brand Your Devices, Discover a Signature Style for your Desk</h1>
+
+    <a href="#shop">See more</a>
+
+  </div>
+
+  <div class="hero-slide" style="background:#d6e8f6;">
+
+    <h1>Made for Everyday Magic and Delight</h1>
+
+    <a href="#shop">Discover now!</a>
+
+  </div>
+
 
 
 
