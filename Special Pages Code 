@@ -1801,6 +1801,39 @@ font-size: 14px;
 
   justify-content: flex-start;
 
+padding: 50px;
+
+  box-sizing: border-box;
+
+}
+
+.hero-overlay {
+
+  color: white;
+
+  font-size: 48px;
+
+  font-weight: 700;
+
+  text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+
+  max-width: 600px;
+
+}
+
+@media (max-width: 1024px) {
+
+  .hero-overlay {
+
+    font-size: 36px;
+
+  }
+
+}
+
+@media (max-width: 768px) {
+
+
 
 
 
