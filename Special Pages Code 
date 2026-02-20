@@ -1371,6 +1371,37 @@ THE LIBRARY SHOP
 
 <h2 id="templates" class="shop-section-title">Templates</h2>
 
+Images
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Hero Banner Slider</title>
+
+<style>
+
+  body {
+
+    margin: 0;
+
+    padding: 0;
+
+    font-family: sans-serif;
+
+  }
+
+  .banner-container {
+
+    overflow: hidden;
+
+    width: 100%;
+
 
 
 
