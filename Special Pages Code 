@@ -2146,6 +2146,40 @@ height: 150px; /* makes it square */
 
 </style>
 
+<div class="sample-row">
+
+  <div class="sample-card">
+
+    <a href="YOUR-LINK-1"><img src="IMAGE-LINK-1" alt="Product 1"></a>
+
+  </div>
+
+  <div class="sample-card">
+
+    <a href="YOUR-LINK-2"><img src="IMAGE-LINK-2" alt="Product 2"></a>
+
+  </div>
+
+  <div class="sample-card">
+
+    <a href="YOUR-LINK-3"><img src="IMAGE-LINK-3" alt="Product 3"></a>
+
+  </div>
+
+  <div class="sample-card">
+
+    <a href="YOUR-LINK-4"><img src="IMAGE-LINK-4" alt="Product 4"></a>
+
+</div>
+
+  <div class="sample-card">
+
+    <a href="YOUR-LINK-5"><img src="IMAGE-LINK-5" alt="Product 5"></a>
+
+  </div>
+
+</div>
+
 
 
 
