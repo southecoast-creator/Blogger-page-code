@@ -1531,6 +1531,40 @@ track.style.transform = `translateX(${-scrollAmount * currentIndex}px)`;
 
 
 
+<style>
+
+.hero-scroll {
+
+  display: flex;
+
+  gap: 20px;
+
+  overflow-x: auto;
+
+  padding: 20px 10px;
+
+  scroll-snap-type: x mandatory;
+
+  -webkit-overflow-scrolling: touch;
+
+}
+
+.hero-scroll::-webkit-scrollbar {
+
+  display: none;
+
+}
+
+.hero-slide {
+
+  flex: 0 0 320px;
+
+  border-radius: 18px;
+
+  padding: 30px 20px;
+
+
+
 
 
 
