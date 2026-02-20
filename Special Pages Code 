@@ -1595,6 +1595,37 @@ text-align: center;
 
   text-decoration: none;
 
+font-size: 14px;
+
+}
+
+.hero-slide a:hover {
+
+  opacity: 0.85;
+
+}
+
+</style>
+
+<div class="hero-scroll">
+
+  <div class="hero-slide" style="background:#f6d6dc;">
+
+    <h1> Find the Rarest and Most Beautiful Templates!</h1>
+
+    <a href="#shop">Browse Now!</a>
+
+  </div>
+
+  <div class="hero-slide" style="background:#d6e8f6;">
+
+    <h1>Make This Your Best Digital Purchase Yet with our Products</h1>
+
+    <a href="#shop">Shop Now!</a>
+
+  </div>
+
+
 
 
 
