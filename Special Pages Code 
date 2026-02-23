@@ -2589,6 +2589,36 @@ padding:15px 35px;
 
 <div style="text-align:center; font-size:14px; color:#888; margin-bottom:20px;">
 
+You will be notified when the workshop officially launches.
+
+</div>
+
+<!-- END Workshop Coming Soon Page -->
+<style>
+
+/* === Membership Page Styling === */
+
+.membership-container {
+
+  max-width: 900px;
+
+  margin: auto;
+
+  font-family: 'Georgia', serif;
+
+  text-align: center;
+
+  padding: 20px;
+
+}
+
+.top-banner {
+
+  background: linear-gradient(90deg, #111, #333);
+
+  color: #fff;
+
+
 
 
 
