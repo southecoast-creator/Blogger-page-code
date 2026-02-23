@@ -2618,6 +2618,38 @@ You will be notified when the workshop officially launches.
 
   color: #fff;
 
+padding: 8px;
+
+  font-size: 14px;
+
+  letter-spacing: 1px;
+
+}
+
+.membership-title {
+
+  font-size: 42px;
+
+  margin-top: 30px;
+
+  font-weight: bold;
+
+}
+
+.membership-subtitle {
+
+  font-size: 20px;
+
+  color: #666;
+
+  margin-bottom: 30px;
+
+}
+
+.hero-image {
+
+  width: 100%;
+
 
 
 
