@@ -2650,6 +2650,71 @@ padding: 8px;
 
   width: 100%;
 
+border-radius: 12px;
+
+  margin-bottom: 30px;
+
+}
+
+.benefits {
+
+  text-align: left;
+
+  margin: 30px 0;
+
+}
+
+.benefits h3 {
+
+  text-align: center;
+
+  margin-bottom: 15px;
+
+}
+
+.benefits ul {
+
+  list-style: none;
+
+  padding: 0;
+
+}
+
+.benefits li {
+
+margin: 10px 0;
+
+  font-size: 18px;
+
+}
+
+.price {
+
+  font-size: 36px;
+
+  font-weight: bold;
+
+  margin: 20px 0;
+
+}
+
+.launch-message {
+
+  background: #f8f8f8;
+
+  padding: 15px;
+
+  border-radius: 8px;
+
+  margin-bottom: 20px;
+
+  font-style: italic;
+
+}
+
+.cta-text {
+
+
 
 
 
