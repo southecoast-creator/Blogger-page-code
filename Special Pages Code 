@@ -2561,6 +2561,34 @@ body {
 
       display:inline-block;
 
+padding:15px 35px;
+
+      background-color:#ff6f61;
+
+      color:#fff;
+
+      font-size:20px;
+
+      font-weight:bold;
+
+      text-decoration:none;
+
+      border-radius:8px;
+
+      transition:0.3s;
+
+  " onmouseover="this.style.backgroundColor='#ff4a3d';" onmouseout="this.style.backgroundColor='#ff6f61';">
+
+    Sign Up Ahead
+
+  </a>
+
+</div>
+
+<!-- Optional Footer -->
+
+<div style="text-align:center; font-size:14px; color:#888; margin-bottom:20px;">
+
 
 
 
