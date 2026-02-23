@@ -2800,6 +2800,37 @@ font-size: 18px;
 
   </div>
 
+<div class="launch-message">
+
+    Doors officially open in 3 months.  
+
+    Sign up early to be notified the moment we launch!
+
+  </div>
+
+  <p class="cta-text">
+
+    Join the waitlist and get early access perks.
+
+  </p>
+
+  <button class="membership-btn">
+
+    Join The Waitlist
+
+  </button>
+
+  <br><br>
+
+  <button class="membership-btn disabled-btn" disabled>
+
+    Pay Ahead (Coming Soon)
+
+  </button>
+
+</div>
+
+
 
 
 
