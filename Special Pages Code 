@@ -2774,6 +2774,32 @@ font-size: 18px;
 
   <img src="YOUR-IMAGE-LINK-HERE" class="hero-image" alt="Membership Preview">
 
+<div class="benefits">
+
+    <h3>✨ What Your Library Card Unlocks:</h3>
+
+    <ul>
+
+      <li>📚 Full access to premium blog posts</li>
+
+      <li>🎥 Exclusive video workshops</li>
+
+      <li>📝 Downloadable writing templates</li>
+
+      <li>💬 Members-only discussions</li>
+
+      <li>🎁 Monthly bonus resources</li>
+
+    </ul>
+
+  </div>
+
+  <div class="price">
+
+    $30 / Month
+
+  </div>
+
 
 
 
