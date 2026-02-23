@@ -2513,6 +2513,28 @@ body {
 
   Hold on, we’re building this space for you! Sign up ahead of the official launch.
 
+</h3>
+
+<!-- Presentation Video (Wide) -->
+
+<div style="text-align:center; margin-bottom:30px;">
+
+  <iframe width="80%" height="450" src="YOUR_VIDEO_EMBED_URL" frameborder="0" allowfullscreen></iframe>
+
+</div>
+
+<!-- Body / Member Benefits -->
+
+<div style="max-width:800px; margin:0 auto 30px auto; font-family:Arial, sans-serif; color:#444; line-height:1.6;">
+
+  <h2 style="color:#222;">Member Benefits:</h2>
+
+  <ul>
+
+    <li>Access to pre-recorded workshop video and slides</li>
+
+    <li>Exclusive worksheets and templates</li>
+
 
 
 
