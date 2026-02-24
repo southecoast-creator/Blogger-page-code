@@ -90,5 +90,37 @@ Navigation menu
 
   height: 2px;
 
+background: #7a5cff;
+
+  transition: width 0.3s ease;
+
+  margin-top: 4px;
+
+}
+
+.mini-nav a:hover {
+
+  color: #7a5cff;
+
+}
+
+.mini-nav a:hover::after {
+
+  width: 100%;
+
+}
+
+/* Mobile */
+
+@media (max-width: 768px) {
+
+  .mini-nav li {
+
+    display: block;
+
+    margin: 8px 0;
+
+  }
+
 
  
