@@ -58,5 +58,37 @@ Navigation menu
 
 }
 
+.mini-nav a {
+
+  text-decoration: none;
+
+  font-size: 13px;
+
+  font-weight: 500;
+
+  color: #444;
+
+  letter-spacing: 0.5px;
+
+  transition: 0.3s ease;
+
+  padding: 5px 0;
+
+  position: relative;
+
+}
+
+/* Elegant Underline */
+
+.mini-nav a::after {
+
+  content: "";
+
+  display: block;
+
+  width: 0;
+
+  height: 2px;
+
 
  
