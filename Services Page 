@@ -348,11 +348,12 @@ Next Page Service Boxes
   box-shadow: 0 18px 40px rgba(0,0,0,0.08);
 
 }
+
 /* ===== Service Heading ===== */
 
 .service-box h2 {
 
-  font-size: 24px;
+font-size: 24px;
 
   margin-bottom: 15px;
 
@@ -380,9 +381,9 @@ Next Page Service Boxes
 
   display: inline-block;
 
-margin-top: 20px;
+  margin-top: 20px;
 
-  padding: 12px 26px;
+padding: 12px 26px;
 
   border-radius: 50px;
 
@@ -426,4 +427,5 @@ margin-top: 20px;
 
 </div>
 
- 
+
+
