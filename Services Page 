@@ -428,4 +428,93 @@ padding: 12px 26px;
 </div>
 
 
+Next Style for pages 
+<style>
+/* Fade-in animation */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1s ease-out, transform 1s ease-out;
+}
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Service box styling */
+.service-box {
+  position: relative;
+  background-color: #ffffff;
+  border: 3px solid #8375a3;
+  padding: 30px 25px;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  max-width: 800px;
+  margin: 25px auto;
+  text-align: center;
+  color: #333333;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Heading & paragraph styles */
+.service-box h2 {
+  font-size: 2em;
+  margin-bottom: 10px;
+  color: #8375a3;
+}
+.service-box p {
+  font-size: 1.1em;
+  line-height: 1.5;
+}
+.service-box a {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 10px 20px;
+  background-color: #8375a3;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+.service-box a:hover {
+  background-color: #8375a3;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .service-box {
+    padding: 25px 20px;
+  }
+.service-box h2 {
+    font-size: 1.8em;
+  }
+  .service-box p {
+    font-size: 1.05em;
+  }
+}
+@media (max-width: 768px) {
+  .service-box {
+    padding: 20px 15px;
+    border-radius: 10px;
+  }
+  .service-box h2 {
+    font-size: 1.5em;
+  }
+  .service-box p {
+    font-size: 1em;
+  }
+}
+</style>
+
+<!--Services Section with Buttons & Starting Prices-->
+<div class="fade-in service-box">
+  <h2>Stories &amp; Novels</h2>
+  <p>Fiction, romance, fantasy — I bring your imaginative worlds to life with engaging storytelling.</p>
+  <p><strong>Starting at:</strong> $300</p>
+  <a href="https://www.theweirdoslibrary.com/p/virtual-meeting.html">Request a quote</a>
+</div>
 
