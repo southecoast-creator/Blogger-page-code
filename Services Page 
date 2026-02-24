@@ -15,4 +15,48 @@ Hero Quote
 
 </div>
 
+
+
+Navigation menu
+<style>
+
+/* ===== Mini Section Navigation ===== */
+
+.mini-nav {
+
+  background: #ffffff;
+
+  padding: 12px 0;
+
+  border-bottom: 1px solid #eee;
+
+  position: sticky;
+
+  top: 0;
+
+  z-index: 999;
+
+}
+
+.mini-nav ul {
+
+  list-style: none;
+
+  margin: 0;
+
+  padding: 0;
+
+  text-align: center;
+
+}
+
+.mini-nav li {
+
+  display: inline-block;
+
+  margin: 0 15px;
+
+}
+
+
  
