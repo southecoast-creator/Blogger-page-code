@@ -122,5 +122,29 @@ background: #7a5cff;
 
   }
 
+}
+
+</style>
+
+<nav class="mini-nav">
+
+  <ul>
+
+    <li><a href="#services">Services</a></li>
+
+    <li><a href="#portfolio">Portfolio</a></li>
+
+    <li><a href="#testimonials">Testimonials</a></li>
+
+    <li><a href="#delivery">Delivery</a></li>
+
+    <li><a href="#payment">Payment</a></li>
+
+    <li><a href="#milestones">Milestones</a></li>
+
+    <li><a href="#confirmation">Confirmation</a></li>
+
+  </ul>
+
 
  
