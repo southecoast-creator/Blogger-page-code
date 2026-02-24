@@ -291,6 +291,139 @@ Video
 
 Next Page Service Boxes
 
+<style>
 
+/* ===== Container ===== */
+
+.services-wrapper {
+
+  max-width: 1100px;
+
+  margin: 60px auto;
+
+  padding: 20px;
+
+  font-family: 'Poppins', sans-serif;
+
+}
+
+/* ===== Section Title ===== */
+
+.services-title {
+
+  text-align: center;
+
+  font-size: 36px;
+
+  font-weight: 600;
+
+  margin-bottom: 50px;
+
+  color: #222;
+
+}
+
+/* ===== Service Box ===== */
+
+.service-box {
+
+  background: #ffffff;
+
+  padding: 40px;
+
+  margin-bottom: 30px;
+
+  border-radius: 14px;
+
+  box-shadow: 0 10px 25px rgba(0,0,0,0.06);
+
+  transition: 0.3s ease;
+
+}
+
+.service-box:hover {
+
+  transform: translateY(-5px);
+
+  box-shadow: 0 18px 40px rgba(0,0,0,0.08);
+
+}
+/* ===== Service Heading ===== */
+
+.service-box h2 {
+
+  font-size: 24px;
+
+  margin-bottom: 15px;
+
+  color: #111;
+
+}
+
+/* ===== Service Text ===== */
+
+.service-box p {
+
+  font-size: 15px;
+
+  color: #555;
+
+  line-height: 1.7;
+
+  max-width: 700px;
+
+}
+
+/* ===== CTA Button ===== */
+
+.service-btn {
+
+  display: inline-block;
+
+margin-top: 20px;
+
+  padding: 12px 26px;
+
+  border-radius: 50px;
+
+  text-decoration: none;
+
+  font-size: 14px;
+
+  font-weight: 500;
+
+  background: linear-gradient(135deg, #8375a3, #a899c9);
+
+  color: #fff;
+
+  transition: 0.3s ease;
+
+}
+
+.service-btn:hover {
+
+  transform: scale(1.05);
+
+  box-shadow: 0 8px 20px rgba(122,92,255,0.3);
+
+}
+
+</style>
+
+<div class="services-wrapper">
+
+  <div class="services-title">My Services</div>
+
+  <div class="service-box">
+
+    <h2>Ghostwriting (Flagship)</h2>
+
+    <p>I turn your ideas into powerful books, blogs, and thought-leadership content. From concept development to final manuscript delivery, I help you publish with clarity and confidence.</p>
+
+    <a href="YOUR-GHOSTWRITING-LINK" class="service-btn">Explore Ghostwriting →</a>
+
+  </div>
+
+</div>
 
  
