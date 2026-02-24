@@ -146,5 +146,27 @@ background: #7a5cff;
 
   </ul>
 
+</nav>
+
+<script>
+
+document.querySelectorAll('.mini-nav a').forEach(anchor => {
+
+  anchor.addEventListener('click', function (e) {
+
+    e.preventDefault();
+
+    document.querySelector(this.getAttribute('href')).scrollIntoView({
+
+      behavior: 'smooth'
+
+    });
+
+  });
+
+});
+
+</script>
+
 
  
