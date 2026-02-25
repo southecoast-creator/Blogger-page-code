@@ -162,6 +162,217 @@ margin-bottom: 30px;
   <h1 style="font-family:Georgia, serif; color:#8375a3; font-size:2.5em;">Hear From Our Regular Clients!</h1>
 
 </div>
+<style>
+
+/* ===== Testimonial Section ===== */
+
+.testimonial-section {
+
+  overflow: hidden;
+
+  background: #8375a3;
+
+  padding: 40px 0;
+
+  position: relative;
+
+}
+
+/* ===== Moving Track ===== */
+
+.testimonial-track {
+
+  display: flex;
+
+  width: calc(300px * 12);
+
+  animation: scrollTestimonials 40s linear infinite;
+
+}
+
+/* ===== Individual Testimonial Card ===== */
+
+.testimonial-card {
+
+  width: 280px;
+
+  min-width: 280px;
+
+  margin: 0 15px;
+
+  background: white;
+
+  border-radius: 20px;
+
+  padding: 25px;
+
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+
+  text-align: center;
+
+  font-family: 'Poppins', sans-serif;
+
+}
+
+/* Profile Image */
+
+.testimonial-card img {
+
+  width: 70px;
+
+  height: 70px;
+
+border-radius: 50%;
+
+  object-fit: cover;
+
+  margin-bottom: 15px;
+
+}
+
+/* Quote Text */
+
+.testimonial-card p {
+
+  font-size: 14px;
+
+  color: #444;
+
+  line-height: 1.6;
+
+}
+
+/* Name */
+
+.testimonial-card h4 {
+
+  margin-top: 15px;
+
+  font-size: 16px;
+
+  color: #222;
+
+}
+
+/* Animation */
+
+@keyframes scrollTestimonials {
+
+  0% {
+
+    transform: translateX(0);
+
+  }
+
+  100% {
+
+    transform: translateX(-50%);
+
+  }
+
+}
+
+</style>
+
+<div class="testimonial-section">
+
+  <div class="testimonial-track">
+
+    <!-- Testimonial 1 -->
+
+    <div class="testimonial-card">
+
+<img src="IMAGE-LINK-HERE" alt="Client">
+
+      <p>"Working with her was seamless and professional. She delivered beyond expectations!"</p>
+
+      <h4>– Sarah K.</h4>
+
+    </div>
+    
+     <!-- Testimonial 1 -->
+
+    <div class="testimonial-card">
+
+      <img src="IMAGE-LINK-HERE" alt="Client">
+
+      <p>"Working with her was seamless and professional. She delivered beyond expectations!"</p>
+
+      <h4>– Jones S.</h4>
+
+    </div>
+    
+     <!-- Testimonial 1 -->
+
+    <div class="testimonial-card">
+
+<img src="IMAGE-LINK-HERE" alt="Client">
+
+      <p>"Working with her was seamless and professional. She delivered beyond expectations!"</p>
+
+      <h4>– Zainab K.</h4>
+
+    </div>
+
+    <!-- Testimonial 2 -->
+
+    <div class="testimonial-card">
+
+      <img src="IMAGE-LINK-HERE" alt="Client">
+
+      <p>"Absolutely talented! My blog traffic doubled after her content strategy."</p>
+
+      <h4>– Michael T.</h4>
+
+    </div>
+
+    <!-- Testimonial 3 -->
+
+    <div class="testimonial-card">
+
+      <img src="IMAGE-LINK-HERE" alt="Client">
+
+      <p>"Fast, reliable, creative. I’ll definitely hire her again."</p>
+
+      <h4>– Amina D.</h4>
+
+    </div>
+
+    <!-- Duplicate for smooth infinite loop -->
+
+    <div class="testimonial-card">
+
+      <img src="IMAGE-LINK-HERE" alt="Client">
+
+      <p>"Working with her was seamless and professional. She delivered beyond expectations!"</p>
+
+      <h4>– Sarah K.</h4>
+
+    </div>
+
+    <div class="testimonial-card">
+
+      <img src="IMAGE-LINK-HERE" alt="Client">
+
+<p>"Absolutely talented! My blog traffic doubled after her content strategy."</p>
+
+      <h4>– Michael T.</h4>
+
+    </div>
+
+    <div class="testimonial-card">
+
+      <img src="IMAGE-LINK-HERE" alt="Client">
+
+      <p>"Fast, reliable, creative. I’ll definitely hire her again."</p>
+
+      <h4>– Kristy T.</h4>
+
+    </div>
+
+  </div>
+
+</div>
 
 
 
