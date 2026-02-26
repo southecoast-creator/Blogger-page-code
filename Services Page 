@@ -657,3 +657,21 @@ Next Style for pages
         <a class="btn-sample" href="#">View Sample</a>
       </div>
     </div>
+
+<!--PREMIUM-->
+    <div class="package-card">
+      <h2>Premium Package</h2>
+      <div class="package-price"><b>$1,600</b></div>
+      <div class="package-details">
+        • <strong>100,000 – 200,000 words</strong><br />
+        • Long-term project handling<br />
+        • Unlimited revisions<br />✓ 100% original, high-quality handwritten manuscript</div><div class="package-details">✓ In-depth story development &amp; advanced plot structuring</div><div class="package-details">✓ Full character arcs (main, supporting &amp; minor characters)</div><div class="package-details">✓ Series-level world-building (if applicable)</div><div class="package-details">✓ Professionally paced chapters with strong emotional impact</div><div class="package-details">✓ Consistent tone, voice, and POV throughout</div><div class="package-details">✓ Advanced editing &amp; deep polishing (style, clarity &amp; flow)</div><div class="package-details">✓ Publishing-ready manuscript formatting</div><div class="package-details">✓ Detailed chapter outline + summaries</div><div class="package-details">✓ Multiple progress reviews &amp; client check-ins</div><div class="package-details">✓ Priority handling &amp; faster turnaround</div><div class="package-details">✓ Confidentiality, full ownership rights &amp; NDA option</div><div class="package-details">✓ Professional communication &amp; dedicated project support</div><div class="package-details"><b>Delivery</b>: 80 days
+      </div>
+      <div class="package-buttons">
+        <a class="btn-purchase" href="https://www.theweirdoslibrary.com/p/payment-page.html">Purchase</a>
+        <a class="btn-chat" href="https://docs.google.com/forms/d/e/1FAIpQLScetp9I_vWucNjFaIjyqcPUH9pKZq3u_Cog2l3KcHdQk1g-KA/viewform?usp=dialog">Chat First</a>
+        <a class="btn-sample" href="#">View Sample</a>
+      </div>
+    </div>
+
+  </div>
