@@ -614,3 +614,23 @@ Next Style for pages
 }
 </style>
 
+<div class="packages-section">
+
+  <div class="packages-header">
+    <h1>Story &amp; Novel Ghostwriting Packages</h1>
+    <p>
+      Professional fiction ghostwriting tailored to your idea, genre, and voice.
+      Every project is handled with confidentiality, care, and creative integrity.
+    </p>
+  </div>
+
+<div class="packages-grid">
+
+    <!--BASIC-->
+    <div class="package-card">
+      <h2>Basic Package</h2>
+      <div class="package-price"><b>$300</b></div>
+      <div class="package-details">
+        • Up to <strong>30,000 words</strong><br />
+        • Three revision round<br />
+        • Confidential ghostwriting</div><div class="package-details">✓ Original handwritten manuscript</div><div class="package-details">✓ Basic plot &amp; character development</div><div class="package-details">✓ Organized chapters &amp; smooth story flow</div><div class="package-details">✓ Light editing &amp; proofreading</div><div class="package-details">✓ Clean manuscript formatting</div><div class="package-details">✓ Confidentiality, full ownership &amp; NDA rights</div><div class="package-details">✓ Professional communication &amp; updates</div><div class="package-details">
