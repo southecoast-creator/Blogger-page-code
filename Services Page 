@@ -1676,6 +1676,14 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 
+
+
+
+
+
+
+
+
 <details class="simple-dropdown">
   <summary>Packages</summary>
   <div class="dropdown-body">
@@ -1788,7 +1796,141 @@ document.addEventListener("DOMContentLoaded", function() {
 <details class="simple-dropdown">
   <summary>Custom Order</summary>
   <div class="dropdown-body">
-    Your custom order content here
+   <style>
+.custom-section {
+  max-width: 900px;
+  margin: 60px auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.custom-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.custom-header h1 {
+  font-size: 32px;
+  color: #8375a3;
+}
+
+.custom-header p {
+  font-size: 16px;
+  color: #555;
+  max-width: 700px;
+  margin: 12px auto;
+}
+
+.custom-box {
+  background: #fff;
+  border-radius: 16px;
+  padding: 30px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+margin-bottom: 30px;
+}
+
+.custom-box h2 {
+  font-size: 22px;
+  color: #8375a3;
+  margin-bottom: 15px;
+}
+
+.custom-box p, .custom-box li {
+  font-size: 14px;
+  color: #555;
+  line-height: 1.7;
+}
+
+.custom-box ul {
+  padding-left: 20px;
+}
+
+.steps {
+  counter-reset: step;
+}
+
+.steps li {
+  margin-bottom: 12px;
+}
+
+.custom-buttons a {
+  display: inline-block;
+  margin: 10px 8px 0 0;
+  padding: 12px 18px;
+border-radius: 8px;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.btn-chat {
+  background: #8375a3;
+  color: #fff;
+}
+
+.btn-email {
+  background: #b7aee3;
+  color: #111111;
+}
+
+.reassurance {
+  text-align: center;
+  font-size: 13px;
+  color: #666;
+  margin-top: 30px;
+}
+</style>
+
+<div class="custom-section">
+
+  <div class="custom-header">
+    <h1>Request a Custom Ghostwriting Project</h1>
+    <p>
+      Not every story fits into a fixed package.
+      If your idea is unique, long-term, or experimental, this space is for you.
+    </p>
+  </div>
+
+  <div class="custom-box">
+    <h2>What Counts as a Custom Project?</h2>
+    <ul>
+      <li>Stories above 200,000 words</li>
+      <li>Book series or episodic fiction</li>
+      <li>Complex plots or world-building</li>
+      <li>Long-term collaboration</li>
+      <li>Projects with special confidentiality needs</li>
+    </ul>
+  </div>
+
+<div class="custom-box">
+    <h2>How the Process Works</h2>
+    <ol class="steps">
+      <li>You reach out with your idea and expectations.</li>
+      <li>We discuss scope, timeline, and tone.</li>
+      <li>You receive a clear proposal before any payment.</li>
+      <li>Work begins only after mutual agreement.</li>
+    </ol>
+  </div>
+
+  <div class="custom-box">
+    <h2>Start a Custom Request</h2>
+    <p>
+      The easiest way to begin is through a direct conversation.
+      No obligation, no pressure—just clarity.
+    </p>
+
+    <div class="custom-buttons">
+      <a class="btn-chat" href="https://docs.google.com/forms/d/e/1FAIpQLScetp9I_vWucNjFaIjyqcPUH9pKZq3u_Cog2l3KcHdQk1g-KA/viewform?usp=dialog">Chat With Me</a>
+      <a class="btn-email" href="mailto:your@email.com">Send Project Details</a>
+    </div>
+  </div>
+
+<iframe frameborder="0" height="1200" marginheight="0" marginwidth="0" src="https://docs.google.com/forms/d/e/1FAIpQLSdjjINSRGlIeUdd3VDPbZ51E9ZRncgd8pWXL4YsKfd4smHPWw/viewform?embedded=true" width="100%">
+Loading…
+  </iframe>
+
+  <div class="reassurance">
+    Your idea remains yours. All discussions are treated with discretion and respect.
+  </div>
   </div>
 </details>
 
