@@ -681,3 +681,86 @@ Next Style for pages
   </div>
 
   </div>
+
+
+
+
+<!-- Dropdown Container -->
+<div class="full-width-dropdown">
+  <button class="dropdown-btn">Click Me ▼</button>
+  <div class="dropdown-content">
+    <!-- Test Content -->
+    <h2>Welcome to the Dropdown!</h2>
+    <p>This is a demo of embedded content inside a full-width dropdown.</p>
+    
+    <h3>Image Example:</h3>
+    <img src="https://via.placeholder.com/800x200" alt="Placeholder Image" style="width:100%; height:auto;">
+
+    <h3>Video Example:</h3>
+    <iframe width="100%" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
+      title="YouTube video" frameborder="0" allowfullscreen></iframe>
+
+    <p>More content can go here: text, links, widgets… anything you want!</p>
+  </div>
+</div>
+
+<style>
+/* Remove Blogger page margins and stretch full width */
+.full-width-dropdown {
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  font-family: Arial, sans-serif;
+  z-index: 1000;
+}
+
+/* Button styling */
+.dropdown-btn {
+  width: 100%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 15px;
+  font-size: 18px;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+}
+
+.dropdown-btn:hover {
+  background-color: #45a049;
+}
+
+/* Dropdown content hidden by default */
+.dropdown-content {
+  display: none;
+  background-color: #f9f9f9;
+  overflow: hidden;
+  padding: 20px;
+  border-top: 2px solid #4CAF50;
+}
+
+/* Smooth animation */
+.dropdown-content.show {
+  display: block;
+  animation: dropdownAnimation 0.3s ease-out;
+}
+
+@keyframes dropdownAnimation {
+  from {opacity: 0; transform: translateY(-10px);}
+  to {opacity: 1; transform: translateY(0);}
+}
+</style>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const btn = document.querySelector('.dropdown-btn');
+  const content = document.querySelector('.dropdown-content');
+  
+  btn.addEventListener('click', () => {
+    content.classList.toggle('show');
+  });
+});
+</script>
