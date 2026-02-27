@@ -1208,3 +1208,225 @@ document.addEventListener("DOMContentLoaded", function() {
   btn.addEventListener('click', () => content.classList.toggle('show'));
 });
 </script>
+
+
+
+
+
+Multi-Package Deals
+<!-- Dropdown Container -->
+<div class="full-width-dropdown">
+  <button class="dropdown-btn">Ghostwriting Packages ▼</button>
+  <div class="dropdown-content">
+    <!-- Packages Section -->
+    <div class="packages-section">
+
+      <div class="packages-header">
+        <h1>Story &amp; Novel Ghostwriting Packages</h1>
+        <p>
+          Professional fiction ghostwriting tailored to your idea, genre, and voice.
+          Every project is handled with confidentiality, care, and creative integrity.
+        </p>
+      </div>
+
+      <div class="packages-grid">
+
+        <!-- BASIC -->
+        <div class="package-card">
+          <h2>Basic Package</h2>
+          <div class="package-price"><b>$300</b></div>
+          <div class="package-details">
+            • Up to <strong>30,000 words</strong><br />
+            • Three revision rounds<br />
+            • Confidential ghostwriting
+          </div>
+          <div class="package-details">✓ Original handwritten manuscript</div>
+          <div class="package-details">✓ Basic plot &amp; character development</div>
+          <div class="package-details">✓ Organized chapters &amp; smooth story flow</div>
+          <div class="package-details">✓ Light editing &amp; proofreading</div>
+          <div class="package-details">✓ Clean manuscript formatting</div>
+          <div class="package-details">✓ Confidentiality, full ownership &amp; NDA rights</div>
+          <div class="package-details">✓ Professional communication &amp; updates</div>
+          <div class="package-details"><b>Delivery</b>: 21 days</div>
+          <div class="package-buttons">
+            <a class="btn-purchase" href="https://www.theweirdoslibrary.com/p/payment-page.html">Purchase</a>
+            <a class="btn-chat" href="https://docs.google.com/forms/d/e/1FAIpQLScetp9I_vWucNjFaIjyqcPUH9pKZq3u_Cog2l3KcHdQk1g-KA/viewform?usp=dialog">Chat First</a>
+            <a class="btn-sample" href="#">View Sample</a>
+          </div>
+        </div>
+
+        <!-- STANDARD -->
+        <div class="package-card">
+          <h2>Standard Package</h2>
+          <div class="package-price"><b>$600</b></div>
+          <div class="package-details">
+            • Up to <strong>60,000 words</strong><br />
+            • Five revision rounds<br />
+            • Style &amp; tone matching
+          </div>
+          <div class="package-details">✓ 100% original handwritten manuscript</div>
+          <div class="package-details">✓ Expanded plot development (clear story arc)</div>
+          <div class="package-details">✓ Deeper character development (main + supporting characters)</div>
+          <div class="package-details">✓ Well-structured chapters with strong pacing</div>
+          <div class="package-details">✓ Consistent tone, POV, and narrative flow</div>
+          <div class="package-details">✓ Thorough editing &amp; proofreading (beyond basic)</div>
+          <div class="package-details">✓ Enhanced manuscript formatting (publishing-ready draft)</div>
+          <div class="package-details">✓ Chapter summaries or outline included</div>
+          <div class="package-details">✓ Mid-project progress review &amp; feedback session</div>
+          <div class="package-details">✓ Confidentiality guarantee, full ownership &amp; NDA rights</div>
+          <div class="package-details">✓ Professional communication &amp; regular updates</div>
+          <div class="package-details"><b>Delivery</b>: 37 days</div>
+          <div class="package-buttons">
+            <a class="btn-purchase" href="https://www.theweirdoslibrary.com/p/payment-page.html">Purchase</a>
+            <a class="btn-chat" href="https://docs.google.com/forms/d/e/1FAIpQLScetp9I_vWucNjFaIjyqcPUH9pKZq3u_Cog2l3KcHdQk1g-KA/viewform?usp=dialog">Chat First</a>
+            <a class="btn-sample" href="#">View Sample</a>
+          </div>
+        </div>
+
+        <!-- PREMIUM -->
+        <div class="package-card">
+          <h2>Premium Package</h2>
+          <div class="package-price"><b>$1,600</b></div>
+          <div class="package-details">
+            • <strong>100,000 – 200,000 words</strong><br />
+            • Long-term project handling<br />
+            • Unlimited revisions
+          </div>
+          <div class="package-details">✓ 100% original, high-quality handwritten manuscript</div>
+          <div class="package-details">✓ In-depth story development &amp; advanced plot structuring</div>
+          <div class="package-details">✓ Full character arcs (main, supporting &amp; minor characters)</div>
+          <div class="package-details">✓ Series-level world-building (if applicable)</div>
+          <div class="package-details">✓ Professionally paced chapters with strong emotional impact</div>
+          <div class="package-details">✓ Consistent tone, voice, and POV throughout</div>
+          <div class="package-details">✓ Advanced editing &amp; deep polishing (style, clarity &amp; flow)</div>
+          <div class="package-details">✓ Publishing-ready manuscript formatting</div>
+          <div class="package-details">✓ Detailed chapter outline + summaries</div>
+          <div class="package-details">✓ Multiple progress reviews &amp; client check-ins</div>
+          <div class="package-details">✓ Priority handling &amp; faster turnaround</div>
+          <div class="package-details">✓ Confidentiality, full ownership rights &amp; NDA option</div>
+          <div class="package-details">✓ Professional communication &amp; dedicated project support</div>
+          <div class="package-details"><b>Delivery</b>: 80 days</div>
+          <div class="package-buttons">
+            <a class="btn-purchase" href="https://www.theweirdoslibrary.com/p/payment-page.html">Purchase</a>
+            <a class="btn-chat" href="https://docs.google.com/forms/d/e/1FAIpQLScetp9I_vWucNjFaIjyqcPUH9pKZq3u_Cog2l3KcHdQk1g-KA/viewform?usp=dialog">Chat First</a>
+            <a class="btn-sample" href="#">View Sample</a>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="trust-note">
+        Larger projects, series, or custom requests can be discussed privately before payment.
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- CSS -->
+<style>
+/* Horizontal scroll for dropdown packages */
+.dropdown-content .packages-grid {
+  display: flex;
+  overflow-x: auto;
+  gap: 20px;
+  padding-bottom: 10px;
+  scroll-behavior: smooth;
+}
+
+.dropdown-content .packages-grid::-webkit-scrollbar {
+  height: 8px;
+}
+
+.dropdown-content .packages-grid::-webkit-scrollbar-thumb {
+  background: #8375a3;
+  border-radius: 4px;
+}
+
+.dropdown-content .packages-grid::-webkit-scrollbar-track {
+  background: #ddd;
+  border-radius: 4px;
+}
+
+.dropdown-content .package-card {
+  min-width: 280px; /* each card width */
+  flex: 0 0 auto;
+}
+/* Dropdown styling */
+.full-width-dropdown {
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  margin-left: -50vw;
+  font-family: Arial, sans-serif;
+  z-index: 1000;
+}
+
+.dropdown-btn {
+  width: 100%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 15px;
+  font-size: 18px;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+}
+
+.dropdown-btn:hover {
+  background-color: #45a049;
+}
+
+.dropdown-content {
+  display: none;
+  background-color: #f9f9f9;
+  overflow: auto;
+  max-height: 80vh; /* scroll if too tall */
+  padding: 20px;
+  border-top: 2px solid #4CAF50;
+}
+
+/* Smooth animation */
+.dropdown-content.show {
+  display: block;
+  animation: dropdownAnimation 0.3s ease-out;
+}
+
+@keyframes dropdownAnimation {
+  from {opacity: 0; transform: translateY(-10px);}
+  to {opacity: 1; transform: translateY(0);}
+}
+
+/* Packages inside dropdown */
+.dropdown-content .packages-section {
+  max-width: none;
+  margin: 0;
+}
+
+/* Copy your previous packages CSS here */
+.packages-section {
+  padding: 20px;
+}
+.packages-header {text-align:center; margin-bottom:50px;}
+.packages-header h1 {font-size:32px; color:#4b2c3a;}
+.packages-header p {font-size:16px; color:#555; max-width:700px; margin:10px auto;}
+.packages-grid {display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:25px;}
+.package-card {background:#fff; border-radius:16px; padding:25px; box-shadow:0 10px 25px rgba(0,0,0,0.1); text-align:center;}
+.package-card h2 {font-size:22px; color:#8375a3; margin-bottom:10px;}
+.package-price {font-size:30px; color:#8375a3; margin:15px 0;}
+.package-details {font-size:14px; color:#555; line-height:1.6; margin-bottom:20px;}
+.package-buttons a {display:block; text-decoration:none; margin:8px 0; padding:10px; border-radius:8px; font-size:14px;}
+.btn-purchase {background:#8375a3; color:#fff;}
+.btn-chat {background:#b7aee3; color:#111;}
+.btn-sample {border:1px solid #a899c9; color:#a899c9;}
+.trust-note {text-align:center; margin-top:40px; font-size:13px; color:#666;}
+</style>
+
+<!-- JS -->
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const btn = document.querySelector('.dropdown-btn');
+  const content = document.querySelector('.dropdown-content');
+  btn.addEventListener('click', () => content.classList.toggle('show'));
+});
+</script>
