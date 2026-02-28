@@ -79,3 +79,71 @@ setInterval(() => {
     allowfullscreen>
   </iframe>
 </div>
+<details class="simple-dropdown">
+  <summary>Packages</summary>
+  <div class="dropdown-body">
+    Your packages content here
+  </div>
+</details>
+
+<details class="simple-dropdown">
+  <summary>Custom Order</summary>
+  <div class="dropdown-body">
+    Your custom order content here
+  </div>
+</details>
+
+<details class="simple-dropdown">
+  <summary>Milestones</summary>
+  <div class="dropdown-body">
+    Your milestones content here
+  </div>
+</details>
+
+<details class="simple-dropdown">
+  <summary>Payments</summary>
+  <div class="dropdown-body">
+    Your payments content here
+  </div>
+</details>
+
+<details class="simple-dropdown">
+  <summary>Portfolio</summary>
+  <div class="dropdown-body">
+    Your portfolio content here
+  </div>
+</details>
+
+<details class="simple-dropdown">
+  <summary>Profile</summary>
+  <div class="dropdown-body">
+    Your profile content here
+  </div>
+</details>
+<style>
+.simple-dropdown {
+  margin: 15px 0;
+  font-family: Arial, sans-serif;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.simple-dropdown summary {
+  padding: 15px;
+  background: #a899c9;
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+  list-style: none;
+}
+
+.simple-dropdown summary::-webkit-details-marker {
+  display: none;
+}
+
+.dropdown-body {
+  padding: 20px;
+  background: #f9f9f9;
+}
+</style>
