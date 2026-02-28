@@ -82,7 +82,186 @@ setInterval(() => {
 <details class="simple-dropdown">
   <summary>Packages</summary>
   <div class="dropdown-body">
-    Your packages content here
+    <!-- Outer service info -->
+
+<div class="service-info">
+
+  <h2>Service Title</h2>
+
+  <p>Service Subtitle 1 | Service Subtitle 2</p>
+
+</div>
+<!-- Scrollable container for multiple cards -->
+<div class="cards-scroll-container">
+  <!-- Card 1 -->
+  <div class="service-card">
+    <h3 class="package-title">Package Title 1</h3>
+    <p class="package-price">$499</p>
+    <p class="package-subtitle"><em>This package includes everything you need for success!</em></p>
+    <ul class="package-features">
+      <li>☆ Feature One</li>
+      <li>☆ Feature Two</li>
+      <li>☆ Feature Three</li>
+    </ul>
+    <p><strong>Delivery:</strong> 7 days</p>
+    <p><strong>Revisions:</strong> 3</p>
+    <div class="package-buttons">
+      <a href="#" class="btn-purchase">Purchase Now</a>
+      <a href="#" class="btn-chat">Chat First</a>
+      <a href="#" class="btn-samples">View Samples</a>
+    </div>
+  </div>
+
+  <!-- Card 2 -->
+  <div class="service-card">
+    <h3 class="package-title">Package Title 2</h3>
+    <p class="package-price">$799</p>
+    <p class="package-subtitle"><em>Perfect for advanced needs and full support!</em></p>
+    <ul class="package-features">
+      <li>☆ Feature One</li>
+      <li>☆ Feature Two</li>
+      <li>☆ Feature Three</li>
+    </ul>
+    <p><strong>Delivery:</strong> 5 days</p>
+    <p><strong>Revisions:</strong> 5</p>
+    <div class="package-buttons">
+      <a href="#" class="btn-purchase">Purchase Now</a>
+      <a href="#" class="btn-chat">Chat First</a>
+      <a href="#" class="btn-samples">View Samples</a>
+    </div>
+  </div>
+
+  <!-- Card 3 -->
+  <div class="service-card">
+    <h3 class="package-title">Package Title 3</h3>
+    <p class="package-price">$999</p>
+    <p class="package-subtitle"><em>The ultimate package with premium features!</em></p>
+    <ul class="package-features">
+      <li>☆ Feature One</li>
+      <li>☆ Feature Two</li>
+      <li>☆ Feature Three</li>
+    </ul>
+    <p><strong>Delivery:</strong> 3 days</p>
+    <p><strong>Revisions:</strong> Unlimited</p>
+    <div class="package-buttons">
+      <a href="#" class="btn-purchase">Purchase Now</a>
+      <a href="#" class="btn-chat">Chat First</a>
+      <a href="#" class="btn-samples">View Samples</a>
+    </div>
+  </div>
+</div>
+
+<style>
+/* Scrollable container */
+.cards-scroll-container {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  padding: 20px;
+  scroll-behavior: smooth;
+}
+.cards-scroll-container::-webkit-scrollbar {
+  display: none;
+}
+
+/* Card styles */
+.service-card {
+  min-width: 300px;
+  max-width: 300px;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+  background: #fff;
+  text-align: center;
+  flex-shrink: 0;
+  font-family: Arial, sans-serif;
+}
+
+/* Package details */
+.package-title {
+  font-size: 22px;
+  margin-bottom: 10px;
+}
+.package-price {
+  font-size: 32px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10px;
+}
+.package-subtitle {
+  font-size: 16px;
+  font-style: italic;
+  color: #666;
+  margin-bottom: 15px;
+}
+
+/* Features list */
+.package-features {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 15px;
+}
+.package-features li {
+  color: #8375a3;
+  font-size: 16px;
+  margin: 5px 0;
+}
+
+/* Delivery & revisions */
+.service-card p strong {
+  color: #333;
+}
+
+/* Buttons container */
+.package-buttons {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* Buttons general */
+.package-buttons a {
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 14px;
+  text-decoration: none;
+  text-align: center;
+  display: inline-block;
+  transition: 0.3s ease;
+}
+
+/* Purchase button */
+.btn-purchase {
+  background: #8375a3;
+  color: #fff;
+}
+.btn-purchase:hover {
+  background: #6e5c91;
+}
+
+/* Chat First button - PROPER transparent outlined purple button */
+.btn-chat {
+  background: transparent;
+  color: #8375a3;
+  border: 2px solid #8375a3;
+}
+.btn-chat:hover {
+  background: #8375a3;
+  color: #fff;
+}
+
+/* Samples button */
+.btn-samples {
+  background: #f5f5f5;
+  color: #333;
+}
+.btn-samples:hover {
+  background: #e0e0e0;
+}
+</style>
   </div>
 </details>
 
