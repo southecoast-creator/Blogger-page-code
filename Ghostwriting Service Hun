@@ -131,7 +131,7 @@ setInterval(() => {
 
 .simple-dropdown summary {
   padding: 15px;
-  background: #a899c9;
+  background: #A899C9;
   color: white;
   font-size: 18px;
   cursor: pointer;
