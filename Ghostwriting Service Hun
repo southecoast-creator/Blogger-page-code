@@ -1,0 +1,30 @@
+<!-- Fiction Ghostwriting Section -->
+<div class="fiction-ghostwriting-section">
+  <h2>Fiction Ghostwriting</h2>
+  <p>Crafting your stories, your voice, our expertise</p>
+</div>
+
+<style>
+.fiction-ghostwriting-section {
+  text-align: center; /* Centers the text */
+  background-color: #a899c9; /* Light background, customizable */
+  padding: 40px 20px; /* Top-bottom 40px, left-right 20px */
+  border-radius: 12px; /* Rounded corners */
+  margin: 30px auto; /* Space above/below */
+  max-width: 800px; /* Keeps it from stretching too wide */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1); /* Soft shadow */
+  font-family: 'Georgia', serif; /* Elegant font */
+}
+
+.fiction-ghostwriting-section h2 {
+  font-size: 2em;
+  color: #2b2b2b; /* Dark title color */
+  margin-bottom: 10px;
+}
+
+.fiction-ghostwriting-section p {
+  font-size: 1.1em;
+  color: #555555; /* Subtitle text color */
+  line-height: 1.6;
+}
+</style>
