@@ -855,7 +855,105 @@ Loading…
 <details class="simple-dropdown">
   <summary>Payments</summary>
   <div class="dropdown-body">
-    Your payments content here
+    <style>
+.payment-section {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 35px;
+  background: #ffffff;
+  border-radius: 25px;
+  box-shadow: 0 10px 35px rgba(0,0,0,0.08);
+  font-family: 'Poppins', sans-serif;
+}
+
+.payment-title {
+  text-align: center;
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 25px;
+  color: #222;
+}
+
+.payment-option {
+  background: #f9f7ff;
+  padding: 20px;
+  margin-bottom: 18px;
+  border-radius: 18px;
+  transition: all 0.3s ease;
+  border-left: 5px solid #8e44ff;
+}
+
+.payment-option:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(142, 68, 255, 0.15);
+}
+
+.payment-option h3 {
+  margin: 0 0 8px 0;
+  font-size: 18px;
+  color: #5e2ced;
+}
+
+.payment-option p {
+  margin: 0;
+  font-size: 15px;
+  color: #555;
+  line-height: 1.6;
+}
+
+.payment-highlight {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.payment-highlight img {
+  width: 100%;
+  max-width: 500px;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  margin: 0 auto;
+  box-shadow: 0 15px 40px rgba(142, 68, 255, 0.25);
+  border: 8px solid #f1eaff;
+}
+
+.secure-note {
+  margin-top: 12px;
+  font-size: 14px;
+  color: #777;
+}
+</style>
+
+<div class="payment-section">
+  <div class="payment-title">Payment Options Available</div>
+
+  <div class="payment-option">
+    <h3>1. Milestone Payments (Flutterwave)</h3>
+    <p>Ideal for large or custom projects. Payments are split into stages, with work progressing after each milestone is completed and approved.</p>
+  </div>
+
+  <div class="payment-option">
+    <h3>2. Escrow Payment (Release After Delivery)</h3>
+    <p>Funds are held securely and released to us once the project is completed and approved by you.</p>
+  </div>
+
+  <div class="payment-option">
+    <h3>3. Full Payment (Paystack)</h3>
+    <p>One-time full payment without escrow. Work begins immediately after payment confirmation.</p>
+  </div>
+
+  <div class="payment-option">
+    <h3>4. Full Payment (Payoneer)</h3>
+    <p>Have a Payoneer account? Make a one-time full payment via our payment request. Work begins immediately after payment confirmation.</p>
+  </div>
+
+  <div class="payment-highlight">
+    <img src="YOUR-IMAGE-LINK-HERE" alt="Secure Payment">
+    <div class="secure-note">Secure • Transparent • Professional</div>
+  </div>
+
+</div>
   </div>
 </details>
 
