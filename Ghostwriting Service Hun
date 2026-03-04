@@ -954,6 +954,258 @@ Loading…
   </div>
 
 </div>
+<div class="payment-card">
+  <h1 class="payment-title">Secure Your Project Slot</h1>
+  <h3 class="payment-subtitle">Choose Your Preferred Payment Method</h3>
+  <p class="payment-description">
+    Select a secure payment option below to begin your milestone or full-service ghostwriting project.
+    Work starts immediately after payment confirmation.
+  </p>
+
+  <div class="button-group">
+    <a href="YOUR_ESCROW_LINK" class="pay-btn escrow">Pay via Escrow</a>
+    <a href="YOUR_PAYSTACK_LINK" class="pay-btn paystack">Pay via Paystack</a>
+    <a href="YOUR_PAYONEER_LINK" class="pay-btn payoneer">Pay via Payoneer</a>
+  </div>
+</div>
+
+<style>
+.payment-card {
+  max-width: 500px;
+  margin: 40px auto;
+  padding: 30px;
+  border-radius: 25px;
+  background: #ffffff;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+  text-align: center;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.payment-title {
+  font-size: 28px;
+  margin-bottom: 10px;
+  color: #222;
+}
+
+.payment-subtitle {
+  font-size: 18px;
+  margin-bottom: 15px;
+  color: #666;
+  font-weight: 500;
+}
+
+.payment-description {
+  font-size: 14px;
+  margin-bottom: 25px;
+  color: #777;
+  line-height: 1.6;
+}
+
+.button-group {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.pay-btn {
+  text-decoration: none;
+  padding: 14px;
+  border-radius: 30px;
+  font-weight: 600;
+  font-size: 15px;
+  transition: all 0.3s ease;
+  display: block;
+}
+
+.escrow {
+  background: #2c3e50;
+  color: #fff;
+}
+
+.paystack {
+  background: #0ba4db;
+  color: #fff;
+}
+
+.payoneer {
+  background: #ff9900;
+  color: #fff;
+}
+
+.pay-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  opacity: 0.9;
+}
+</style>
+<div class="payment-card">
+  <h1 class="payment-title">Secure Your Project Slot</h1>
+  <h3 class="payment-subtitle">Choose Your Preferred Payment Method</h3>
+  <p class="payment-description">
+    Select a secure payment option below to begin your milestone or full-service ghostwriting project.
+    Work starts immediately after payment confirmation.
+  </p>
+
+  <div class="button-group">
+    <a href="YOUR_ESCROW_LINK" class="pay-btn escrow">Pay via Escrow</a>
+    <a href="YOUR_PAYSTACK_LINK" class="pay-btn paystack">Pay via Paystack</a>
+    <a href="YOUR_PAYONEER_LINK" class="pay-btn payoneer">Pay via Payoneer</a>
+  </div>
+</div>
+
+<style>
+.payment-card {
+  max-width: 500px;
+  margin: 40px auto;
+  padding: 30px;
+  border-radius: 25px;
+  background: #ffffff;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+  text-align: center;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.payment-title {
+  font-size: 28px;
+  margin-bottom: 10px;
+  color: #222;
+}
+
+.payment-subtitle {
+  font-size: 18px;
+  margin-bottom: 15px;
+  color: #666;
+  font-weight: 500;
+}
+
+.payment-description {
+  font-size: 14px;
+  margin-bottom: 25px;
+  color: #777;
+  line-height: 1.6;
+}
+
+.button-group {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.pay-btn {
+  text-decoration: none;
+  padding: 14px;
+  border-radius: 30px;
+  font-weight: 600;
+  font-size: 15px;
+  transition: all 0.3s ease;
+  display: block;
+}
+
+.escrow {
+  background: #2c3e50;
+  color: #fff;
+}
+
+.paystack {
+  background: #0ba4db;
+  color: #fff;
+}
+
+.payoneer {
+  background: #ff9900;
+  color: #fff;
+}
+
+.pay-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  opacity: 0.9;
+}
+</style>
+<div class="payment-card">
+  <h1 class="payment-title">Secure Your Project Slot</h1>
+  <h3 class="payment-subtitle">Choose Your Preferred Payment Method</h3>
+  <p class="payment-description">
+    Select a secure payment option below to begin your milestone or full-service ghostwriting project.
+    Work starts immediately after payment confirmation.
+  </p>
+
+  <div class="button-group">
+    <a href="YOUR_ESCROW_LINK" class="pay-btn escrow">Pay via Escrow</a>
+    <a href="YOUR_PAYSTACK_LINK" class="pay-btn paystack">Pay via Paystack</a>
+    <a href="YOUR_PAYONEER_LINK" class="pay-btn payoneer">Pay via Payoneer</a>
+  </div>
+</div>
+
+<style>
+.payment-card {
+  max-width: 500px;
+  margin: 40px auto;
+  padding: 30px;
+  border-radius: 25px;
+  background: #ffffff;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+  text-align: center;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.payment-title {
+  font-size: 28px;
+  margin-bottom: 10px;
+  color: #222;
+}
+
+.payment-subtitle {
+  font-size: 18px;
+  margin-bottom: 15px;
+  color: #666;
+  font-weight: 500;
+}
+
+.payment-description {
+  font-size: 14px;
+  margin-bottom: 25px;
+  color: #777;
+  line-height: 1.6;
+}
+
+.button-group {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.pay-btn {
+  text-decoration: none;
+  padding: 14px;
+  border-radius: 30px;
+  font-weight: 600;
+  font-size: 15px;
+  transition: all 0.3s ease;
+  display: block;
+}
+
+.escrow {
+  background: #2c3e50;
+  color: #fff;
+}
+
+.paystack {
+  background: #0ba4db;
+  color: #fff;
+}
+
+.payoneer {
+  background: #ff9900;
+  color: #fff;
+}
+
+.pay-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  opacity: 0.9;
+}
+</style>
   </div>
 </details>
 
