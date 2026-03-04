@@ -1212,7 +1212,97 @@ Loading…
 <details class="simple-dropdown">
   <summary>Portfolio</summary>
   <div class="dropdown-body">
-    Your portfolio content here
+    <style>
+
+/* ===== Auto Scroll Portfolio ===== */
+
+.portfolio-scroll-container {
+
+  overflow: hidden;
+
+  background: #ffffff;
+
+  padding: 40px 0;
+
+}
+
+.portfolio-track {
+
+  display: flex;
+
+  width: calc(250px * 10);
+
+  animation: scroll 25s linear infinite;
+
+}
+
+.portfolio-track img {
+
+  width: 220px;
+
+  height: 280px;
+
+object-fit: cover;
+
+  margin: 0 20px;
+
+  border-radius: 12px;
+
+  box-shadow: 0 12px 25px rgba(0,0,0,0.1);
+
+  transition: transform 0.3s ease;
+
+}
+
+.portfolio-track img:hover {
+
+  transform: scale(1.05);
+
+}
+
+.portfolio-scroll-container:hover .portfolio-track {
+
+  animation-play-state: paused;
+
+}
+
+@keyframes scroll {
+
+  0% { transform: translateX(0); }
+
+  100% { transform: translateX(-50%); }
+
+}
+
+</style>
+
+<div class="portfolio-scroll-container">
+
+  <div class="portfolio-track">
+
+    <img src="IMAGE1-LINK" />
+
+    <img src="IMAGE2-LINK" />
+
+    <img src="IMAGE3-LINK" />
+
+    <img src="IMAGE4-LINK" />
+
+    <img src="IMAGE5-LINK" />
+
+    <!--Repeat same images for seamless loop-->
+
+    <img src="IMAGE1-LINK" />
+
+    <img src="IMAGE2-LINK" />
+
+    <img src="IMAGE3-LINK" />
+
+    <img src="IMAGE4-LINK" />
+
+    <img src="IMAGE5-LINK" />
+
+ </div>
   </div>
 </details>
 
