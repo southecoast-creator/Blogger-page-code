@@ -1460,13 +1460,77 @@ transition: 0.3s ease;
 }
 
 </style>
-  </div>
-</details>
 
-<details class="simple-dropdown">
-  <summary>Profile</summary>
-  <div class="dropdown-body">
-    Your profile content here
+<div class="featured-portfolio">
+
+  <div class="featured-title">Featured Work</div>
+
+  <div class="featured-scroll">
+
+    <div class="portfolio-card">
+
+      <img src="IMAGE1-LINK" />
+
+      <h3>Ghostwritten Memoir</h3>
+
+      <p>Full-length book project including research, structuring, and manuscript delivery.</p>
+
+      <a class="portfolio-btn" href="YOUR-LINK-1" target="_blank">View Project →</a>
+
+    </div>
+
+    <div class="portfolio-card">
+
+      <img src="IMAGE2-LINK" />
+
+      <h3>SEO Blog Series</h3>
+
+<p>High-ranking content strategy and blog creation for niche authority growth.</p>
+
+      <a class="portfolio-btn" href="YOUR-LINK-2" target="_blank">Read Articles →</a>
+
+    </div>
+
+    <div class="portfolio-card">
+
+      <img src="IMAGE3-LINK" />
+
+      <h3>Website Copy</h3>
+
+      <p>Conversion-focused homepage and service page rewrite for brand positioning.</p>
+
+      <a class="portfolio-btn" href="YOUR-LINK-3" target="_blank">See Copy →</a>
+
+    </div>
+
+    <div class="portfolio-card">
+
+      <img src="IMAGE4-LINK" />
+
+      <h3>Editing Project</h3>
+
+      <p>Developmental and line 
+editing for a fiction manuscript.</p>
+
+      <a class="portfolio-btn" href="YOUR-LINK-4" target="_blank">View Sample →</a>
+
+    </div>
+
+    <div class="portfolio-card">
+
+      <img src="IMAGE5-LINK" />
+
+      <h3>Consultation Package</h3>
+
+      <p>Strategic content planning and brand voice refinement session.</p>
+
+      <a class="portfolio-btn" href="YOUR-LINK-5" target="_blank">Learn More →</a>
+
+    </div>
+
+  </div>
+
+</div>
   </div>
 </details>
 <style>
