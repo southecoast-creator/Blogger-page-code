@@ -757,3 +757,16 @@ Open for Long-Term Projects
 <a class="btn social-btn" href="#">Fiverr</a>
 
 </div></div>
+
+
+<div id="deliveryPopup">
+
+<h3>Your delivery is ready!</h3>
+
+<p>Your order has been completed. Click below to access your files.</p>
+
+<button onclick="openDelivery()">Pick Up Order</button>
+
+<button onclick="openSurvey()">Take Survey</button>
+
+<button onclick="openReview()">Leave Review</button>
