@@ -4606,4 +4606,83 @@ editing for a fiction manuscript.</p>
       </div>
     </div>
   </div>
+    <style>
+/* ===== Special Offers Cards ===== */
+.offer-section {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 25px;
+  background: #ffffff;
+  border-radius: 25px;
+  box-shadow: 0 10px 35px rgba(0,0,0,0.08);
+  font-family: 'Poppins', sans-serif;
+}
+
+.offer-card {
+  background: #fdf4ff;
+  border-left: 5px solid #8e44ff;
+  padding: 20px;
+  border-radius: 18px;
+  margin-bottom: 18px;
+  transition: all 0.3s ease;
+}
+
+.offer-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(142, 68, 255, 0.15);
+}
+
+.offer-card h3 {
+  margin: 0 0 8px 0;
+  font-size: 18px;
+  color: #5e2ced;
+}
+
+.offer-card p {
+  margin: 0;
+  font-size: 15px;
+  color: #555;
+  line-height: 1.6;
+}
+
+.offer-btn {
+  margin-top: 12px;
+  padding: 12px;
+  text-align: center;
+  border-radius: 50px;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  background: linear-gradient(135deg, #7a5cff, #ff6ec4);
+  color: #ffffff;
+  transition: 0.3s ease;
+  display: inline-block;
+}
+
+.offer-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 25px rgba(122,92,255,0.4);
+}
+    </style>
+
+    <div class="offer-section">
+      <div class="offer-card">
+        <h3>🎉 10% Off Next Project</h3>
+        <p>Repeat clients get 10% off their next milestone or full-service project.</p>
+        <a href="YOUR-OFFER-LINK-1" class="offer-btn">Claim Offer →</a>
+      </div>
+
+      <div class="offer-card">
+        <h3>💎 Free Consultation</h3>
+        <p>Book your second project and enjoy a free 30-min consultation session.</p>
+        <a href="YOUR-OFFER-LINK-2" class="offer-btn">Claim Offer →</a>
+      </div>
+
+      <div class="offer-card">
+        <h3>🔥 Bundle Deals</h3>
+        <p>Combine multiple projects for extra discounts as a valued returning client.</p>
+        <a href="YOUR-OFFER-LINK-3" class="offer-btn">Claim Offer →</a>
+      </div>
+    </div>
+  </div>
 </details>
