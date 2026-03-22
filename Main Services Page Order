@@ -2209,3 +2209,49 @@ font-weight: bold;
   <p>Check out add-ons that help you get it done faster, proofread and edit your work with professional editors, get to know how readers view your story with beta reading and get a story guide that shows just how your story was built brick by brick!</p>
   
   <p>Writing Service Rate and delivery:<b> Depends on chosen add-on</b></p>
+
+</div>
+
+<div class="cards-scroll-container">
+
+  <!-- Card 1 -->
+
+  <div class="service-card">
+
+    <h3 class="package-title"><b>Faster Delivery (Optional Add-on/Extra)</b></h3>
+
+    <p class="package-subtitle"><em>Have your manuscript delivered days earlier and stay ahead of your schedule!</em></p>
+    
+    <p class="package-subtitle"><em>Get <b>10% off</b> When You Select More Than 1 Add-on!</em></p>
+    
+    <p class="package-subtitle"><em>I will produce 30k, 60k and 100k words in just 17, 30 and 50 days respectively </em></p>
+
+    <p><b>Service Rate:</b><span class="base-price"> <strike>$ 0.01 per word</strike> $0.0125 per word</span></p>
+
+<p><b>Basic novel delivered in <strike>(21) </strike>17 days:</b><span class="base-price"> $375</span></p>
+    
+    <p><b>Writing Speed:</b><span class="base-price"> 3-4k words daily(3-4kw/d)</span></p>
+    
+    <p><b>Delivery time(Based on Quantity):</b><span class="base-price"> 17-50 days!</span></p>
+
+    <p>Choose Package for Add-on:</p>
+
+    <label><input type="checkbox" class="extra-option" data-price="100"> Beta reading (Basic Ghostwriting Story/Novel Package, $375 delivered in 17 days)</label>
+
+    <label><input type="checkbox" class="extra-option" data-price="50"> Beta reading (Standard Ghostwriting Story/ Novel Package, $750, delivered in 30 days) </label>
+
+<label><input type="checkbox" class="extra-option" data-price="50"> Beta reading (Premium Ghostwriting Story/ Novel Package, $1250, delivered in 50 days) </label>
+
+    <p><strong>Total: $<span class="total-price">375-$1250</span></strong></p>
+
+    <button class="btn-purchase" onclick="openModal(this)">Add now!</button>
+
+  </div>
+
+  <!-- Card 2 -->
+
+  <div class="service-card">
+
+    <h3 class="package-title"><b>Proofreading &amp; Editing (Optional Add-on/Extra)</b></h3>
+
+    <p class="package-subtitle"><em>Let Professional Editors get your work done,dusted and publish ready with the perfect finishing touches!</em></p>
