@@ -119,3 +119,75 @@ margin-bottom: 30px;
 }
 
 @media (max-width: 900px) {
+
+.split-section {
+
+    flex-direction: column;
+
+  }
+
+  .split-image {
+
+    min-height: 60vh;
+
+    background-attachment: scroll;
+
+  }
+
+}
+
+</style>
+
+<section class="split-section">
+
+  <div class="split-image"></div>
+
+  <div class="split-text">
+
+    <div class="text-inner">
+
+      <h1><b><strong>MADE FOR BOOK LOVERS, BUILT FOR THINKERS</strong></b></h1>
+
+<p>“The latest bookish finds and study essentials, just for you.”</p>
+
+      <a href="#">Fiverr</a>&nbsp; &nbsp; &nbsp; &nbsp;<a href="#">Upwork</a>&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<a href="#">LinkedIn</a></div>
+
+  </div>
+
+</section>
+<!--HERO SECTION-->
+
+<div style="background-color: white; border-radius: 15px; box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px; margin-bottom: 30px; padding: 30px; text-align: center;">
+
+  <h1 style="color: #8375a3; font-family: Georgia, serif; font-size: 2.5em;">Hear From Our Regular Clients!</h1>
+
+</div>
+<style>
+
+/* ===== Testimonial Section ===== */
+
+.testimonial-section {
+
+  overflow: hidden;
+
+  background: #8375a3;
+
+  padding: 40px 0;
+
+  position: relative;
+
+}
+
+/* ===== Moving Track ===== */
+
+.testimonial-track {
+
+  display: flex;
+
+  width: calc(300px * 12);
+
+  animation: scrollTestimonials 40s linear infinite;
+
+}
+
+/* ===== Individual Testimonial Card ===== */
