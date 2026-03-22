@@ -1164,3 +1164,109 @@ padding: 35px 25px;
 }
 
 </style>
+
+<!--HERO SECTION-->
+
+<div style="background-color: white; border-radius: 15px; box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px; margin-bottom: 30px; padding: 30px; text-align: center;">
+
+  <h1 style="color: #8375a3; font-family: Georgia, serif; font-size: 2.5em;">Why You Should Hire Us!</h1>
+
+</div>
+<div class="why-work-with-me">
+
+  <div class="info-card">
+
+    <div class="icon">
+
+      <img alt="Icon 1" src="YOUR-ICON-LINK" />
+
+    </div>
+
+    <div class="card-content">
+
+      <h3>Strategic Thinking</h3>
+
+      <p>I don’t just write — I structure content that converts, engages, and builds authority.</p>
+
+</div>
+
+  </div>
+
+  <div class="info-card">
+
+    <div class="icon">
+
+      <img alt="Icon 2" src="https://i.postimg.cc/1ztr33CY/Untitled-design-20260120-005106-0000.png" />
+
+    </div>
+
+    <div class="card-content">
+
+      <h3>Deep Research</h3>
+
+      <p>Your content is backed by solid research, clarity, and accuracy — no fluff.</p>
+
+    </div>
+
+  </div>
+
+  <div class="info-card">
+
+    <div class="icon">
+
+<img alt="Icon 4" src="YOUR-ICON-LINK" />
+
+    </div>
+
+    <div class="card-content">
+
+      <h3>On-Time Delivery</h3>
+
+      <p>Deadlines matter. I respect your time and deliver when I say I will.</p>
+
+    </div>
+
+  </div>
+
+  <div class="info-card">
+
+    <div class="icon">
+
+<img alt="Icon 5" src="YOUR-ICON-LINK" />
+
+    </div>
+
+    <div class="card-content">
+
+      <h3>Clear Communication</h3>
+
+      <p>Expect transparency, updates, and smooth collaboration from start to finish.</p>
+
+    </div>
+
+  </div>
+
+</div>
+<!--HERO SECTION-->
+
+<div style="background-color: white; border-radius: 15px; box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px; margin-bottom: 30px; padding: 30px; text-align: center;">
+
+  <h1 style="color: #8375a3; font-family: Georgia, serif; font-size: 2.5em;">Here's What Working With Us Looks Like</h1>
+
+</div>
+
+<!--Step 1-->
+
+  <div style="background-color: #fff8e1; border-radius: 10px; border: 2px solid rgb(255, 111, 97); margin-bottom: 20px; padding: 20px;">
+
+    <h2 style="color: #ff6f61;">Step 2 – Chat to Confirm</h2>
+
+    <p>Chat Via Google chat. Ask your questions, discuss projects with me, confirm your purchase or order and scope.</p>
+
+  </div>
+
+  <!--Step 3-->
+
+  <div style="background-color: #e3f2fd; border-radius: 10px; border: 2px solid rgb(30, 136, 229); margin-bottom: 20px; padding: 20px;">
+
+    <h2 style="color: #1e88e5;">Step 3 – Secure Payment</h2>
