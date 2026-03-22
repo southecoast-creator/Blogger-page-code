@@ -1791,3 +1791,116 @@ const scrollStep = 191; // board width + gap
 const scrollDelay = 3000;
 
 setInterval(() => {
+
+if (!slider) return;
+
+  if (scrollAmount >= slider.scrollWidth - slider.clientWidth) {
+
+    scrollAmount = 0;
+
+  } else {
+
+    scrollAmount += scrollStep;
+
+  }
+
+  slider.scrollTo({
+
+    left: scrollAmount,
+
+    behavior: 'smooth'
+
+  });
+
+}, scrollDelay);
+
+</script>
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%;">
+
+  <iframe
+
+src="https://www.youtube.com/embed/6-RcXEW9Rl4?si=rVWp7w8ZguO_xZGg" 
+
+    style="position: absolute; top:0; left: 0; width: 100%; height: 100%;" 
+
+    frameborder="0" 
+
+    allowfullscreen>
+
+  </iframe>
+
+</div>
+
+<details class="simple-dropdown">
+
+  <summary><b>Packages</b></summary>
+
+  <div class="dropdown-body">
+
+    <!-- Outer service info -->
+
+<div class="service-info">
+
+  <h2><b>Story &amp; Novel Ghostwriting Packages</b></h2>
+
+<p class="package-price">$300</p>
+
+    <p class="package-subtitle"><em><b>✓</b>Up to <b>30,000 words</b></em></p>
+    
+    <p class="package-subtitle"><em><b>✓ Clean &amp; Professional Formatting</b></em></p>
+    
+    <p class="package-subtitle"><em><b>✓ Expert Storytelling &amp; Compelling Plot Development</b></em></p>
+
+    <ul class="package-features">
+
+      <li>☆ 100% Original handwritten full manuscript</li>
+      
+      <li>☆ Confidential ghostwriting</li>
+
+      <li>☆ Excellent plot, pacing &amp; character development</li>
+
+      <li>☆ Light editing &amp; proofreading</li>
+
+<li>☆ Full ownership &amp; rights transfer</li>
+      
+      <li>☆ Smooth story organization and flow</li>
+      
+      <li>☆ Engaging dialogues a d scenes</li>
+      
+      <li>☆ Genre flexibility</li>
+      
+      <li>☆ Clear and professional 24/7 communication</li>
+      
+      <li>☆ Prefect for novellas, mini fictions etc</li>
+
+    </ul>
+
+    <p><strong>Delivery:</strong> 21 days</p>
+
+    <p><strong>Revisions:</strong> 3</p>
+
+    <div class="package-buttons">
+
+      <a href="#purchasenow1" class="btn-purchase">Purchase Now</a>
+
+      <a
+href="https://docs.google.com/forms/d/e/1FAIpQLScxxSeF8cO0lSXzq7esn8QiUafVIdJJlYobTju0qMLbYSfjhA/viewform?usp=publish-editor" class="btn-chat">Chat First</a>
+
+      <a href="#" class="btn-samples">View Samples</a>
+
+    </div>
+
+  </div>
+
+  <!-- Card 2 -->
+
+  <div class="service-card">
+
+    <h3 class="package-title">Standard Story/Novel Ghostwriting Package</h3>
+
+    <p class="package-price">$600</p>
+
+    <p class="package-subtitle"><em><b>✓</b> Up to <b>60,000 words</b></em></p>
+    
+    <p class="package-subtitle"><em><b>✓ Style and tone matching per character</b></em></p>
