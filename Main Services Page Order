@@ -353,3 +353,30 @@ border-radius: 50%;
     <div class="testimonial-card">
 
       <img alt="Client" src="IMAGE-LINK-HERE" />
+
+<p>"Absolutely talented! My blog traffic doubled after her content strategy."</p>
+
+      <h4>– Michael T.</h4>
+
+    </div>
+
+    <div class="testimonial-card">
+
+      <img alt="Client" src="IMAGE-LINK-HERE" />
+
+      <p>"Fast, reliable, creative. I’ll definitely hire her again."</p>
+
+      <h4>– Kristy T.</h4>
+
+    </div>
+
+  </div>
+
+</div>
+<!--HERO SECTION-->
+
+<div style="background-color: white; border-radius: 15px; box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px; margin-bottom: 30px; padding: 30px; text-align: center;">
+
+  <h1 style="color: #8375a3; font-family: Georgia, serif; font-size: 2.5em;">Our Offers</h1>
+
+</div>
