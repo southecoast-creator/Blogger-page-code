@@ -1,1 +1,27 @@
-the
+<style>
+
+html, body {
+
+  margin: 0;
+
+  padding: 0;
+
+}
+
+.split-section {
+
+  width: 100vw;
+
+  margin-left: calc(-50vw + 50%);
+
+  display: flex;
+
+  min-height: 100vh;
+
+}
+
+.split-image {
+
+  flex: 1;
+
+  background: url('https://i.postimg.cc/sgDFjvNg/A-Place-for-all-Your-Perfect-Finds-20260221-120958-0000.png') center/cover no-repeat;
