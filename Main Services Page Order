@@ -466,3 +466,90 @@ background-color: #ffffff; /* white background */
     padding: 35px 25px;
 
   }
+
+.frame-box h1 {
+
+    font-size: 2.2em;
+
+  }
+
+  .frame-box p {
+
+    font-size: 1.1em;
+
+  }
+
+}
+
+@media (max-width: 768px) {
+
+  .frame-box {
+
+    padding: 25px 20px;
+
+  }
+
+  .frame-box h1 {
+
+    font-size: 1.8em;
+
+  }
+
+}
+
+@media (max-width: 768px) {
+
+.frame-box {
+
+    padding: 25px 20px;
+
+  }
+
+  .frame-box h1 {
+
+    font-size: 1.8em;
+
+  }
+
+  .frame-box p {
+
+    font-size: 1em;
+
+  }
+
+}
+
+</style>
+
+<script>
+
+window.addEventListener('DOMContentLoaded', () => {
+
+  document.querySelectorAll('.fade-in').forEach(el => {
+
+el.classList.add('visible');
+
+  });
+
+});
+
+</script>
+
+<div class="fade-in frame-box">
+
+  <h1>Fiction Ghostwriting</h1>
+
+  <p>Fiction, romance, fantasy, I bring your imaginative worlds to life with engaging storytelling.</p>
+
+</div>
+<style>
+
+/* Fade-in animation (can keep same for all) */
+
+.fade-in {
+
+  opacity: 0;
+
+  transform: translateY(20px);
+
+  transition: opacity 1s ease-out, transform 1s ease-out;
