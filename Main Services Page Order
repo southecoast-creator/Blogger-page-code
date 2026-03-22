@@ -2129,3 +2129,83 @@ font-size: 16px;
   border-radius: 8px;
 
   cursor: pointer;
+
+font-weight: bold;
+
+  font-size: 14px;
+
+  text-decoration: none;
+
+  text-align: center;
+
+  display: inline-block;
+
+  transition: 0.3s ease;
+
+}
+
+/* Purchase button */
+
+.btn-purchase {
+
+  background: #8375a3;
+
+  color: #fff;
+
+}
+
+.btn-purchase:hover {
+
+  background: #6e5c91;
+
+}
+
+/* Chat First button - PROPER transparent outlined purple button */
+
+.btn-chat {
+
+  background: transparent;
+
+  color: #8375a3;
+
+  border: 2px solid #8375a3;
+
+}
+
+.btn-chat:hover {
+
+  background: #8375a3;
+
+  color: #fff;
+
+}
+
+/* Samples button */
+
+.btn-samples {
+
+  background: #f5f5f5;
+
+  color: #333;
+
+}
+
+.btn-samples:hover {
+
+  background: #e0e0e0;
+
+}
+
+</style>
+
+  </div>
+
+    <!-- Outer service info -->
+
+<div class="service-info">
+
+  <h2><b>We don't Just Write, We Polish, We Add Value and We Help you Publish a Bestseller!</b></h2>
+
+  <p>Check out add-ons that help you get it done faster, proofread and edit your work with professional editors, get to know how readers view your story with beta reading and get a story guide that shows just how your story was built brick by brick!</p>
+  
+  <p>Writing Service Rate and delivery:<b> Depends on chosen add-on</b></p>
