@@ -191,3 +191,95 @@ margin-bottom: 30px;
 }
 
 /* ===== Individual Testimonial Card ===== */
+
+.testimonial-card {
+
+  width: 280px;
+
+  min-width: 280px;
+
+  margin: 0 15px;
+
+  background: white;
+
+  border-radius: 20px;
+
+  padding: 25px;
+
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+
+  text-align: center;
+
+  font-family: 'Poppins', sans-serif;
+
+}
+
+/* Profile Image */
+
+.testimonial-card img {
+
+  width: 70px;
+
+  height: 70px;
+
+border-radius: 50%;
+
+  object-fit: cover;
+
+  margin-bottom: 15px;
+
+}
+
+/* Quote Text */
+
+.testimonial-card p {
+
+  font-size: 14px;
+
+  color: #444;
+
+  line-height: 1.6;
+
+}
+
+/* Name */
+
+.testimonial-card h4 {
+
+  margin-top: 15px;
+
+  font-size: 16px;
+
+  color: #222;
+
+}
+
+/* Animation */
+
+@keyframes scrollTestimonials {
+
+  0% {
+
+    transform: translateX(0);
+
+  }
+
+  100% {
+
+    transform: translateX(-50%);
+
+  }
+
+}
+
+</style>
+
+<div class="testimonial-section">
+
+  <div class="testimonial-track">
+
+    <!--Testimonial 1-->
+
+    <div class="testimonial-card">
+
+      <img alt="Client" src="IMAGE-LINK-HERE" />
