@@ -1270,3 +1270,51 @@ padding: 35px 25px;
   <div style="background-color: #e3f2fd; border-radius: 10px; border: 2px solid rgb(30, 136, 229); margin-bottom: 20px; padding: 20px;">
 
     <h2 style="color: #1e88e5;">Step 3 – Secure Payment</h2>
+
+<p> Pay once all details are confirmed to enable us start your project. Payments can be made at once or in milestones</p>
+
+  </div>
+
+  <!--Step 4-->
+
+  <div style="background-color: #fff3e0; border-radius: 10px; border: 2px solid rgb(251, 140, 0); margin-bottom: 20px; padding: 20px;">
+
+    <h2 style="color: #fb8c00;">Step 4 – Delivery, Feedback &amp; Revisions</h2>
+
+    <p>Work starts, updates are sent and files are delivered securely. You review the work and I make any minor revisions needed. My goal is your satisfaction! After which you can leave us a review!🎉</p>
+
+  </div>
+
+<!--Step 5-->
+
+  <div style="background-color: #b7aee3; border-radius: 10px; border: 2px solid rgb(131, 117, 163); margin-bottom: 20px; padding: 20px;">
+
+    <h2 style="color: #8375a3;">Step 5 – Enjoy &amp; Share</h2>
+
+    <p>Once everything is perfect, use your content to grow your brand, blog, or business. Share the results and enjoy the impact!</p>
+    
+    </div>
+
+  <!--Step 5-->
+
+  <div style="background-color: #b7aee3; border-radius: 10px; border: 2px solid rgb(131, 117, 163); margin-bottom: 20px; padding: 20px;">
+
+    <h2 style="color: #8375a3;">Step 5 – Enjoy &amp; Share</h2>
+
+    <p>Once everything is perfect, use your content to grow your brand, blog, or business. Share the results and enjoy the impact!</p>
+
+</div>
+
+  <div class="quote-box">
+
+  <h2>Let’s Bring Your Ideas to Life</h2>
+
+  <p class="subtext">
+
+    Every project is unique. Tell me about yours and receive a free, no-obligation quote tailored to your needs.
+
+  </p>
+
+  <a class="quote-btn" href="#contact">Get Your Free Quote</a>
+
+</div>
