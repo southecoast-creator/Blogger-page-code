@@ -1490,3 +1490,86 @@ margin-bottom: 25px;
   color: #555;
 
 }
+
+.faq-question.active + .faq-answer {
+
+  display: block;
+
+}
+
+</style>
+
+<script>
+
+document.querySelectorAll(".faq-question").forEach(button => {
+
+  button.addEventListener("click", () => {
+
+    button.classList.toggle("active");
+
+  });
+
+});
+
+</script>
+<nav class="nav-clean">
+
+  <ul>
+
+    <li><a href="#services">Services</a></li>
+
+<li><a href="#profile">Profile</a></li>
+
+    <li><a href="#portfolio">Portfolio</a></li>
+
+    <li><a href="#legal">Legal</a></li>
+
+  </ul>
+
+</nav>
+
+<style>
+
+.nav-clean {
+
+  background: #8375a3;
+
+  padding: 8px 20px;
+
+  border-radius: 10px;
+
+  display: inline-block;
+
+}
+
+.nav-clean ul {
+
+  list-style: none;
+
+margin: 0;
+
+  padding: 0;
+
+  display: flex;          /* Flex ensures items stay in one line */
+
+  gap: 12px;              /* space between items */
+
+  white-space: nowrap;     /* prevents wrapping */
+
+}
+
+.nav-clean ul li {
+
+  display: inline-block;   /* ensures horizontal alignment */
+
+}
+
+.nav-clean ul li a {
+
+  text-decoration: none;
+
+  color: #fff;
+
+  font-weight: 500;
+
+  padding: 6px 12px;
