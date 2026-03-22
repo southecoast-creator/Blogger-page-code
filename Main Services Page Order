@@ -2255,3 +2255,47 @@ font-weight: bold;
     <h3 class="package-title"><b>Proofreading &amp; Editing (Optional Add-on/Extra)</b></h3>
 
     <p class="package-subtitle"><em>Let Professional Editors get your work done,dusted and publish ready with the perfect finishing touches!</em></p>
+
+<label><input type="checkbox" class="extra-option" data-price="50"> Beta reading (Premium Ghostwriting Story/ Novel Package, $1250, delivered in 50 days) </label>
+
+    <p><strong>Total: $<span class="total-price">375-$1250</span></strong></p>
+
+    <button class="btn-purchase" onclick="openModal(this)">Add now!</button>
+
+  </div>
+
+  <!-- Card 2 -->
+
+  <div class="service-card">
+
+    <h3 class="package-title"><b>Proofreading &amp; Editing (Optional Add-on/Extra)</b></h3>
+
+    <p class="package-subtitle"><em>Let Professional Editors get your work done,dusted and publish ready with the perfect finishing touches!</em></p>
+
+<label><input type="checkbox" class="extra-option" data-price="75"> Proofreading &amp; Editing for Standard Ghostwriting Story/Novel Packages (+$144)</label>
+    
+    <label><input type="checkbox" class="extra-option" data-price="75"> Proofreading &amp; Editing for Premium Ghostwriting Story/Novel Packages (+$168)</label>
+
+    <p><strong>Total: $<span class="total-price">72-168</span></strong></p>
+
+    <button class="btn-purchase" onclick="openModal(this)">Add Now!</button>
+
+  </div>
+  
+  <!-- Card 3 -->
+  
+  <div class="service-card">
+    
+    <h3 class="package-title"><b>Beta Reading (Optional Add-on/Extra)</b></h3>
+
+<p class="package-subtitle"><em>I will betaread 30k,60k and 100k words in 3, 5 and 7 days respectively for $10, $15 and $20 respectively</em></p>
+    
+    <p class="package-subtitle"><em>Get professional reports, review, edits and critiques with detailed reading froma professional team of writers!</em></p>
+    
+    <p><b>Service Rate:</b><span class="base-price"> $1 per 3k words</span></p>
+    
+    <p>Choose package for add-on:</p>
+    
+    <label><input type="checkbox" class="extra-option" data-price="150"> Beta Reading for Basic Story/Novel Ghostwriting Packages (+$10)</label>
+    
+    <label><input type="checkbox" class="extra-option" data-price="150"> Beta Reading for Standard Story/Novel Ghostwriting Packages (+$15)</label>
