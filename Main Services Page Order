@@ -1404,3 +1404,89 @@ margin-bottom: 25px;
     <div class="faq-answer">
 
       <p>Ghostwriting means I write content on your behalf while you receive full credit as the author.</p>
+
+</div>
+
+  </div>
+
+  <div class="faq-item">
+
+    <button class="faq-question">How does pricing work?</button>
+
+    <div class="faq-answer">
+
+      <p>Pricing depends on word count, research level, and deadline. You can request a free personalized quote anytime.</p>
+
+    </div>
+
+  </div>
+
+  <div class="faq-item">
+
+    <button class="faq-question">Will my project remain confidential?</button>
+
+    <div class="faq-answer">
+
+      <p>Absolutely. All projects are handled with strict confidentiality and professionalism.</p>
+
+</div>
+
+  </div>
+
+</div>
+
+<style>
+
+.faq-section {
+
+  max-width: 700px;
+
+  margin: 40px auto;
+
+}
+
+.faq-section h2 {
+
+  text-align: center;
+
+  margin-bottom: 25px;
+
+}
+
+.faq-item {
+
+  margin-bottom: 15px;
+
+  border-bottom: 1px solid #ddd;
+
+}
+
+.faq-question {
+
+  width: 100%;
+
+  padding: 15px;
+
+  text-align: left;
+
+  background: none;
+
+  border: none;
+
+  font-size: 16px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+}
+
+.faq-answer {
+
+  display: none;
+
+  padding: 0 15px 15px;
+
+  color: #555;
+
+}
