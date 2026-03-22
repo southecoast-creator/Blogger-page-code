@@ -1656,3 +1656,56 @@ box-shadow: 0 4px 15px rgba(0,0,0,0.08);
   background: #8375a3;
 
   color: #fff;
+
+transform: translateY(-2px);
+
+}
+
+.mini-nav a.active {
+
+  background: #8375a3;
+
+  color: #fff;
+
+}
+
+</style>
+
+<div class="mini-nav-container">
+
+  <div class="mini-nav">
+
+    <a class="active" href="#section1">Fiction</a>
+
+    <a href="#section2">Non-fiction</a>
+
+    <a href="#section3">Blogs &amp; Articles</a>
+
+    <a href="#section4">Emails &amp; Newsletters</a>
+    
+    <a href="#section6">Social Media Content</a>
+
+<a href="#section5">Scriptwriting</a>
+
+  </div>
+
+</div>
+<div id="section1"></div>
+<!-- Fiction Ghostwriting Section -->
+
+<div class="fiction-ghostwriting-section">
+
+  <h2>Fiction Ghostwriting</h2>
+
+  <p>Crafting your stories, your voice, our expertise</p>
+
+</div>
+<style>
+
+.fiction-ghostwriting-section {
+
+  text-align: center; /* Centers the text */
+
+  background-color: #a899c9; /* Light background, customizable */
+
+  padding: 40px 20px; /* Top-bottom 40px, left-right 20px */
