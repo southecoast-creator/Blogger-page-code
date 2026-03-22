@@ -2347,3 +2347,59 @@ font-weight: bold;
   <div class="modal-content">
 
     <span class="close" onclick="closeModal()">&times;</span>
+
+.btn-samples {background:#f5f5f5;color:#333;border:none;padding:10px 20px;border-radius:8px;display:block;margin:10px auto;width:70%; text-align:center;}
+
+.btn-samples:hover {background:#e0e0e0;}
+
+/* Modal styles */
+
+.modal { display:none; position:fixed; z-index:999; left:0; top:0; width:100%; height:100%; overflow:auto; background:rgba(0,0,0,0.4); }
+
+.modal-content { background:#fff; margin:15% auto; padding:20px; border-radius:12px; width:80%; max-width:400px; box-shadow:0 5px 15px rgba(0,0,0,0.3); text-align:center; }
+
+.close { color:#aaa; float:right; font-size:24px; font-weight:bold; cursor:pointer; }
+
+.close:hover { color:#000; }
+
+/* Stack buttons vertically */
+
+.modal-buttons a { display:block; margin:10px auto; width:70%; text-align:center; }
+
+</style>
+
+<script>
+
+function openModal(button){
+
+  const card = button.closest('.service-card');
+
+  const total = card.querySelector('.total-price').textContent;
+
+  const modal = document.getElementById('purchase-modal');
+
+  modal.style.display = "block";
+
+  modal.querySelector('p').textContent = `Thanks for selecting an Add-on, please pick your selected add-on below for one time payment!`;
+
+}
+
+function closeModal(){
+
+  document.getElementById('purchase-modal').style.display = "none";
+
+}
+
+// Auto-calculate total for each card
+
+document.querySelectorAll('.service-card').forEach(card => {
+
+  const quantityInput = card.querySelector('.package-quantity');
+
+  const extras = card.querySelectorAll('.extra-option');
+
+  const basePrice = parseInt(card.querySelector('.base-price').textContent);
+
+  const totalPriceEl = card.querySelector('.total-price');
+
+  function updateTotal(){
