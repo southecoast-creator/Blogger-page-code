@@ -283,3 +283,73 @@ border-radius: 50%;
     <div class="testimonial-card">
 
       <img alt="Client" src="IMAGE-LINK-HERE" />
+
+<p>"Working with her was seamless and professional. She delivered beyond expectations!"</p>
+
+      <h4>– Sarah K.</h4>
+
+    </div>
+    
+     <!--Testimonial 1-->
+
+    <div class="testimonial-card">
+
+      <img alt="Client" src="IMAGE-LINK-HERE" />
+
+      <p>"Working with her was seamless and professional. She delivered beyond expectations!"</p>
+
+      <h4>– Jones S.</h4>
+
+    </div>
+    
+     <!--Testimonial 1-->
+
+    <div class="testimonial-card">
+
+      <img alt="Client" src="IMAGE-LINK-HERE" />
+
+<p>"Working with her was seamless and professional. She delivered beyond expectations!"</p>
+
+      <h4>– Zainab K.</h4>
+
+    </div>
+
+    <!--Testimonial 2-->
+
+    <div class="testimonial-card">
+
+      <img alt="Client" src="IMAGE-LINK-HERE" />
+
+      <p>"Absolutely talented! My blog traffic doubled after her content strategy."</p>
+
+      <h4>– Michael T.</h4>
+
+    </div>
+
+    <!--Testimonial 3-->
+
+    <div class="testimonial-card">
+
+      <img alt="Client" src="IMAGE-LINK-HERE" />
+
+<p>"Fast, reliable, creative. I’ll definitely hire her again."</p>
+
+      <h4>– Amina D.</h4>
+
+    </div>
+
+    <!--Duplicate for smooth infinite loop-->
+
+    <div class="testimonial-card">
+
+      <img alt="Client" src="IMAGE-LINK-HERE" />
+
+      <p>"Working with her was seamless and professional. She delivered beyond expectations!"</p>
+
+      <h4>– Sarah K.</h4>
+
+    </div>
+
+    <div class="testimonial-card">
+
+      <img alt="Client" src="IMAGE-LINK-HERE" />
