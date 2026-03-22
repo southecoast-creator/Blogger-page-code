@@ -1318,3 +1318,89 @@ padding: 35px 25px;
   <a class="quote-btn" href="#contact">Get Your Free Quote</a>
 
 </div>
+
+<style>
+
+.quote-box {
+
+  background: #f9f9f9;
+
+  padding: 40px 20px;
+
+  text-align: center;
+
+  border-radius: 12px;
+
+  margin: 40px 0;
+
+  box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+
+}
+
+.quote-box h2 {
+
+  font-size: 24px;
+
+  margin-bottom: 15px;
+
+}
+
+.quote-box .subtext {
+
+  font-size: 16px;
+
+  color: #555;
+
+margin-bottom: 25px;
+
+  max-width: 500px;
+
+  margin-left: auto;
+
+  margin-right: auto;
+
+}
+
+.quote-btn {
+
+  background: #8375a3;
+
+  color: #fff;
+
+  padding: 12px 25px;
+
+  text-decoration: none;
+
+  border-radius: 30px;
+
+  font-size: 15px;
+
+  transition: 0.3s ease;
+
+}
+
+.quote-btn:hover {
+
+  background: #444;
+
+}
+
+</style>
+<!--HERO SECTION-->
+
+<div style="background-color: white; border-radius: 15px; box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px; margin-bottom: 30px; padding: 30px; text-align: center;">
+
+  <h1 style="color: #8375a3; font-family: Georgia, serif; font-size: 2.5em;">FAQs</h1>
+
+</div>
+<div class="faq-section">
+
+  <h2>Frequently Asked Questions</h2>
+
+  <div class="faq-item">
+
+    <button class="faq-question">What is ghostwriting?</button>
+
+    <div class="faq-answer">
+
+      <p>Ghostwriting means I write content on your behalf while you receive full credit as the author.</p>
