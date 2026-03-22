@@ -380,3 +380,89 @@ border-radius: 50%;
   <h1 style="color: #8375a3; font-family: Georgia, serif; font-size: 2.5em;">Our Offers</h1>
 
 </div>
+
+<style>
+
+/* Fade-in animation (can keep same for all) */
+
+.fade-in {
+
+  opacity: 0;
+
+  transform: translateY(20px);
+
+  transition: opacity 1s ease-out, transform 1s ease-out;
+
+}
+
+.fade-in.visible {
+
+  opacity: 1;
+
+  transform: translateY(0);
+
+}
+
+/* New framed box styling */
+
+.frame-box {
+
+  position: relative;
+
+background-color: #ffffff; /* white background */
+
+  border: 4px solid #8375a3; /* purple frame */
+
+  padding: 40px 30px;
+
+  border-radius: 20px;
+
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+
+  max-width: 900px;
+
+  margin: 40px auto;
+
+  text-align: center;
+
+  color: #333333;
+
+  overflow: hidden;
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: center;
+
+}
+
+/* Heading & paragraph styles */
+
+.frame-box h1 {
+
+  font-size: 2.5em;
+
+  margin-bottom: 15px;
+
+  color: #8375a3;
+
+}
+
+.frame-box p {
+
+  font-size: 1.2em;
+
+  line-height: 1.6;
+
+}
+
+/* Responsive adjustments */
+
+@media (max-width: 1024px) {
+
+  .frame-box {
+
+    padding: 35px 25px;
+
+  }
