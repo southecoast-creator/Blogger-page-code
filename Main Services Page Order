@@ -1962,3 +1962,76 @@ href="https://docs.google.com/forms/d/e/1FAIpQLScxxSeF8cO0lSXzq7esn8QiUafVIdJJlY
     <p class="package-subtitle"><em><b>✓ Professional storytelling and Plot development</b></em></p>
     
     <p class="package-subtitle"><em><b>✓ Clean manuscript formatting (publish ready version across all document types)</b></em></p>
+
+<li>☆ Style &amp; tone matching</li>
+      
+      <li>☆ Detailed chapter outlines + summaries</li>
+      
+      <li>☆ Multiple project reviews &amp; check-ins</li>
+      
+      <li>☆ Confidentiality, full ownership rights &amp; NDA option</li>
+
+    </ul>
+
+    <p><strong>Delivery:</strong> 63 days</p>
+
+    <p><strong>Revisions:</strong> Unlimited</p>
+
+    <div class="package-buttons">
+
+      <a href="#purchasenow1" class="btn-purchase">Purchase Now</a>
+
+      <a
+href="https://docs.google.com/forms/d/e/1FAIpQLScxxSeF8cO0lSXzq7esn8QiUafVIdJJlYobTju0qMLbYSfjhA/viewform?usp=publish-editor" class="btn-chat">Chat First</a>
+
+      <a href="#" class="btn-samples">View Samples</a>
+
+    </div>
+
+  </div>
+
+</div>
+
+<style>
+
+/* Scrollable container */
+
+.cards-scroll-container {
+
+  display: flex;
+
+  gap: 20px;
+
+  overflow-x: auto;
+
+  padding: 20px;
+
+  scroll-behavior: smooth;
+
+}
+
+.cards-scroll-container::-webkit-scrollbar {
+
+  display: none;
+
+}
+
+/* Card styles */
+
+.service-card {
+
+  min-width: 300px;
+
+  max-width: 300px;
+
+  padding: 20px;
+
+  border-radius: 15px;
+
+  box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+
+  background: #fff;
+
+  text-align: center;
+
+  flex-shrink: 0;
