@@ -2035,3 +2035,97 @@ href="https://docs.google.com/forms/d/e/1FAIpQLScxxSeF8cO0lSXzq7esn8QiUafVIdJJlY
   text-align: center;
 
   flex-shrink: 0;
+
+font-family: Arial, sans-serif;
+
+}
+
+/* Package details */
+
+.package-title {
+
+  font-size: 22px;
+
+  margin-bottom: 10px;
+  
+  color: #8375a3
+
+}
+
+.package-price {
+
+  font-size: 32px;
+
+  font-weight: bold;
+
+  color: #8375a3;
+
+  margin-bottom: 10px;
+
+}
+
+.package-subtitle {
+
+font-size: 16px;
+
+  font-style: italic;
+
+  color: #666;
+
+  margin-bottom: 15px;
+
+}
+
+/* Features list */
+
+.package-features {
+
+  list-style: none;
+
+  padding: 0;
+
+  margin-bottom: 15px;
+
+}
+
+.package-features li {
+
+  color: #000;
+
+  font-size: 16px;
+
+  margin: 5px 0;
+
+}
+
+/* Delivery & revisions */
+
+.service-card p strong {
+
+  color: #333;
+
+}
+
+/* Buttons container */
+
+.package-buttons {
+
+  display: flex;
+
+  justify-content: space-around;
+
+  flex-wrap: wrap;
+
+  gap: 10px;
+
+}
+
+/* Buttons general */
+
+.package-buttons a {
+
+  padding: 10px 20px;
+
+  border-radius: 8px;
+
+  cursor: pointer;
