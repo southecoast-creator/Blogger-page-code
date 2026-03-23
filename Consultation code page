@@ -1,0 +1,273 @@
+<!-- Consultation Card HTML -->
+<div class="consultation-card">
+  <img src="YOUR-GIG-IMAGE-URL" alt="Consultation Gig" class="consultation-image">
+  <div class="consultation-content">
+    <div class="title-with-icon">
+      <svg class="video-call-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M17 10.5V7c0 .55-.45 1-1 1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z" fill="#4CAF50"/>
+      </svg>
+      <h3 class="consultation-title">Consultation Title Here</h3>
+    </div>
+    <button class="consult-btn" onclick="openConsultationModal()">Consult Now</button>
+  </div>
+</div>
+
+<!-- Modal Popup -->
+<div id="consultationModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeConsultationModal()">&times;</span>
+    
+    <!-- Horizontally Scrollable Images -->
+    <div class="image-carousel">
+      <img src="GIG-IMAGE-1-URL" alt="Gig 1" class="carousel-img">
+      <img src="GIG-IMAGE-2-URL" alt="Gig 2" class="carousel-img">
+      <img src="GIG-IMAGE-3-URL" alt="Gig 3" class="carousel-img">
+    </div>
+    
+    <!-- Four Buttons (3 Links + 1 Instructions Popup) -->
+    <div class="modal-buttons">
+      <a href="https://link1.com" class="btn btn-link" target="_blank">Link 1</a>
+      <a href="https://link2.com" class="btn btn-link" target="_blank">Link 2</a>
+      <a href="https://link3.com" class="btn btn-link" target="_blank">Link 3</a>
+      <button class="btn btn-instructions" onclick="openInstructionsModal()">Instructions</button>
+    </div>
+  </div>
+</div>
+
+<!-- Instructions Modal -->
+<div id="instructionsModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeInstructionsModal()">&times;</span>
+    <h2>How to Proceed</h2>
+    <p>Your instructions here...</p>
+  </div>
+</div>
+
+<!-- CSS -->
+<style>
+  /* Consultation Card */
+  .consultation-card {
+    display: flex;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    max-width: 400px;
+    margin: 20px 0;
+  }
+
+  .consultation-image {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    flex-shrink: 0;
+  }
+
+  .consultation-content {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-grow: 1;
+  }
+
+  /* Title with Icon */
+  .title-with-icon {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+  }
+
+  .video-call-icon {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+  }
+
+  .consultation-title {
+    margin: 0;
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+  }
+
+  .consult-btn {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+  }
+
+  .consult-btn:hover {
+    background-color: #45a049;
+  }
+
+  /* Modal Styling */
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    animation: fadeIn 0.3s;
+  }
+
+  .modal-content {
+    background-color: white;
+    margin: 5% auto;
+    padding: 30px;
+    border-radius: 8px;
+    max-width: 600px;
+    position: relative;
+    animation: slideIn 0.3s;
+  }
+
+  .close {
+    position: absolute;
+    right: 20px;
+    top: 15px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #aaa;
+  }
+
+  .close:hover {
+    color: #000;
+  }
+
+  /* Image Carousel */
+  .image-carousel {
+    display: flex;
+    gap: 15px;
+    overflow-x: auto;
+    margin: 20px 0;
+    padding: 10px 0;
+  }
+
+  .carousel-img {
+    min-width: 150px;
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  /* Modal Buttons */
+  .modal-buttons {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+  }
+
+  .btn {
+    flex: 1;
+    min-width: 100px;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    text-decoration: none;
+    text-align: center;
+    transition: background-color 0.3s;
+  }
+
+  .btn-link {
+    background-color: #2196F3;
+    color: white;
+  }
+
+  .btn-link:hover {
+    background-color: #0b7dda;
+  }
+
+  .btn-instructions {
+    background-color: #FF9800;
+    color: white;
+  }
+
+  .btn-instructions:hover {
+    background-color: #e68900;
+  }
+
+  /* Animations */
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes slideIn {
+    from { transform: translateY(-50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    .consultation-card {
+      flex-direction: column;
+    }
+
+    .consultation-image {
+      width: 100%;
+      height: 200px;
+    }
+
+    .modal-buttons {
+      flex-direction: column;
+    }
+
+    .btn {
+      flex: 1 1 100%;
+    }
+
+    .title-with-icon {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+</style>
+
+<!-- JavaScript -->
+<script>
+  function openConsultationModal() {
+    document.getElementById('consultationModal').style.display = 'block';
+  }
+
+  function closeConsultationModal() {
+    document.getElementById('consultationModal').style.display = 'none';
+    closeInstructionsModal();
+  }
+
+  function openInstructionsModal() {
+    document.getElementById('instructionsModal').style.display = 'block';
+  }
+
+  function closeInstructionsModal() {
+    document.getElementById('instructionsModal').style.display = 'none';
+  }
+
+  // Close modals when clicking outside
+  window.onclick = function(event) {
+    let consultationModal = document.getElementById('consultationModal');
+    let instructionsModal = document.getElementById('instructionsModal');
+    
+    if (event.target === consultationModal) {
+      closeConsultationModal();
+    }
+    if (event.target === instructionsModal) {
+      closeInstructionsModal();
+    }
+  }
+</script>
