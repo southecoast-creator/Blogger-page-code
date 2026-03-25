@@ -79,3 +79,35 @@ setInterval(() => {
     allowfullscreen>
   </iframe>
 </div>
+<style>
+.simple-dropdown {
+  margin: 15px 0;
+  font-family: Arial, sans-serif;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.simple-dropdown summary {
+  padding: 15px;
+  background: #A899C9;
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+  list-style: none;
+}
+
+.simple-dropdown summary::-webkit-details-marker {
+  display: none;
+}
+
+.dropdown-body {
+  padding: 20px;
+  background: #f9f9f9;
+}
+</style>
+<details class="simple-dropdown">
+  <summary>Special Offers for Repeat Buyers</summary>
+  <div class="dropdown-body">
+  </div>
+</details>
