@@ -1,0 +1,81 @@
+<!-- Fiction Ghostwriting Section -->
+<div class="fiction-ghostwriting-section">
+  <h2>Fiction Ghostwriting</h2>
+  <p>Crafting your stories, your voice, our expertise</p>
+</div>
+
+<style>
+.fiction-ghostwriting-section {
+  text-align: center; /* Centers the text */
+  background-color: #a899c9; /* Light background, customizable */
+  padding: 40px 20px; /* Top-bottom 40px, left-right 20px */
+  border-radius: 12px; /* Rounded corners */
+  margin: 30px auto; /* Space above/below */
+  max-width: 800px; /* Keeps it from stretching too wide */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1); /* Soft shadow */
+  font-family: 'Georgia', serif; /* Elegant font */
+}
+
+.fiction-ghostwriting-section h2 {
+  font-size: 2em;
+  color: #2b2b2b; /* Dark title color */
+  margin-bottom: 10px;
+}
+
+.fiction-ghostwriting-section p {
+  font-size: 1.1em;
+  color: #555555; /* Subtitle text color */
+  line-height: 1.6;
+}
+</style>
+<div class="board-slider" id="boardSlider">
+  <a href="LINK1" class="board">
+    <img src="IMAGE1" alt="Board 1">
+    <span>See what the club’s discussing</span>
+  </a>
+
+  <a href="LINK2" class="board">
+    <img src="IMAGE2" alt="Board 2">
+    <span>Curated Picks</span>
+  </a>
+
+  <a href="LINK3" class="board">
+    <img src="IMAGE3" alt="Board 3">
+    <span>Reader Favorites</span>
+  </a>
+
+  <a href="LINK4" class="board">
+    <img src="IMAGE4" alt="Board 4">
+    <span>Freshly Brewed</span>
+  </a>
+</div>
+<script>
+const slider = document.getElementById('boardSlider');
+
+let scrollAmount = 0;
+const scrollStep = 191; // board width + gap
+const scrollDelay = 3000;
+
+setInterval(() => {
+  if (!slider) return;
+
+  if (scrollAmount >= slider.scrollWidth - slider.clientWidth) {
+    scrollAmount = 0;
+  } else {
+    scrollAmount += scrollStep;
+  }
+
+  slider.scrollTo({
+    left: scrollAmount,
+    behavior: 'smooth'
+  });
+}, scrollDelay);
+</script>
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%;">
+  <iframe 
+    src="https://www.youtube.com/embed/YOUR_VIDEO_ID" 
+    style="position: absolute; top:0; left: 0; width: 100%; height: 100%;" 
+    frameborder="0" 
+    allowfullscreen>
+  </iframe>
+</div>
