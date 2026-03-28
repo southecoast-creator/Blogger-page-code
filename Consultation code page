@@ -271,3 +271,251 @@
     }
   }
 </script>
+
+
+
+
+
+
+
+
+
+
+<style>
+.course-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+
+.course-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+  overflow: hidden;
+  transition: 0.25s ease;
+}
+
+.course-card:hover {
+  transform: translateY(-3px);
+}
+
+.course-card img {
+  width: 100%;
+  height: 110px;
+  object-fit: cover;
+}
+
+.card-content {
+  padding: 10px;
+}
+
+.card-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.card-desc {
+  font-size: 12px;
+  margin: 6px 0;
+  color: #444;
+}
+
+.enroll-btn {
+  width: 100%;
+  padding: 7px;
+  border: none;
+  background: black;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+/* MODAL */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 999;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.6);
+}
+
+.modal-content {
+  background: #fff;
+  margin: 20% auto;
+  padding: 16px;
+  width: 240px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.modal button {
+  display: block;
+  width: 100%;
+  margin: 8px 0;
+  padding: 8px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.close {
+  float: right;
+  cursor: pointer;
+}
+</style>
+
+<div class="course-container">
+
+  <!-- CARD 1 -->
+  <div class="course-card">
+    <img src="https://via.placeholder.com/300x180">
+    <div class="card-content">
+      <div class="card-title">
+        <!-- Mortarboard -->
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="black">
+          <path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3z"/>
+          <path d="M6 12v4c0 1.5 3 3 6 3s6-1.5 6-3v-4l-6 3-6-3z"/>
+        </svg>
+        Blogging
+      </div>
+      <div class="card-desc">Build and grow your blog.</div>
+      <button class="enroll-btn" onclick="openModal('modal1')">Enroll</button>
+    </div>
+  </div>
+
+  <!-- CARD 2 -->
+  <div class="course-card">
+    <img src="https://via.placeholder.com/300x180">
+    <div class="card-content">
+      <div class="card-title">
+        <!-- Premium Badge -->
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="black">
+          <path d="
+            M12 2
+            L14 4 L17 4.5
+            L18.5 7 L21 9
+            L20 12 L21 15
+            L18.5 17 L17 19.5
+            L14 20 L12 22
+            L10 20 L7 19.5
+            L5.5 17 L3 15
+            L4 12 L3 9
+            L5.5 7 L7 4.5
+            L10 4 Z
+          "/>
+          <path d="M8 16 L12 20 L16 16 Z"/>
+        </svg>
+        Freelancing
+      </div>
+      <div class="card-desc">Scale your writing business.</div>
+      <button class="enroll-btn" onclick="openModal('modal2')">Enroll</button>
+    </div>
+  </div>
+
+  <!-- CARD 3 -->
+  <div class="course-card">
+    <img src="https://via.placeholder.com/300x180">
+    <div class="card-content">
+      <div class="card-title">
+        <!-- Dogeared -->
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="black">
+          <path d="M6 2h9l5 5v15H6z"/>
+          <path d="M15 2v5h5"/>
+        </svg>
+        Fiction
+      </div>
+      <div class="card-desc">Write powerful stories.</div>
+      <button class="enroll-btn" onclick="openModal('modal3')">Enroll</button>
+    </div>
+  </div>
+
+  <!-- CARD 4 -->
+  <div class="course-card">
+    <img src="https://via.placeholder.com/300x180">
+    <div class="card-content">
+      <div class="card-title">
+        <!-- Pen -->
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="black">
+          <path d="M3 17.25V21h3.75L19.81 7.94l-3.75-3.75L3 17.25z"/>
+        </svg>
+        Copywriting
+      </div>
+      <div class="card-desc">Master persuasive writing.</div>
+      <button class="enroll-btn" onclick="openModal('modal4')">Enroll</button>
+    </div>
+  </div>
+
+</div>
+
+<!-- MODALS -->
+
+<div id="modal1" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('modal1')">&times;</span>
+    <h4>Blogging</h4>
+    <p>Select your path</p>
+    <button>Basics (Free)</button>
+    <button>Full Course</button>
+  </div>
+</div>
+
+<div id="modal2" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('modal2')">&times;</span>
+    <h4>Freelancing</h4>
+    <p>Select your path</p>
+    <button>Basics (Free)</button>
+    <button>Full Course</button>
+  </div>
+</div>
+
+<div id="modal3" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('modal3')">&times;</span>
+    <h4>Fiction Writing</h4>
+    <p>Select your path</p>
+    <button>Basics (Free)</button>
+    <button>Full Course</button>
+  </div>
+</div>
+
+<div id="modal4" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('modal4')">&times;</span>
+    <h4>Copywriting</h4>
+    <p>Select your path</p>
+    <button>Basics (Free)</button>
+    <button>Full Course</button>
+  </div>
+</div>
+
+<script>
+function openModal(id){
+  document.getElementById(id).style.display="block";
+}
+function closeModal(id){
+  document.getElementById(id).style.display="none";
+}
+window.onclick=function(e){
+  document.querySelectorAll('.modal').forEach(m=>{
+    if(e.target===m)m.style.display="none";
+  });
+}
+</script>
+
+
+
+
+
+
+
+
+<a href="YOUR-FREE-COURSE-LINK" target="_blank">
+  <button>Basics (Free)</button>
+</a>
