@@ -1,0 +1,47 @@
+<svg width="150" height="150" xmlns="http://www.w3.org/2000/svg">
+  <!-- Embedded background image (Base64) -->
+  <defs>
+    <pattern id="bg" patternUnits="userSpaceOnUse" width="150" height="150">
+      <image href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJYAAACWCAYAAAA8AXHiAAAACXBIWXMAAAsTAAALEwEAmpwYAAA..."
+             x="0" y="0" width="150" height="150" />
+    </pattern>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background rectangle using the embedded image -->
+  <rect x="0" y="0" width="150" height="150" rx="20" ry="20" fill="url(#bg)" />
+
+  <!-- Faceless girl -->
+  <image href="faceless-girl.png" x="55" y="15" width="40" height="40" filter="url(#glow)"/>
+
+  <!-- Brand name -->
+  <text x="75" y="65" font-family="Arial, sans-serif" font-size="11" fill="#ffffff" font-weight="bold" text-anchor="middle">
+    The Weirdos Library
+  </text>
+
+  <!-- Achievement text -->
+  <text x="75" y="80" font-family="Arial, sans-serif" font-size="9" fill="#ffffff" font-weight="bold" text-anchor="middle">
+    You have successfully
+  </text>
+  <text x="75" y="93" font-family="Arial, sans-serif" font-size="9" fill="#ffffff" font-weight="bold" text-anchor="middle">
+    completed the [Course Name]!
+  </text>
+
+  <!-- Trophy centered under text -->
+  <rect x="65" y="110" width="20" height="15" fill="#FFD700" stroke="#DAA520" stroke-width="1"/>
+  <path d="M65,110 Q60,115 65,120" fill="none" stroke="#DAA520" stroke-width="1"/>
+  <path d="M85,110 Q90,115 85,120" fill="none" stroke="#DAA520" stroke-width="1"/>
+  <rect x="67" y="125" width="16" height="5" fill="#DAA520" stroke="#DAA520" stroke-width="1"/>
+
+  <!-- Label in top-right corner -->
+  <rect x="85" y="10" width="55" height="16" rx="4" ry="4" fill="#ff4d6d"/>
+  <text x="112.5" y="22" font-family="Arial, sans-serif" font-size="8" fill="#ffffff" font-weight="bold" text-anchor="middle">
+    Exclusive
+  </text>
+</svg>
