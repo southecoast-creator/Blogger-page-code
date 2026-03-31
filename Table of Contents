@@ -80,3 +80,85 @@ function toggleTOC() {
 // Initialize TOC on page load
 document.addEventListener("DOMContentLoaded", createTOC);
 </script>
+
+
+
+
+Best Bottom TOC
+<script>
+function createTOC() {
+  const tocList = document.getElementById("toc-list");
+  if (!tocList) return;
+
+  // Only target headings INSIDE the main privacy policy content
+  // Adjust the selector below to match your actual content container
+  const mainContent = document.querySelector(".post-body") || 
+                      document.querySelector(".entry-content") || 
+                      document.getElementById("post-body") || 
+                      document.querySelector("article");
+
+  if (!mainContent) {
+    // Fallback: use the whole document (less ideal)
+    var headings = document.querySelectorAll("h2, h3");
+  } else {
+    var headings = mainContent.querySelectorAll("h2, h3");
+  }
+
+  let counter = 1;
+  tocList.innerHTML = ""; // Clear any existing items
+
+  headings.forEach(function(h) {
+    const headingText = h.textContent.trim();
+
+    // Skip unwanted headings (add more patterns if needed)
+    const skipList = [
+      "Featured", 
+      "Recently", 
+      "Privacy Policy", // if it's duplicated as a big title
+      "The Expert Guide",
+      "How I Survived",
+      "How to Get Your Blogger Blog",
+      "Shop Fancy Fanart",
+      "Subscribe to our Newsletter",
+      "Get a Library Card",
+      "Policy Checklist",     // optional: remove if you want to keep it
+      "More on Cookie Policy",
+      "SUMMARY OF KEY POINTS"
+    ];
+
+    if (skipList.some(item => headingText.includes(item))) {
+      return; // skip this heading
+    }
+
+    // Add ID if missing
+    if (!h.id) {
+      h.id = "toc-" + counter;
+      counter++;
+    }
+
+    // Create list item
+    const li = document.createElement("li");
+    if (h.tagName === "H3") {
+      li.classList.add("toc-sub");
+    }
+
+    const link = document.createElement("a");
+    link.href = "#" + h.id;
+    link.textContent = headingText;
+
+    li.appendChild(link);
+    tocList.appendChild(li);
+  });
+}
+
+// Toggle function (unchanged)
+function toggleTOC() {
+  const tocBox = document.getElementById("toc-content");
+  if (tocBox) {
+    tocBox.style.display = (tocBox.style.display === "block") ? "none" : "block";
+  }
+}
+
+// Run when page loads
+document.addEventListener("DOMContentLoaded", createTOC);
+</script>
