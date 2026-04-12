@@ -71,3 +71,28 @@
 </div>
 <!-- 📚 YOUR BLOG CONTENT WRAPPER -->
 <div id="blogContent">
+
+
+
+<script>
+function unlockPage() {
+
+  /* 🔑 UNLIMITED CODE LIST (YOU CAN ADD MORE ANYTIME) */
+  const validCodes = [
+    "FREE-TRIAL-001",
+    "FREE-TRIAL-002",
+    "WEIRDO30",
+    "LIBRARYVIP",
+    "ACCESS-ALPHA"
+  ];
+
+  let input = document.getElementById("codeInput").value;
+
+  if(validCodes.includes(input)) {
+    document.getElementById("lockOverlay").style.display = "none";
+    document.getElementById("blogContent").style.display = "block";
+  } else {
+    document.getElementById("errorMsg").innerText = "Invalid Library Card ❌";
+  }
+}
+</script>
