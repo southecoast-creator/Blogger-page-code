@@ -43,3 +43,31 @@
   border-radius: 8px;
   cursor: pointer;
 }
+
+/* ERROR */
+#errorMsg {
+  color: #ff6b6b;
+  margin-top: 10px;
+  font-size: 13px;
+}
+
+/* HIDE CONTENT INITIALLY */
+#blogContent {
+  display: none;
+}
+</style>
+<!-- 🔐 OVERLAY -->
+<div id="lockOverlay">
+  <div id="lockBox">
+    <h3>🔐 Library Card Required</h3>
+    <p>Enter your access code to continue</p>
+
+    <input type="password" id="codeInput" placeholder="Enter Library Code">
+
+    <button onclick="unlockPage()">Unlock</button>
+
+    <div id="errorMsg"></div>
+  </div>
+</div>
+<!-- 📚 YOUR BLOG CONTENT WRAPPER -->
+<div id="blogContent">
