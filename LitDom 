@@ -1,0 +1,781 @@
+Claude
+
+<script>
+document.addEventListener('DOMContentLoaded', async function () {
+
+  /* =========================
+     PAGE ELEMENTS
+  ========================= */
+
+  const signupArea =
+    document.getElementById('litdom-signup');
+
+  const loginArea =
+    document.getElementById('litdom-login');
+
+  const userArea =
+    document.getElementById('litdom-user-area');
+
+  const userEmail =
+    document.getElementById('litdom-user-email');
+
+  const logoutButton =
+    document.getElementById('logout-button');
+
+  const logoutMessage =
+    document.getElementById('logout-message');
+
+
+  /* =========================
+     SIGN UP
+  ========================= */
+
+  const signupButton =
+    document.getElementById('signup-button');
+
+  const signupMessage =
+    document.getElementById('signup-message');
+
+  if (signupButton) {
+
+    signupButton.addEventListener('click', async function () {
+
+      const email =
+        document.getElementById('signup-email').value.trim();
+
+      const password =
+        document.getElementById('signup-password').value;
+
+      if (!email || !password) {
+        signupMessage.textContent =
+          'Please enter your email and password.';
+        return;
+      }
+
+      signupMessage.textContent =
+        'Creating your account...';
+
+      const result =
+        await litdomSupabase.auth.signUp({
+          email: email,
+          password: password,
+          options: {
+            emailRedirectTo:
+              'https://litdom.blogspot.com/p/sign-up-for-litdom.html'
+          }
+        });
+
+      if (result.error) {
+        signupMessage.textContent =
+          result.error.message;
+        return;
+      }
+
+      signupMessage.textContent =
+        'Account created! Please check your email to confirm your account.';
+
+    });
+
+  }
+
+
+  /* =========================
+     LOGIN
+  ========================= */
+
+  const loginButton =
+    document.getElementById('login-button');
+
+  const loginMessage =
+    document.getElementById('login-message');
+
+  if (loginButton) {
+
+    loginButton.addEventListener('click', async function () {
+
+      const email = document.getElementById('login-email').value.trim();
+      const password = document.getElementById('login-password').value;
+
+      if (!email || !password) {
+        loginMessage.textContent = 'Please enter your email and password.';
+        return;
+      }
+
+      loginMessage.textContent = 'Logging you in...';
+
+      const result = await litdomSupabase.auth.signInWithPassword({
+        email: email,
+        password: password
+      });
+
+      if (result.error) {
+        loginMessage.textContent = result.error.message;
+        return;
+      }
+
+      const loggedInUser = result.data.user;
+
+      loginMessage.textContent = 'Login successful! 🎉';
+
+      window.location.href =
+        'https://litdom.blogspot.com/p/profile.html#' +
+        encodeURIComponent(loggedInUser.id);
+
+    });
+
+  }
+
+
+  /* =========================
+     CHECK CURRENT USER
+  ========================= */
+
+  const userResult =
+    await litdomSupabase.auth.getUser();
+
+  if (userResult.error) {
+    console.log(
+      'Could not get current user:',
+      userResult.error.message
+    );
+    return;
+  }
+
+  const user =
+    userResult.data.user;
+
+
+  /* =====================================================
+     LOGGED-IN USER
+  ===================================================== */
+  if (user) {
+
+    if (userArea) {
+      userArea.style.display = 'block';
+    }
+
+    if (signupArea) {
+      signupArea.style.display = 'none';
+    }
+
+    if (loginArea) {
+      loginArea.style.display = 'none';
+    }
+
+    if (userEmail) {
+      userEmail.textContent =
+        'Logged in as: ' + user.email;
+    }
+
+
+    /* =========================
+       LOAD PROFILE
+    ========================= */
+
+    const profileResult =
+      await litdomSupabase
+        .from('profiles')
+        .select('username, display_name, bio')
+        .eq('id', user.id)
+        .maybeSingle();
+
+    if (profileResult.error) {
+
+      console.log(
+        'Profile loading error:',
+        profileResult.error.message
+      );
+
+    } else if (profileResult.data) {
+
+      const profile =
+        profileResult.data;
+
+      const displayNameElement =
+        document.getElementById(
+          'profile-display-name'
+        );
+
+      const usernameElement =
+        document.getElementById(
+          'profile-username'
+        );
+
+      if (displayNameElement) {
+        displayNameElement.textContent =
+          profile.display_name || 'Not set';
+      }
+
+      if (usernameElement) {
+        usernameElement.textContent =
+          profile.username || 'Not set';
+      }
+
+    }
+
+    /* =========================
+       SAVE PROFILE
+    ========================= */
+
+    const saveProfileButton =
+      document.getElementById(
+        'save-profile-button'
+      );
+
+    const profileSaveMessage =
+      document.getElementById(
+        'profile-save-message'
+      );
+
+
+    if (saveProfileButton) {
+
+      saveProfileButton.addEventListener(
+        'click',
+        async function () {
+
+          const displayName =
+            document.getElementById(
+              'edit-display-name'
+            ).value.trim();
+
+          const username =
+            document.getElementById(
+              'edit-username'
+            ).value.trim();
+
+          const bio =
+            document.getElementById(
+              'edit-bio'
+            ).value.trim();
+
+
+          profileSaveMessage.textContent =
+            'Saving profile...';
+
+
+          const updateResult =
+            await litdomSupabase
+              .from('profiles')
+              .upsert({
+                id: user.id,
+                display_name: displayName,
+                username: username,
+                bio: bio
+              })
+              .select();
+
+
+          /* =========================
+             CHECK THE ACTUAL RESULT
+          ========================= */
+
+          if (updateResult.error) {
+
+            profileSaveMessage.textContent =
+              'Error: ' +
+              updateResult.error.message;
+
+            console.log(
+              'Profile update error:',
+              updateResult.error
+            );
+
+            return;
+          }
+
+
+          if (
+            !updateResult.data ||
+            updateResult.data.length === 0
+          ) {
+
+            profileSaveMessage.textContent =
+              'Profile was not updated. No matching profile row was found.';
+
+            console.log(
+              'Profile update affected 0 rows.',
+              'User ID:',
+              user.id
+            );
+
+            return;
+          }
+
+
+          /* =========================
+             SUCCESS
+          ========================= */
+
+          const displayNameElement =
+            document.getElementById(
+              'profile-display-name'
+            );
+
+          const usernameElement =
+            document.getElementById(
+              'profile-username'
+            );
+
+          if (displayNameElement) {
+            displayNameElement.textContent =
+              displayName || 'Not set';
+          }
+
+          if (usernameElement) {
+            usernameElement.textContent =
+              username || 'Not set';
+          }
+
+
+          profileSaveMessage.textContent =
+            'Profile saved successfully! 🎉';
+
+        }
+      );
+
+    }
+
+
+    /* =========================
+       LOG OUT
+    ========================= */
+
+    if (logoutButton) {
+
+      logoutButton.addEventListener(
+        'click',
+        async function () {
+
+          const result =
+            await litdomSupabase.auth.signOut();
+
+          if (result.error) {
+
+            logoutMessage.textContent =
+              result.error.message;
+
+            return;
+          }
+
+          window.location.reload();
+
+        }
+      );
+
+    }
+
+
+  } else {
+
+    /* =====================================================
+       NO USER LOGGED IN
+    ===================================================== */
+
+    if (userArea) {
+      userArea.style.display = 'none';
+    }
+
+    if (signupArea) {
+      signupArea.style.display = 'block';
+    }
+
+    if (loginArea) {
+      loginArea.style.display = 'block';
+    }
+
+  }
+
+});
+</script>
+
+
+
+
+Old
+<script>
+document.addEventListener(&#39;DOMContentLoaded&#39;, async function () {
+
+  /* =========================
+     PAGE ELEMENTS
+  ========================= */
+
+  const signupArea =
+    document.getElementById(&#39;litdom-signup&#39;);
+
+  const loginArea =
+    document.getElementById(&#39;litdom-login&#39;);
+
+  const userArea =
+    document.getElementById(&#39;litdom-user-area&#39;);
+
+  const userEmail =
+    document.getElementById(&#39;litdom-user-email&#39;);
+
+  const logoutButton =
+    document.getElementById(&#39;logout-button&#39;);
+
+  const logoutMessage =
+    document.getElementById(&#39;logout-message&#39;);
+
+
+  /* =========================
+     SIGN UP
+  ========================= */
+
+  const signupButton =
+    document.getElementById(&#39;signup-button&#39;);
+
+  const signupMessage =
+    document.getElementById(&#39;signup-message&#39;);
+
+  if (signupButton) {
+
+    signupButton.addEventListener(&#39;click&#39;, async function () {
+
+      const email =
+        document.getElementById(&#39;signup-email&#39;).value.trim();
+
+      const password =
+        document.getElementById(&#39;signup-password&#39;).value;
+
+      if (!email || !password) {
+        signupMessage.textContent =
+          &#39;Please enter your email and password.&#39;;
+        return;
+      }
+
+      signupMessage.textContent =
+        &#39;Creating your account...&#39;;
+
+      const result =
+await litdomSupabase.auth.signUp({
+          email: email,
+          password: password,
+          options: {
+            emailRedirectTo:
+              &#39;https://litdom.blogspot.com/p/sign-up-for-litdom.html&#39;
+          }
+        });
+
+      if (result.error) {
+        signupMessage.textContent =
+          result.error.message;
+        return;
+      }
+
+      signupMessage.textContent =
+        &#39;Account created! Please check your email to confirm your account.&#39;;
+
+    });
+
+  }
+
+
+  /* =========================
+     LOGIN
+  ========================= */
+
+  const loginButton =
+    document.getElementById(&#39;login-button&#39;);
+
+  const loginMessage =
+    document.getElementById(&#39;login-message&#39;);
+
+  if (loginButton) {
+
+    loginButton.addEventListener(&#39;click&#39;, async function () {
+
+  const email = document.getElementById(&#39;login-email&#39;).value.trim();
+  const password = document.getElementById(&#39;login-password&#39;).value;
+
+  if (!email || !password) {
+    loginMessage.textContent = &#39;Please enter your email and password.&#39;;
+    return;
+  }
+
+  loginMessage.textContent = &#39;Logging you in...&#39;;
+const result = await litdomSupabase.auth.signInWithPassword({
+    email: email,
+    password: password
+  });
+
+  if (result.error) {
+    loginMessage.textContent = result.error.message;
+    return;
+  }
+
+  const loggedInUser = result.data.user;
+
+  loginMessage.textContent = &#39;Login successful! 🎉&#39;;
+
+  window.location.href =
+    &#39;https://litdom.blogspot.com/p/profile.html#&#39; +
+  encodeURIComponent(result.data.user.id)&#39;
+});
+
+
+  /* =========================
+     CHECK CURRENT USER
+  ========================= */
+
+  const userResult =
+    await litdomSupabase.auth.getUser();
+
+  if (userResult.error) {
+console.log(
+      &#39;Could not get current user:&#39;,
+      userResult.error.message
+    );
+    return;
+  }
+
+  const user =
+    userResult.data.user;
+
+
+  /* =====================================================
+     LOGGED-IN USER
+  ===================================================== */
+if (user) {
+
+    if (userArea) {
+      userArea.style.display = &#39;block&#39;;
+    }
+
+    if (signupArea) {
+      signupArea.style.display = &#39;none&#39;;
+    }
+
+    if (loginArea) {
+      loginArea.style.display = &#39;none&#39;;
+    }
+
+    if (userEmail) {
+      userEmail.textContent =
+        &#39;Logged in as: &#39; + user.email;
+    }
+
+
+    /* =========================
+       LOAD PROFILE
+    ========================= */
+
+    const profileResult =
+      await litdomSupabase
+        .from(&#39;profiles&#39;)
+        .select(&#39;username, display_name, bio&#39;)
+        .eq(&#39;id&#39;, user.id)
+        .maybeSingle();
+if (profileResult.error) {
+
+      console.log(
+        &#39;Profile loading error:&#39;,
+        profileResult.error.message
+      );
+
+    } else if (profileResult.data) {
+
+      const profile =
+        profileResult.data;
+
+      const displayNameElement =
+        document.getElementById(
+          &#39;profile-display-name&#39;
+        );
+
+      const usernameElement =
+        document.getElementById(
+          &#39;profile-username&#39;
+        );
+
+      if (displayNameElement) {
+        displayNameElement.textContent =
+          profile.display_name || &#39;Not set&#39;;
+      }
+
+      if (usernameElement) {
+        usernameElement.textContent =
+          profile.username || &#39;Not set&#39;;
+      }
+
+    }
+/* =========================
+       SAVE PROFILE
+    ========================= */
+
+    const saveProfileButton =
+      document.getElementById(
+        &#39;save-profile-button&#39;
+      );
+
+    const profileSaveMessage =
+      document.getElementById(
+        &#39;profile-save-message&#39;
+      );
+
+
+    if (saveProfileButton) {
+
+      saveProfileButton.addEventListener(
+        &#39;click&#39;,
+        async function () {
+
+          const displayName =
+            document.getElementById(
+              &#39;edit-display-name&#39;
+            ).value.trim();
+
+          const username =
+            document.getElementById(
+              &#39;edit-username&#39;
+            ).value.trim();
+
+          const bio =
+            document.getElementById(
+              &#39;edit-bio&#39;
+            ).value.trim();
+
+
+          profileSaveMessage.textContent =
+            &#39;Saving profile...&#39;;
+
+
+          const updateResult =
+  await litdomSupabase
+    .from(&#39;profiles&#39;)
+    .upsert({
+      id: user.id,
+      display_name: displayName,
+      username: username,
+      bio: bio
+    })
+    .select();
+
+
+          /* =========================
+             CHECK THE ACTUAL RESULT
+          ========================= */
+
+          if (updateResult.error) {
+
+            profileSaveMessage.textContent =
+              &#39;Error: &#39; +
+              updateResult.error.message;
+
+            console.log(
+              &#39;Profile update error:&#39;,
+updateResult.error
+            );
+
+            return;
+          }
+
+
+          if (
+            !updateResult.data ||
+            updateResult.data.length === 0
+          ) {
+
+            profileSaveMessage.textContent =
+              &#39;Profile was not updated. No matching profile row was found.&#39;;
+
+            console.log(
+              &#39;Profile update affected 0 rows.&#39;,
+              &#39;User ID:&#39;,
+              user.id
+            );
+
+            return;
+          }
+
+
+          /* =========================
+             SUCCESS
+          ========================= */
+
+          const displayNameElement =
+            document.getElementById(
+              &#39;profile-display-name&#39;
+            );
+
+          const usernameElement =
+            document.getElementById(
+              &#39;profile-username&#39;
+            );
+
+if (displayNameElement) {
+            displayNameElement.textContent =
+              displayName || &#39;Not set&#39;;
+          }
+
+          if (usernameElement) {
+            usernameElement.textContent =
+              username || &#39;Not set&#39;;
+          }
+
+
+          profileSaveMessage.textContent =
+            &#39;Profile saved successfully! 🎉&#39;;
+
+        }
+      );
+
+    }
+
+
+    /* =========================
+       LOG OUT
+    ========================= */
+
+    if (logoutButton) {
+
+      logoutButton.addEventListener(
+        &#39;click&#39;,
+        async function () {
+
+          const result =
+            await litdomSupabase.auth.signOut();
+
+          if (result.error) {
+
+            logoutMessage.textContent =
+              result.error.message;
+
+            return;
+          }
+
+          window.location.reload();
+
+        }
+);
+
+    }
+
+
+  } else {
+
+    /* =====================================================
+       NO USER LOGGED IN
+    ===================================================== */
+
+    if (userArea) {
+      userArea.style.display = &#39;none&#39;;
+    }
+
+    if (signupArea) {
+      signupArea.style.display = &#39;block&#39;;
+    }
+
+    if (loginArea) {
+      loginArea.style.display = &#39;block&#39;;
+    }
+
+  }
+      
+});
+</script>
+
+
+
+GPT
