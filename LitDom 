@@ -1,4 +1,4 @@
-Claude
+typeClaude
 
 <script>
 document.addEventListener('DOMContentLoaded', async function () {
@@ -779,3 +779,49 @@ if (displayNameElement) {
 
 
 GPT
+
+/* =========================
+   PROFILE AVATAR
+========================= */
+
+const avatarImage =
+  document.getElementById(
+    'profile-avatar-image'
+  );
+
+const avatarInitial =
+  document.getElementById(
+    'public-profile-initial'
+  );
+
+if (profile.avatar_url) {
+
+  if (avatarImage) {
+    avatarImage.src =
+      profile.avatar_url;
+
+    avatarImage.style.display =
+      'block';
+  }
+
+  if (avatarInitial) {
+    avatarInitial.style.display =
+      'none';
+  }
+
+} else {
+
+  if (avatarImage) {
+    avatarImage.style.display =
+      'none';
+  }
+
+  if (avatarInitial) {
+    avatarInitial.textContent =
+      displayName.charAt(0).toUpperCase();
+
+    avatarInitial.style.display =
+      'inline';
+  }
+
+}
