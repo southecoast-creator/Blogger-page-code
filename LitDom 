@@ -825,3 +825,190 @@ if (profile.avatar_url) {
   }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+/* =========================
+   UPLOAD AVATAR
+========================= */
+
+if (avatarInput) {
+
+  avatarInput.addEventListener(
+    'change',
+    async function () {
+
+      const file = avatarInput.files[0];
+
+      if (!file) {
+        return;
+      }
+
+      /* Get logged-in user */
+
+      const userResult =
+        await litdomSupabase.auth.getUser();
+
+      if (userResult.error || !userResult.data.user) {
+
+        alert(
+          'Please log in before changing your profile picture.'
+        );
+
+        avatarInput.value = '';
+        return;
+      }
+
+      const user =
+        userResult.data.user;
+
+
+      /* Check image type */
+
+      if (!file.type.startsWith('image/')) {
+
+        alert(
+          'Please choose an image file.'
+        );
+
+        avatarInput.value = '';
+        return;
+      }
+
+
+      /* Check image size */
+
+      if (file.size > 5 * 1024 * 1024) {
+
+        alert(
+          'Please choose an image smaller than 5 MB.'
+        );
+
+        avatarInput.value = '';
+        return;
+      }
+
+
+      /* Create a unique file name */
+
+      const fileExtension =
+        file.name.split('.').pop();
+
+      const fileName =
+        'profile-' +
+        Date.now() +
+        '.' +
+        fileExtension;
+
+      const filePath =
+        user.id +
+        '/' +
+        fileName;
+
+
+      /* Upload image */
+
+      const uploadResult =
+        await litdomSupabase
+          .storage
+          .from('avatar')
+          .upload(
+            filePath,
+            file
+          );
+
+
+      if (uploadResult.error) {
+
+        console.error(
+          'Avatar upload error:',
+          uploadResult.error
+        );
+
+        alert(
+          'Could not upload your profile picture: ' +
+          uploadResult.error.message
+        );
+
+        avatarInput.value = '';
+        return;
+      }
+
+
+      /* Get public image URL */
+
+      const publicUrlResult =
+        litdomSupabase
+          .storage
+          .from('avatar')
+          .getPublicUrl(filePath);
+
+      const avatarUrl =
+        publicUrlResult.data.publicUrl;
+
+
+      /* Save URL to profile */
+
+      const updateResult =
+        await litdomSupabase
+          .from('profiles')
+          .update({
+            avatar_url: avatarUrl
+          })
+          .eq('id', user.id);
+
+
+      if (updateResult.error) {
+
+        console.error(
+          'Avatar profile update error:',
+          updateResult.error
+        );
+
+        alert(
+          'The picture uploaded, but the profile could not be updated: ' +
+          updateResult.error.message
+        );
+
+        avatarInput.value = '';
+        return;
+      }
+
+
+      /* Display picture immediately */
+
+      if (avatarImage) {
+
+        avatarImage.src =
+          avatarUrl;
+
+        avatarImage.style.display =
+          'block';
+      }
+
+      if (avatarInitial) {
+
+        avatarInitial.style.display =
+          'none';
+      }
+
+
+      avatarInput.value = '';
+
+      alert(
+        'Profile picture updated! 🎉'
+      );
+
+    }
+  );
+
+}
