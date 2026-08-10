@@ -144,3 +144,124 @@ if (avatarContainer && avatarInput) {
   }
 }
 </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div id="profile-login-gate" style="display:none;">
+  <h2>🔒 Login required</h2>
+  <p>You need a Litdom account to view profiles.</p>
+
+  <a href="/p/login.html">
+    Log in
+  </a>
+
+  <a href="/p/sign-up-for-litdom.html">
+    Sign up
+  </a>
+</div>
+<div id="profile-content" style="display:none;">
+  
+<div id="litdom-public-profile">
+
+  <div class="profile-header">
+
+    <div class="profile-avatar" id="profile-avatar-container">
+
+  <img
+    id="profile-avatar-image"
+    src=""
+    alt="Profile picture"
+    style="display:none;"
+  >
+
+  <span id="public-profile-initial">L</span>
+
+  <input
+    type="file"
+    id="profile-avatar-input"
+    accept="image/*"
+    style="display:none;"
+  >
+
+</div>
+
+    <div class="profile-info">
+
+      <h1 id="public-profile-name">
+        Loading...
+      </h1>
+
+      <div id="public-profile-username">
+        @username
+      </div>
+
+      <p id="public-profile-bio">
+        Loading profile...
+      </p>
+      <div id="profile-follow-area">
+
+  <div id="profile-stats">
+
+  <button
+    type="button"
+    id="followers-button">
+
+    <strong id="follower-count">0</strong>
+    Followers
+
+  </button>
+
+  <button
+    type="button"
+    id="following-button">
+
+    <strong id="following-count">0</strong>
+    Following</button>
+
+</div>
+
+<div id="followers-list"></div>
+
+<div id="following-list"></div>
+
+  <button id="follow-button" type="button">
+    Follow
+  </button>
+
+  <p id="follow-message"></p>
+
+</div>
+
+    </div>
+
+  </div>
+  
+  <div id="profile-owner-area" style="display:none;">
+
+<div class="owner-profile-card">
+  
+  <h2>My Account</h2>
+
+  <div class="owner-profile-actions">
+
+    <button type="button" id="my-library-button">
+      <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+      My Library
+    </button>
+
+    <button type="button" id="wallet-button">
+      <svg viewBox="0 0 24 24"><path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"/><path d="M3 5v14a2 2 0 0 0 2 2h16v-5"/><path d="M18 12a2 2 0 0 0 0 4h4v-4z"/></svg>
+      Wallet
