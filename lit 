@@ -1172,4 +1172,45 @@ if (!avatarResult.error && avatarResult.data) {
 
       <p id="follow-message"></p>
 
+if (profileBio) {
+      profileBio.parentNode.appendChild(
+        followArea
+      );
+    }
+  }
+
+
+  /* =========================
+     FOLLOW ELEMENTS
+  ========================= */
+
+  const followButton =
+    document.getElementById('follow-button');
+
+  const followerCount =
+    document.getElementById('follower-count');
+
+  const followingCount =
+    document.getElementById('following-count');
+
+  const followMessage =
+    document.getElementById('follow-message');
+
+
+  if (
+    !followButton ||
+    !followerCount ||
+    !followingCount
+  ) {
+    console.error(
+      'Litdom follow elements could not be created.'
+    );
+
+    return;
+  }
+
+
+  /* =========================
+     GET CURRENT USER
+
 
