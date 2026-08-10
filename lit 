@@ -629,5 +629,141 @@ flex-direction: column;
 <script>
 document.addEventListener('DOMContentLoaded', async function () {
   function formatCount(number) {
+if (number < 1000) return number;
+
+  if (number < 1000000) {
+    return (number / 1000).toFixed(1).replace('.0', '') + 'K';
+  }
+
+  if (number < 1000000000) {
+    return (number / 1000000).toFixed(1).replace('.0', '') + 'M';
+  }
+
+  return (number / 1000000000).toFixed(1).replace('.0', '') + 'B';
+}
+
+  /* =========================
+     GET PROFILE ID
+  ========================= */
+
+  const params = new URLSearchParams(
+  window.location.search
+);
+
+const urlProfileId = params.get('id');
+
+const savedProfileId =
+  localStorage.getItem('litdomProfileId');
+
+const profileId =
+  urlProfileId || savedProfileId;
+
+
+  /* =========================
+     BASIC ELEMENTS
+========================= */
+
+  const profileName =
+    document.getElementById('public-profile-name');
+
+  const profileUsername =
+    document.getElementById('public-profile-username');
+
+  const profileBio =
+    document.getElementById('public-profile-bio');
+
+  const authorName =
+    document.getElementById('works-author-name');
+
+  const avatarInitial =
+    document.getElementById('public-profile-initial');
+  /* =========================
+   AVATAR ELEMENTS
+========================= */
+
+const avatarContainer =
+  document.getElementById(
+    'profile-avatar-container'
+  );
+
+const avatarImage =
+  document.getElementById(
+    'profile-avatar-image'
+  );
+
+const avatarInput =
+  document.getElementById(
+    'profile-avatar-input'
+
+);
+  
+  /* =========================
+   PROFILE AVATAR OWNERSHIP
+========================= */
+
+const avatarContainer =
+  document.getElementById('profile-avatar-container');
+
+const avatarInput =
+  document.getElementById('profile-avatar-input');
+
+const currentUserId =
+  session && session.user
+    ? session.user.id
+    : null;
+
+const isProfileOwner =
+  currentUserId &&
+  profileId &&
+  currentUserId === profileId;
+  /* =========================
+   ONLY OWNER CAN EDIT AVATAR
+========================= */
+
+if (avatarContainer && avatarInput) {
+
+  if (isProfileOwner) {
+
+    avatarContainer.style.cursor = 'pointer';
+
+    avatarContainer.addEventListener(
+      'click',
+      function () {
+        avatarInput.click();
+
+}
+    );
+
+  } else {
+
+    /* Other users can see the picture,
+       but cannot interact with it. */
+
+    avatarContainer.style.cursor = 'default';
+
+    avatarInput.style.display = 'none';
+
+    avatarContainer.onclick = null;
+
+  }
+}
+  
+  /* =========================
+   OPEN AVATAR PICKER
+========================= */
+
+if (avatarContainer && avatarInput) {
+
+  avatarContainer.addEventListener(
+    'click',
+    function () {
+
+      avatarInput.click();
+
+    }
+  );
+
+}
+  
 
 
