@@ -57,3 +57,136 @@ document.addEventListener('DOMContentLoaded', async function () {
     }
   }
 
+if (!followingList) {
+
+    followingList =
+      document.createElement('div');
+
+    followingList.id =
+      'following-list';
+
+    followingList.style.display =
+      'none';
+
+    const followArea =
+      document.getElementById(
+        'profile-follow-area'
+      );
+
+    if (followArea) {
+      followArea.appendChild(
+        followingList
+      );
+    }
+  }
+
+
+  /* =========================
+     GET BUTTONS
+  ========================= */
+
+  const followersButton =
+    document.getElementById(
+      'followers-button'
+    );
+
+  const followingButton =
+    document.getElementById(
+      'following-button'
+    );
+
+
+  if (
+    !followersButton ||
+    !followingButton ||
+    !followersList ||
+    !followingList
+  ) {
+    return;
+  }
+
+
+  /* =========================
+LOAD USERS
+  ========================= */
+
+  async function loadUsers(
+    type,
+    container
+  ) {
+
+    container.innerHTML =
+      '<p>Loading...</p>';
+
+
+    const column =
+      type === 'followers'
+        ? 'following_id'
+        : 'follower_id';
+
+
+    const userColumn =
+      type === 'followers'
+        ? 'follower_id'
+        : 'following_id';
+
+
+    /* =========================
+       GET FOLLOW RELATIONSHIPS
+    ========================= */
+
+    const {
+      data: follows,
+      error
+    } = await litdomSupabase
+      .from('follows')
+      .select(userColumn)
+      .eq(
+        column,
+        profileId
+      );
+if (error) {
+
+      console.error(
+        'Follow list error:',
+        error
+      );
+
+      container.innerHTML =
+        '<p>Unable to load list.</p>';
+
+      return;
+    }
+
+
+    if (
+      !follows ||
+      follows.length === 0
+    ) {
+
+      container.innerHTML =
+        type === 'followers'
+          ? '<p>No followers yet.</p>'
+          : '<p>Not following anyone yet.</p>';
+
+      return;
+    }
+
+
+    /* =========================
+       GET USER IDS
+    ========================= */
+
+    const userIds =
+      follows.map(
+        function (row) {
+          return row[userColumn];
+        }
+      );
+
+
+    /* =========================
+       GET PROFILES
+    ========================= */
+
+
