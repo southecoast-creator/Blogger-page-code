@@ -2418,4 +2418,1776 @@ END DASHBOARD SCRIPT
 
 });
 </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  /* =====================================================
+     CREATE BOOK
+  ===================================================== */
+
+  createBookForm.addEventListener(
+    'submit',
+    async function (event) {
+
+      event.preventDefault();
+
+      const user =
+        await getCurrentUser();
+
+      if (!user) {
+
+        createBookMessage.textContent =
+          'Please log in first.';
+
+        return;
+
+      }
+
+
+      const title =
+        bookTitleInput.value.trim();
+
+      const description =
+        bookDescriptionInput.value.trim();
+
+      const genre =
+        bookGenreInput.value.trim();
+
+
+      if (!title) {
+
+        createBookMessage.textContent =
+          'Please enter a book title.';
+
+        return;
+
+      }
+
+
+      if (!description) {
+
+        createBookMessage.textContent =
+          'Please enter a description.';
+
+        return;
+
+      }
+
+
+      if (!genre) {
+
+        createBookMessage.textContent =
+          'Please enter a genre.';
+
+        return;
+
+      }
+
+
+      /*
+         COVER
+      */
+
+      let coverUrl = null;
+
+      const coverFile =
+        bookCoverInput.files[0];
+
+
+      if (coverFile) {
+
+        if (coverFile.size > 5 * 1024 * 1024) {
+
+          createBookMessage.textContent =
+            'Cover image must be 5 MB or smaller.';
+
+          return;
+
+        }
+
+
+        if (
+          !coverFile.type.startsWith('image/')
+        ) {
+
+          createBookMessage.textContent =
+            'Please select a valid image file.';
+
+          return;
+
+        }
+
+      }
+
+
+      saveNewBookButton.disabled =
+        true;
+
+      saveNewBookButton.textContent =
+        'Saving...';
+
+      createBookMessage.textContent =
+        '';
+
+
+      try {
+
+        /*
+           UPLOAD COVER
+        */
+
+        if (coverFile) {
+
+          const fileExtension =
+            coverFile.name
+              .split('.')
+              .pop()
+              .toLowerCase();
+
+          const fileName =
+            `${user.id}/${crypto.randomUUID()}.${fileExtension}`;
+
+
+          const {
+            error: uploadError
+          } =
+            await litdomSupabase
+              .storage
+              .from('book-covers')
+              .upload(
+                fileName,
+                coverFile,
+                {
+                  cacheControl: '3600',
+                  upsert: false
+                }
+              );
+
+
+          if (uploadError) {
+
+            throw uploadError;
+
+          }
+
+
+          const {
+            data: publicUrlData
+          } =
+            litdomSupabase
+              .storage
+              .from('book-covers')
+              .getPublicUrl(
+                fileName
+              );
+
+
+          coverUrl =
+            publicUrlData.publicUrl;
+
+        }
+
+
+        /*
+           CREATE BOOK
+        */
+
+        const {
+          data: newBook,
+          error: bookError
+        } =
+          await litdomSupabase
+            .from('books')
+            .insert({
+
+              author_id:
+                user.id,
+
+              title:
+                title,
+
+              description:
+                description,
+
+              genre:
+                genre,
+
+              cover_url:
+                coverUrl,
+
+              status:
+                'draft'
+
+            })
+            .select()
+            .single();
+
+
+        if (bookError) {
+
+          throw bookError;
+
+        }
+
+
+        console.log(
+          'Book created:',
+          newBook
+        );
+
+
+        createBookMessage.textContent =
+          'Book created successfully! 🎉';
+
+
+        createBookForm.reset();
+
+
+        await loadBooks();
+
+
+        setTimeout(
+          function () {
+
+            createBookModal.style.display =
+              'none';
+
+            createBookMessage.textContent =
+              '';
+
+          },
+          700
+        );
+
+
+      } catch (error) {
+
+        console.error(
+          'Create book error:',
+          error
+        );
+
+
+        createBookMessage.textContent =
+          error.message ||
+          'Unable to create book.';
+
+      } finally {
+
+        saveNewBookButton.disabled =
+          false;
+
+        saveNewBookButton.textContent =
+          'Save Draft';
+
+      }
+
+    }
+  );
+
+
+  /* =====================================================
+     LOAD BOOKS
+  ===================================================== */
+
+  async function loadBooks() {
+
+    booksContainer.innerHTML = `
+
+      <div class="writer-dashboard-loading">
+
+        Loading your books...
+
+      </div>
+
+    `;
+
+
+    const user =
+      await getCurrentUser();
+
+
+    if (!user) {
+
+      booksContainer.innerHTML = `
+
+        <div class="no-books-message">
+
+          <p>
+            Please log in to access your
+            Writer Dashboard.
+          </p>
+
+        </div>
+
+      `;
+
+      return;
+
+    }
+
+
+    try {
+
+      const {
+        data: books,
+        error
+      } =
+        await litdomSupabase
+          .from('books')
+          .select(`
+            id,
+            title,
+            cover_url,
+            description,
+            genre,
+            created_at,
+            status
+          `)
+          .eq(
+            'author_id',
+            user.id
+          )
+          .order(
+            'created_at',
+            {
+              ascending: false
+            }
+          );
+
+
+      if (error) {
+
+        throw error;
+
+      }
+
+
+      if (
+        !books ||
+        books.length === 0
+      ) {
+
+        booksContainer.innerHTML = `
+
+          <div class="no-books-message">
+
+            <p>
+              You haven't created any books yet.
+            </p>
+
+            <p>
+              Start your first story by
+              clicking "Create New Book".
+            </p>
+
+          </div>
+
+        `;
+
+        return;
+
+      }
+
+
+      booksContainer.innerHTML = '';
+
+
+      books.forEach(
+        function (book) {
+
+          const card =
+            document.createElement(
+              'article'
+            );
+
+
+          card.className =
+            'writer-book-card';
+
+
+          const safeTitle =
+            escapeHtml(
+              book.title ||
+              'Untitled Book'
+            );
+
+
+          const cover =
+            book.cover_url
+
+              ? `
+
+                <img
+                  src="${escapeHtml(
+                    book.cover_url
+                  )}"
+                  alt="${safeTitle}"
+                  class="writer-book-cover"
+                >
+
+              `
+
+              : `
+
+                <div class="
+                  writer-book-cover
+                  writer-book-cover-placeholder
+                ">
+
+                  No Cover
+
+                </div>
+
+              `;
+
+
+          card.innerHTML = `
+
+            ${cover}
+
+            <div class="writer-book-content">
+
+              <h3>
+                ${safeTitle}
+              </h3>
+
+              ${
+                book.genre
+                  ? `
+
+                    <p class="writer-book-genre">
+
+                      ${escapeHtml(
+                        book.genre
+                      )}
+
+                    </p>
+
+                  `
+                  : ''
+              }
+
+              <span class="writer-book-status">
+
+                ${escapeHtml(
+                  book.status ||
+                  'draft'
+                )}
+
+              </span>
+
+              <div class="writer-book-actions">
+
+                <button
+                  type="button"
+                  class="edit-book-button"
+                  data-book-id="${escapeHtml(
+                    book.id
+                  )}">
+
+                  Edit
+
+                </button>
+
+                <button
+                  type="button"
+                  class="manage-chapters-button"
+                  data-book-id="${escapeHtml(
+                    book.id
+                  )}"
+                  data-book-title="${encodeURIComponent(
+                    book.title ||
+                    'Untitled Book'
+                  )}">
+
+                  Chapters
+
+                </button>
+
+              </div>
+
+            </div>
+
+          `;
+
+
+          booksContainer.appendChild(
+            card
+          );
+
+        }
+      );
+
+
+    } catch (error) {
+
+      console.error(
+        'Writer books loading error:',
+        error
+      );
+
+
+      booksContainer.innerHTML = `
+
+        <div class="no-books-message">
+
+          <p>
+            Unable to load your books.
+          </p>
+
+          <p>
+            ${escapeHtml(
+              error.message ||
+              ''
+            )}
+          </p>
+
+        </div>
+
+      `;
+
+    }
+
+  }
+
+
+  /* =====================================================
+     OPEN CHAPTER MANAGER
+  ===================================================== */
+
+  async function openChapterManager(
+    bookId,
+    bookTitle
+  ) {
+
+    if (!bookId) {
+      return;
+    }
+
+
+    const user =
+      await getCurrentUser();
+
+
+    if (!user) {
+
+      alert(
+        'Please log in first.'
+      );
+
+      return;
+
+    }
+
+
+    /*
+       VERIFY BOOK OWNERSHIP
+    */
+
+    const {
+      data: book,
+      error
+    } =
+      await litdomSupabase
+        .from('books')
+        .select(`
+          id,
+          title
+        `)
+        .eq(
+          'id',
+          bookId
+        )
+        .eq(
+          'author_id',
+          user.id
+        )
+        .maybeSingle();
+
+
+    if (error) {
+
+      console.error(
+        'Book ownership error:',
+        error
+      );
+
+      alert(
+        'Unable to open this book.'
+      );
+
+      return;
+
+    }
+
+
+    if (!book) {
+
+      alert(
+        'You do not have permission to manage this book.'
+      );
+
+      return;
+
+    }
+
+
+    activeBookId =
+      book.id;
+
+    activeBookTitle =
+      book.title ||
+      bookTitle ||
+      'Chapters';
+
+
+    chapterModalTitle.textContent =
+      `Chapters — ${activeBookTitle}`;
+
+
+    chapterEditor.style.display =
+      'none';
+
+
+    chapterModal.style.display =
+      'block';
+
+
+    await loadChapters(
+      activeBookId
+    );
+
+  }
+
+
+  /* =====================================================
+     CONNECT CHAPTER BUTTONS
+  ===================================================== */
+
+  booksContainer.addEventListener(
+    'click',
+    function (event) {
+
+      const button =
+        event.target.closest(
+          '.manage-chapters-button'
+        );
+
+
+      if (!button) {
+        return;
+      }
+
+
+      const bookId =
+        button.dataset.bookId;
+
+
+      const encodedTitle =
+        button.dataset.bookTitle;
+
+
+      const bookTitle =
+        encodedTitle
+          ? decodeURIComponent(
+              encodedTitle
+            )
+          : 'Chapters';
+
+
+      openChapterManager(
+        bookId,
+        bookTitle
+      );
+
+    }
+  );
+
+
+  /* =====================================================
+     LOAD CHAPTERS
+  ===================================================== */
+
+  async function loadChapters(
+    bookId
+  ) {
+
+    if (!bookId) {
+
+      chapterList.innerHTML = `
+
+        <p class="chapter-empty">
+          No book selected.
+        </p>
+
+      `;
+
+      return;
+
+    }
+
+
+    chapterList.innerHTML = `
+
+      <p class="chapter-loading">
+        Loading chapters...
+      </p>
+
+    `;
+
+
+    try {
+
+      const {
+        data: chapters,
+        error
+      } =
+        await litdomSupabase
+          .from('chapters')
+          .select(`
+            id,
+            book_id,
+            chapter_number,
+            title,
+            status,
+            word_count,
+            updated_at,
+            created_at
+          `)
+          .eq(
+            'book_id',
+            bookId
+          )
+          .order(
+            'chapter_number',
+            {
+              ascending: true
+            }
+          );
+
+
+      if (error) {
+
+        throw error;
+
+      }
+
+
+      if (
+        !chapters ||
+        chapters.length === 0
+      ) {
+
+        chapterList.innerHTML = `
+
+          <p class="chapter-empty">
+
+            No chapters yet.
+
+            <br>
+
+            Create your first chapter below.
+
+          </p>
+
+        `;
+
+        return;
+
+      }
+
+
+      chapterList.innerHTML =
+        '';
+
+
+      chapters.forEach(
+        function (chapter) {
+
+          const card =
+            document.createElement(
+              'article'
+            );
+
+
+          card.className =
+            'chapter-card';
+
+
+          card.innerHTML = `
+
+            <h4>
+
+              Chapter
+              ${escapeHtml(
+                chapter.chapter_number
+              )}
+
+              —
+              
+              ${escapeHtml(
+                chapter.title ||
+                'Untitled Chapter'
+              )}
+
+            </h4>
+
+
+            <div class="chapter-card-meta">
+
+              Status:
+
+              <strong>
+
+                ${escapeHtml(
+                  chapter.status ||
+                  'draft'
+                )}
+
+              </strong>
+
+            </div>
+
+
+            <div class="chapter-word-count">
+
+              ${Number(
+                chapter.word_count ||
+                0
+              ).toLocaleString()}
+
+              words
+
+            </div>
+
+
+            <div class="chapter-card-actions">
+
+              <button
+                type="button"
+                class="edit-chapter-button"
+                data-chapter-id="${escapeHtml(
+                  chapter.id
+                )}">
+
+                Edit
+
+              </button>
+
+
+              <button
+                type="button"
+                class="chapter-delete-button"
+                data-chapter-id="${escapeHtml(
+                  chapter.id
+                )}">
+
+                Delete
+
+              </button>
+
+            </div>
+
+          `;
+
+
+          chapterList.appendChild(
+            card
+          );
+
+        }
+      );
+
+
+      /*
+         EDIT BUTTONS
+      */
+
+      chapterList
+        .querySelectorAll(
+          '.edit-chapter-button'
+        )
+        .forEach(
+          function (button) {
+
+            button.addEventListener(
+              'click',
+              function () {
+
+                editChapter(
+                  button.dataset.chapterId
+                );
+
+              }
+            );
+
+          }
+        );
+
+
+      /*
+         DELETE BUTTONS
+      */
+
+      chapterList
+        .querySelectorAll(
+          '.chapter-delete-button'
+        )
+        .forEach(
+          function (button) {
+
+            button.addEventListener(
+              'click',
+              function () {
+
+                deleteChapter(
+                  button.dataset.chapterId
+                );
+
+              }
+            );
+
+          }
+        );
+
+
+    } catch (error) {
+
+      console.error(
+        'Chapter loading error:',
+        error
+      );
+
+
+      chapterList.innerHTML = `
+
+        <p class="chapter-empty">
+
+          Unable to load chapters.
+
+          <br>
+
+          ${escapeHtml(
+            error.message ||
+            ''
+          )}
+
+        </p>
+
+      `;
+
+    }
+
+  }
+
+
+  /* =====================================================
+     GET NEXT CHAPTER NUMBER
+  ===================================================== */
+
+  async function getNextChapterNumber(
+    bookId
+  ) {
+
+    const {
+      data,
+      error
+    } =
+      await litdomSupabase
+        .from('chapters')
+        .select(
+          'chapter_number'
+        )
+        .eq(
+          'book_id',
+          bookId
+        )
+        .order(
+          'chapter_number',
+          {
+            ascending: false
+          }
+        )
+        .limit(1);
+
+
+    if (error) {
+
+      console.error(
+        'Next chapter number error:',
+        error
+      );
+
+      return 1;
+
+    }
+
+
+    if (
+      !data ||
+      data.length === 0
+    ) {
+
+      return 1;
+
+    }
+
+
+    return (
+      Number(
+        data[0].chapter_number
+      ) + 1
+    );
+
+  }
+
+
+  /* =====================================================
+     NEW CHAPTER
+  ===================================================== */
+
+  addChapterButton.addEventListener(
+    'click',
+    async function () {
+
+      if (!activeBookId) {
+
+        chapterMessage.textContent =
+          'No book selected.';
+
+        return;
+
+      }
+
+
+      editingChapterId =
+        null;
+
+
+      chapterEditorHeading.textContent =
+        'New Chapter';
+
+
+      chapterNumberInput.value =
+        await getNextChapterNumber(
+          activeBookId
+        );
+
+
+      chapterTitleInput.value =
+        '';
+
+      chapterContentInput.value =
+        '';
+
+      chapterStatusInput.value =
+        'draft';
+
+      chapterWordCount.textContent =
+        '0 words';
+
+      chapterMessage.textContent =
+        '';
+
+
+      chapterEditor.style.display =
+        'block';
+
+
+      chapterTitleInput.focus();
+
+    }
+  );
+
+
+  /* =====================================================
+     EDIT CHAPTER
+  ===================================================== */
+
+  async function editChapter(
+    chapterId
+  ) {
+
+    if (!chapterId) {
+      return;
+    }
+
+
+    const {
+      data: chapter,
+      error
+    } =
+      await litdomSupabase
+        .from('chapters')
+        .select(`
+          id,
+          book_id,
+          chapter_number,
+          title,
+          content,
+          status,
+          word_count
+        `)
+        .eq(
+          'id',
+          chapterId
+        )
+        .maybeSingle();
+
+
+    if (error) {
+
+      console.error(
+        'Chapter edit loading error:',
+        error
+      );
+
+      alert(
+        'Unable to load chapter.'
+      );
+
+      return;
+
+    }
+
+
+    if (!chapter) {
+
+      alert(
+        'Chapter not found.'
+      );
+
+      return;
+
+    }
+
+
+    /*
+       MAKE SURE THE CHAPTER
+       BELONGS TO THE ACTIVE BOOK
+    */
+
+    if (
+      chapter.book_id !==
+      activeBookId
+    ) {
+
+      alert(
+        'You do not have permission to edit this chapter.'
+      );
+
+      return;
+
+    }
+
+
+    editingChapterId =
+      chapter.id;
+
+
+    chapterEditorHeading.textContent =
+      'Edit Chapter';
+
+
+    chapterNumberInput.value =
+      chapter.chapter_number;
+
+
+    chapterTitleInput.value =
+      chapter.title ||
+      '';
+
+
+    chapterContentInput.value =
+      chapter.content ||
+      '';
+
+
+    chapterStatusInput.value =
+      chapter.status ||
+      'draft';
+
+
+    updateChapterWordCount();
+
+
+    chapterMessage.textContent =
+      '';
+
+
+    chapterEditor.style.display =
+      'block';
+
+
+    chapterTitleInput.focus();
+
+  }
+
+
+  /* =====================================================
+     CHAPTER WORD COUNT
+  ===================================================== */
+
+  function updateChapterWordCount() {
+
+    const content =
+      chapterContentInput.value.trim();
+
+
+    const count =
+      content
+        ? content
+            .split(/\s+/)
+            .filter(
+              function (word) {
+                return word.length > 0;
+              }
+            )
+            .length
+        : 0;
+
+
+    chapterWordCount.textContent =
+      `${count.toLocaleString()} words`;
+
+  }
+
+
+  chapterContentInput.addEventListener(
+    'input',
+    updateChapterWordCount
+  );
+
+
+  /* =====================================================
+     SAVE CHAPTER
+  ===================================================== */
+
+  chapterForm.addEventListener(
+    'submit',
+    async function (event) {
+
+      event.preventDefault();
+
+
+      if (!activeBookId) {
+
+        chapterMessage.textContent =
+          'No book selected.';
+
+        return;
+
+      }
+
+
+      const user =
+        await getCurrentUser();
+
+
+      if (!user) {
+
+        chapterMessage.textContent =
+          'Please log in first.';
+
+        return;
+
+      }
+
+
+      const chapterNumber =
+        Number(
+          chapterNumberInput.value
+        );
+
+
+      const title =
+        chapterTitleInput.value.trim();
+
+
+      const content =
+        chapterContentInput.value.trim();
+
+
+      const status =
+        chapterStatusInput.value;
+
+
+      const wordCount =
+        content
+          ? content
+              .split(/\s+/)
+              .filter(
+                function (word) {
+                  return word.length > 0;
+                }
+              )
+              .length
+          : 0;
+
+
+      if (
+        !chapterNumber ||
+        chapterNumber < 1
+      ) {
+
+        chapterMessage.textContent =
+          'Enter a valid chapter number.';
+
+        return;
+
+      }
+
+
+      if (!title) {
+
+        chapterMessage.textContent =
+          'Please enter a chapter title.';
+
+        return;
+
+      }
+
+
+      if (!content) {
+
+        chapterMessage.textContent =
+          'Please write your chapter content.';
+
+        return;
+
+      }
+
+
+      saveChapterButton.disabled =
+        true;
+
+      saveChapterButton.textContent =
+        'Saving...';
+
+      chapterMessage.textContent =
+        '';
+
+
+      try {
+
+        /*
+           VERIFY BOOK OWNERSHIP
+        */
+
+        const {
+          data: book,
+          error: bookError
+        } =
+          await litdomSupabase
+            .from('books')
+            .select(
+              'id'
+            )
+            .eq(
+              'id',
+              activeBookId
+            )
+            .eq(
+              'author_id',
+              user.id
+            )
+            .maybeSingle();
+
+
+        if (bookError) {
+
+          throw bookError;
+
+        }
+
+
+        if (!book) {
+
+          throw new Error(
+            'You do not have permission to edit this book.'
+          );
+
+        }
+
+
+        /*
+           UPDATE EXISTING CHAPTER
+        */
+
+        if (editingChapterId) {
+
+          const {
+            error: updateError
+          } =
+            await litdomSupabase
+              .from('chapters')
+              .update({
+
+                chapter_number:
+                  chapterNumber,
+
+                title:
+                  title,
+
+                content:
+                  content,
+
+                status:
+                  status,
+
+                word_count:
+                  wordCount,
+
+                updated_at:
+                  new Date().toISOString()
+
+              })
+              .eq(
+                'id',
+                editingChapterId
+              )
+              .eq(
+                'book_id',
+                activeBookId
+              );
+
+
+          if (updateError) {
+
+            throw updateError;
+
+          }
+
+
+          chapterMessage.textContent =
+            'Chapter updated successfully! 🎉';
+
+        }
+
+
+        /*
+           CREATE NEW CHAPTER
+        */
+
+        else {
+
+          const {
+            error: insertError
+          } =
+            await litdomSupabase
+              .from('chapters')
+              .insert({
+
+                book_id:
+                  activeBookId,
+
+                chapter_number:
+                  chapterNumber,
+
+                title:
+                  title,
+
+                content:
+                  content,
+
+                status:
+                  status,
+
+                word_count:
+                  wordCount
+
+              });
+
+
+          if (insertError) {
+
+            throw insertError;
+
+          }
+
+
+          chapterMessage.textContent =
+            'Chapter created successfully! 🎉';
+
+        }
+
+
+        editingChapterId =
+          null;
+
+
+        await loadChapters(
+          activeBookId
+        );
+
+
+        setTimeout(
+          function () {
+
+            chapterEditor.style.display =
+              'none';
+
+            chapterMessage.textContent =
+              '';
+
+          },
+          700
+        );
+
+
+      } catch (error) {
+
+        console.error(
+          'Chapter save error:',
+          error
+        );
+
+
+        chapterMessage.textContent =
+          error.message ||
+          'Unable to save chapter.';
+
+      } finally {
+
+        saveChapterButton.disabled =
+          false;
+
+        saveChapterButton.textContent =
+          'Save Chapter';
+
+      }
+
+    }
+  );
+
+
+  /* =====================================================
+     CANCEL CHAPTER EDITOR
+  ===================================================== */
+
+  cancelChapterButton.addEventListener(
+    'click',
+    function () {
+
+      editingChapterId =
+        null;
+
+      chapterForm.reset();
+
+
+chapterWordCount.textContent =
+        '0 words';
+
+      chapterMessage.textContent =
+        '';
+
+      chapterEditor.style.display =
+        'none';
+
+    }
+  );
+
+
+  /* =====================================================
+     DELETE CHAPTER
+  ===================================================== */
+
+  async function deleteChapter(
+    chapterId
+  ) {
+
+    if (!chapterId) {
+      return;
+    }
+
+
+    const confirmed =
+      window.confirm(
+        'Delete this chapter? This cannot be undone.'
+      );
+
+
+    if (!confirmed) {
+      return;
+    }
+
+
+    const user =
+      await getCurrentUser();
+
+
+    if (!user) {
+
+      alert(
+        'Please log in first.'
+      );
+
+      return;
+
+    }
+
+
+    try {
+
+      /*
+         VERIFY BOOK OWNERSHIP
+      */
+
+      const {
+        data: book,
+        error: bookError
+      } =
+        await litdomSupabase
+          .from('books')
+          .select(
+            'id'
+          )
+          .eq(
+            'id',
+            activeBookId
+          )
+          .eq(
+            'author_id',
+            user.id
+          )
+          .maybeSingle();
+
+
+      if (bookError) {
+
+        throw bookError;
+
+      }
+
+
+      if (!book) {
+
+        throw new Error(
+          'You do not have permission to delete this chapter.'
+        );
+
+      }
+
+
+      /*
+         DELETE CHAPTER
+      */
+
+      const {
+        error: deleteError
+      } =
+        await litdomSupabase
+          .from('chapters')
+          .delete()
+          .eq(
+            'id',
+            chapterId
+          )
+          .eq(
+            'book_id',
+            activeBookId
+          );
+
+
+      if (deleteError) {
+
+        throw deleteError;
+
+      }
+
+
+      await loadChapters(
+        activeBookId
+      );
+
+    } catch (error) {
+
+      console.error(
+        'Chapter delete error:',
+        error
+      );
+
+
+      alert(
+        error.message ||
+        'Unable to delete chapter.'
+      );
+
+    }
+
+  }
+
+
+  /* =====================================================
+     CLOSE CHAPTER MODAL
+  ===================================================== */
+
+closeChapterModal.addEventListener(
+    'click',
+    function () {
+
+      chapterModal.style.display =
+        'none';
+
+      chapterEditor.style.display =
+        'none';
+
+      editingChapterId =
+        null;
+
+    }
+  );
+
+
+  chapterModalOverlay.addEventListener(
+    'click',
+    function (event) {
+
+      if (
+        event.target ===
+        chapterModalOverlay
+      ) {
+
+        chapterModal.style.display =
+          'none';
+
+        chapterEditor.style.display =
+          'none';
+
+        editingChapterId =
+          null;
+
+      }
+
+    }
+  );
+
+
+  /* =====================================================
+     INITIAL LOAD
+  ===================================================== */
+
+  loadBooks();
+
+});
             
