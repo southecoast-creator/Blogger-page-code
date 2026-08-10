@@ -765,5 +765,38 @@ if (avatarContainer && avatarInput) {
 
 }
   
+/* =========================
+   UPLOAD AVATAR
+========================= */
+
+if (avatarInput) {
+
+  avatarInput.addEventListener(
+    'change',
+    async function () {
+
+      const file = avatarInput.files[0];
+
+      if (!file) {
+        return;
+      }
+
+      /* Get logged-in user */
+
+      const userResult =
+        await litdomSupabase.auth.getUser();
+      
+            if (userResult.error || !userResult.data.user) {
+
+        alert(
+          'Please log in before changing your profile picture.'
+        );
+
+        avatarInput.value = '';
+        return;
+      }
+
+      const user =
+        userResult.data.user;
 
 
