@@ -961,6 +961,72 @@ const publicUrlResult =
     return;
   }
   
+/* =========================
+     LOAD PROFILE
+  ========================= */
+
+  const {
+    data: profile,
+    error: profileError
+  } = await litdomSupabase
+    .from('profiles')
+    .select('id, username, display_name, bio')
+    .eq('id', profileId)
+    .maybeSingle();
+
+
+  /* =========================
+     PROFILE ERROR
+  ========================= */
+
+  if (profileError) {
+
+    console.error(
+      'Profile loading error:',
+      profileError
+    );
+
+    if (profileName) {
+      profileName.textContent =
+        'Unable to load profile';
+    }
+
+    return;
+  }
+
+/* =========================
+     PROFILE NOT FOUND
+  ========================= */
+
+  if (!profile) {
+
+    if (profileName) {
+      profileName.textContent =
+        'Profile not found';
+    }
+
+    if (profileUsername) {
+      profileUsername.textContent = '';
+    }
+
+    if (profileBio) {
+      profileBio.textContent =
+        'This profile does not exist.';
+    }
+
+    return;
+  }
+  
+    /* =========================
+     OWNER / VISITOR CHECK
+  ========================= */
+
+  const ownerArea =
+    document.getElementById(
+      'profile-owner-area'
+    );
+
+  const {
   
 
 
