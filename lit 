@@ -447,5 +447,115 @@ margin: 35px 0;
 
   background: #2b1024;
   border: 1px solid #4a1f3d;
+border-radius: 14px;
+
+  text-align: center;
+  font-family: 'Fraunces', Georgia, serif;
+}
+  }
+
+  #profile-stats {
+    display: flex;
+    gap: 24px;
+    }
+
+  #profile-stats span {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 50px
+    color: #d8c7d3;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+    position: relative;
+    padding-right: 24px;
+  }
+
+  #profile-stats span:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 28px;
+    width: 1px;
+    background: #c9a24b;
+    opacity: 0.5;
+  }
+#profile-stats strong {
+    font-size: 20px;
+    color: #fff;
+    font-weight: 700;
+  }
+  #profile-stats {
+  display: flex;
+  gap: 25px;
+  align-items: center;
+  margin: 20px 0;
+}
+
+#profile-stats button {
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  margin: 0;
+  color: #ccc !important;
+  font-family: inherit;
+  font-size: 15px;
+  cursor: pointer;
+  box-shadow: none !important;
+}
+
+#profile-stats button strong {
+  color: #d4af37 !important;
+  font-size: 20px;
+  margin-right: 5px;
+}
+
+#profile-stats button:hover {
+  color: #fff !important;
+}
+
+#profile-stats button:hover strong {
+  color: #f0c94a !important;
+}
+
+#follow-button {
+  background: #d4af37;
+  color: #fff;
+  border: none;
+  border-radius: 999px;
+  padding: 10px 50px;
+
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.15s ease;
+
+  display: block !important;
+  width: fit-content !important;
+
+  margin: 0 auto !important;
+  float: none !important;
+}
+  
+  }
+  
+
+  #follow-button:hover {
+    background: #d4294d;
+    transform: translateY(-1px);
+  }
+
+  #follow-button:active {
+    transform: translateY(0);
+  }
+
+  #follow-button.following {
+    background: transparent;
+    border: 1px solid #111111;
+    color: #c9a24b;
 
 
