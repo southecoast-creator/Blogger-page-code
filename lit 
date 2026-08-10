@@ -1212,5 +1212,75 @@ if (profileBio) {
 
   /* =========================
      GET CURRENT USER
+========================= */
+
+  const {
+    data: {
+      user: currentUser
+    }
+  } = await litdomSupabase.auth.getUser();
+
+
+  /* =========================
+     FOLLOWER COUNT
+  ========================= */
+
+  const {
+    count: followers,
+    error: followerError
+  } = await litdomSupabase
+    .from('follows')
+    .select('*', {
+      count: 'exact',
+      head: true
+    })
+    .eq('following_id', profileId);
+
+
+  if (followerError) {
+
+    console.error(
+      'Follower count error:',
+      followerError
+    );
+
+  } else {
+
+    followerCount.textContent =
+  formatCount(followers || 0);
+  }
+
+/* =========================
+     FOLLOWING COUNT
+  ========================= */
+
+  const {
+    count: following,
+    error: followingError
+  } = await litdomSupabase
+    .from('follows')
+    .select('*', {
+      count: 'exact',
+      head: true
+    })
+    .eq('follower_id', profileId);
+
+
+  if (followingError) {
+
+    console.error(
+      'Following count error:',
+      followingError
+    );
+
+  } else {
+
+    followingCount.textContent =
+  formatCount(following || 0);
+  }
+
+
+  /* =========================
+     LOGGED-OUT VISITOR
 
 
