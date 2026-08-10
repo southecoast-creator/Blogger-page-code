@@ -557,5 +557,77 @@ border-radius: 14px;
     background: transparent;
     border: 1px solid #111111;
     color: #c9a24b;
+}
+
+  #follow-message {
+    width: 100%;
+    text-align: center;
+    color: #c9a24b;
+    font-size: 13px;
+    margin: 4px 0 0;
+    min-height: 16px;
+  }
+  
+    .owner-profile-card {
+    background: #2b1024;
+    border: 1px solid #4a1f3d;
+    border-radius: 16px;
+    padding: 22px;
+    max-width: 480px;
+    margin: 20px auto;
+    font-family: 'Fraunces', Georgia, serif;
+  }
+
+  .owner-profile-card h2 {
+    color: #f4e6d8;
+    font-size: 20px;
+    margin: 0 0 18px;
+    text-align: center;
+    letter-spacing: 0.5px;
+  }
+
+  .owner-profile-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  
+    .owner-profile-actions button {
+    display: flex;
+
+flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    background: #3a1730;
+    border: 1px solid #55253f;
+    border-radius: 12px;
+    padding: 16px 8px;
+    color: #d8c7d3;
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    cursor: pointer;
+    transition: background 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
+  }
+
+  .owner-profile-actions button:hover {
+    background: #4a1f3d;
+    border-color: #c9a24b;
+    transform: translateY(-2px);
+  }
+
+  .owner-profile-actions button svg {
+    width: 26px;
+    height: 26px;
+    stroke: #c9a24b;
+    fill: none;
+    stroke-width: 1.6;
+  }
+  
+</style>
+<script>
+document.addEventListener('DOMContentLoaded', async function () {
+  function formatCount(number) {
 
 
