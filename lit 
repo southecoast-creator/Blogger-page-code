@@ -1512,3 +1512,38 @@ followMessage.textContent =
 
 
 
+
+<script>
+document.addEventListener('DOMContentLoaded', async function () {
+
+  const loginGate =
+    document.getElementById('profile-login-gate');
+
+  const profileContent =
+    document.getElementById('profile-content');
+
+  const ownerArea =
+    document.getElementById('profile-owner-area');
+
+
+  if (!loginGate || !profileContent) {
+    return;
+  }
+
+
+  /* =========================
+     GET PROFILE ID
+  ========================= */
+
+  const params =
+    new URLSearchParams(
+      window.location.search
+    );
+
+  const profileId =
+    params.get('id');
+
+
+  /* =========================
+
+
