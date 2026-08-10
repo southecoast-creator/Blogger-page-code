@@ -872,4 +872,39 @@ fileExtension;
 
       /* Get public image URL */
 
+const publicUrlResult =
+        litdomSupabase
+          .storage
+          .from('avatar')
+          .getPublicUrl(filePath);
+
+      const avatarUrl =
+        publicUrlResult.data.publicUrl;
+      
+      
+            /* Save URL to profile */
+
+      const updateResult =
+        await litdomSupabase
+          .from('profiles')
+          .update({
+            avatar_url: avatarUrl
+          })
+          .eq('id', user.id);
+
+
+      if (updateResult.error) {
+
+        console.error(
+          'Avatar profile update error:',
+          updateResult.error
+        );
+
+        alert(
+          'The picture uploaded, but the profile could not be updated: ' +
+          updateResult.error.message
+        );
+
+        avatarInput.value = '
+
 
