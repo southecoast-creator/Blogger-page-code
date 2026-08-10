@@ -1,0 +1,2421 @@
+<script>
+
+document.addEventListener('DOMContentLoaded', function () {
+
+  /* =====================================================
+     WRITER DASHBOARD
+  ===================================================== */
+
+  const booksContainer =
+    document.getElementById('writer-books');
+
+  const createBookButton =
+    document.getElementById('create-book-button');
+
+  if (!booksContainer || !createBookButton) {
+    console.error(
+      'Writer Dashboard elements could not be found.'
+    );
+    return;
+  }
+
+
+  /* =====================================================
+     STATE
+  ===================================================== */
+
+  let activeBookId = null;
+  let activeBookTitle = '';
+  let editingChapterId = null;
+
+
+  /* =====================================================
+     CREATE BOOK MODAL
+  ===================================================== */
+
+  const createBookModal =
+    document.createElement('div');
+
+  createBookModal.id =
+    'create-book-modal';
+
+  createBookModal.innerHTML = `
+
+    <div class="create-book-overlay">
+
+      <div class="create-book-panel">
+
+        <button
+          type="button"
+          id="close-create-book"
+          class="close-create-book">
+          ×
+        </button>
+
+        <p class="dashboard-eyebrow">
+          NEW STORY
+        </p>
+
+        <h2>Create New Book</h2>
+
+        <p class="create-book-subtitle">
+          Start your story as a draft.
+          You can publish it later.
+        </p>
+
+        <form id="create-book-form">
+
+          <label for="new-book-title">
+            Book Title
+          </label>
+
+          <input
+            type="text"
+            id="new-book-title"
+            placeholder="Enter your book title"
+            required
+          >
+
+          <label for="new-book-description">
+            Description
+          </label>
+
+          <textarea
+            id="new-book-description"
+            rows="6"
+            placeholder="Tell readers what your story is about..."
+            required
+          ></textarea>
+
+          <label for="new-book-genre">
+            Genre
+          </label>
+
+          <input
+            type="text"
+            id="new-book-genre"
+            placeholder="Romance, Fantasy, Thriller..."
+            required
+          >
+
+          <label for="new-book-cover">
+            Cover
+          </label>
+
+          <input
+            type="file"
+            id="new-book-cover"
+            accept="image/*"
+          >
+
+          <p class="cover-note">
+            JPG, PNG, or WEBP. Maximum 5 MB.
+          </p>
+
+          <div
+            id="create-book-message"
+            class="create-book-message">
+          </div>
+
+          <button
+            type="submit"
+            id="save-new-book"
+            class="save-new-book">
+            Save Draft
+          </button>
+
+        </form>
+
+      </div>
+
+    </div>
+
+  `;
+
+  document.body.appendChild(
+    createBookModal
+  );
+
+
+  /* =====================================================
+     CHAPTER MANAGER MODAL
+  ===================================================== */
+
+  const chapterModal =
+    document.createElement('div');
+
+  chapterModal.id =
+    'chapter-management-modal';
+
+  chapterModal.innerHTML = `
+
+    <div class="chapter-modal-overlay">
+
+      <div class="chapter-modal-panel">
+
+        <button
+          type="button"
+          id="close-chapter-modal"
+          class="close-chapter-modal">
+          ×
+        </button>
+
+        <p class="dashboard-eyebrow">
+          CHAPTER MANAGEMENT
+        </p>
+
+        <h2 id="chapter-modal-book-title">
+          Chapters
+        </h2>
+
+        <div
+          id="chapter-list"
+          class="chapter-list">
+
+          <p class="chapter-loading">
+            Loading chapters...
+          </p>
+
+        </div>
+
+        <button
+          type="button"
+          id="add-chapter-button"
+          class="save-new-book">
+          + New Chapter
+        </button>
+
+        <div
+          id="chapter-editor"
+          class="chapter-editor"
+          style="display:none;">
+
+          <div class="chapter-editor-divider"></div>
+
+          <h3 id="chapter-editor-heading">
+            New Chapter
+          </h3>
+
+          <form id="chapter-form">
+
+            <label for="chapter-number-input">
+              Chapter Number
+            </label>
+
+            <input
+              type="number"
+              id="chapter-number-input"
+              min="1"
+              required
+            >
+
+            <label for="chapter-title-input">
+              Chapter Title
+            </label>
+
+            <input
+              type="text"
+              id="chapter-title-input"
+              placeholder="Chapter title"
+              required
+            >
+
+            <label for="chapter-content-input">
+              Chapter Content
+            </label>
+
+            <textarea
+              id="chapter-content-input"
+              rows="18"
+              placeholder="Write your chapter here..."
+              required
+            ></textarea>
+
+            <div
+              id="chapter-word-count"
+              class="chapter-word-count">
+              0 words
+            </div>
+
+            <label for="chapter-status-input">
+              Status
+            </label>
+
+            <select
+              id="chapter-status-input">
+
+              <option value="draft">
+                Draft
+              </option>
+
+              <option value="published">
+                Published
+              </option>
+
+            </select>
+
+            <div
+              id="chapter-message"
+              class="create-book-message">
+            </div>
+
+            <div class="chapter-editor-buttons">
+
+              <button
+                type="submit"
+                id="save-chapter-button"
+                class="save-chapter-button">
+                Save Chapter
+              </button>
+
+              <button
+                type="button"
+                id="cancel-chapter-button"
+                class="cancel-chapter-button">
+                Cancel
+              </button>
+
+            </div>
+
+          </form>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  `;
+
+  document.body.appendChild(
+    chapterModal
+  );
+
+
+  /* =====================================================
+     STYLES
+  ===================================================== */
+
+  const dashboardStyle =
+    document.createElement('style');
+
+  dashboardStyle.textContent = `
+
+    /* =========================
+       MODALS
+    ========================== */
+
+    #create-book-modal,
+    #chapter-management-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+    }
+
+    .create-book-overlay,
+    .chapter-modal-overlay {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: rgba(10, 5, 9, .85);
+      overflow-y: auto;
+    }
+
+
+    /* =========================
+       PANELS
+    ========================== */
+
+    .create-book-panel,
+    .chapter-modal-panel {
+      position: relative;
+      width: 100%;
+      max-width: 700px;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 28px;
+      background: #2b1024;
+      border: 1px solid #4a1f3d;
+      border-radius: 18px;
+      color: #f4e6d8;
+      box-shadow:
+        0 20px 60px rgba(0,0,0,.55);
+      font-family: Georgia, serif;
+    }
+
+    .create-book-panel {
+      max-width: 560px;
+    }
+
+
+    /* =========================
+       HEADINGS
+    ========================== */
+
+    .create-book-panel h2,
+    .chapter-modal-panel h2,
+    .chapter-modal-panel h3 {
+      margin-top: 0;
+      color: #f4e6d8;
+    }
+
+    .create-book-subtitle {
+      color: #bcaeb8;
+      margin: 0 0 25px;
+    }
+
+
+    /* =========================
+       LABELS
+    ========================== */
+
+    .create-book-panel label,
+    .chapter-modal-panel label {
+      display: block;
+      margin: 16px 0 7px;
+      color: #d4af37;
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+
+    /* =========================
+       INPUTS
+    ========================== */
+
+    .create-book-panel input,
+    .create-book-panel textarea,
+    .chapter-modal-panel input,
+    .chapter-modal-panel textarea,
+    .chapter-modal-panel select {
+
+      box-sizing: border-box;
+
+      width: 100%;
+
+      padding: 12px;
+
+      border: 1px solid #55253f;
+
+      border-radius: 9px;
+
+      background: #1b1b1b;
+
+      color: #fff;
+
+      font-family: Georgia, serif;
+
+      font-size: 14px;
+
+    }
+
+
+    .create-book-panel textarea,
+    .chapter-modal-panel textarea {
+
+      resize: vertical;
+
+      line-height: 1.6;
+
+    }
+
+
+    .create-book-panel input:focus,
+    .create-book-panel textarea:focus,
+    .chapter-modal-panel input:focus,
+    .chapter-modal-panel textarea:focus,
+    .chapter-modal-panel select:focus {
+
+      outline: none;
+
+      border-color: #c9a24b;
+
+    }
+
+
+    /* =========================
+       CLOSE BUTTONS
+    ========================== */
+
+    .close-create-book,
+    .close-chapter-modal {
+
+      position: absolute;
+
+      top: 12px;
+
+      right: 15px;
+
+      width: 36px;
+
+      height: 36px;
+
+      border: 0;
+
+      background: transparent;
+
+      color: #d8c7d3;
+
+      font-size: 28px;
+
+      cursor: pointer;
+
+      z-index: 2;
+
+    }
+
+    .close-create-book:hover,
+    .close-chapter-modal:hover {
+
+      color: #c9a24b;
+
+    }
+
+
+    /* =========================
+       MESSAGES
+    ========================== */
+
+    .create-book-message {
+
+      min-height: 20px;
+
+      margin: 15px 0;
+
+      color: #d8c7d3;
+
+      font-size: 13px;
+
+    }
+
+
+    /* =========================
+       BUTTONS
+    ========================== */
+
+    .save-new-book {
+
+      width: 100%;
+
+      padding: 13px;
+
+      margin-top: 15px;
+
+      border: 1px solid #c9a24b;
+
+      border-radius: 10px;
+
+      background: #c9a24b;
+
+      color: #24101e;
+
+      font-weight: bold;
+
+      cursor: pointer;
+
+    }
+
+    .save-new-book:hover {
+
+      background: #e0bd62;
+
+    }
+
+    .save-new-book:disabled {
+
+      opacity: .6;
+
+      cursor: wait;
+
+    }
+
+
+    /* =========================
+       COVER NOTE
+    ========================== */
+
+    .cover-note {
+
+      color: #8f818b;
+
+      font-size: 12px;
+
+      margin-top: 7px;
+
+    }
+
+
+    /* =========================
+       CHAPTER LIST
+    ========================== */
+
+    .chapter-list {
+
+      margin: 25px 0;
+
+    }
+
+    .chapter-card {
+
+      margin-bottom: 12px;
+
+      padding: 18px;
+
+      background: #1b1b1b;
+
+      border: 1px solid #3d2535;
+
+      border-radius: 12px;
+
+    }
+
+    .chapter-card h4 {
+
+      margin: 0 0 8px;
+
+      color: #fff;
+
+    }
+
+    .chapter-card-meta {
+
+      color: #a99ba5;
+
+      font-size: 13px;
+
+      margin-bottom: 7px;
+
+    }
+
+    .chapter-status {
+
+      display: inline-block;
+
+      margin-top: 5px;
+
+      padding: 3px 7px;
+
+      border-radius: 5px;
+
+      background: #3a2635;
+
+      color: #d4af37;
+
+      font-size: 11px;
+
+    }
+
+    .chapter-word-count {
+
+      color: #8f818b;
+
+      font-size: 12px;
+
+      margin-top: 7px;
+
+    }
+
+
+    /* =========================
+       CHAPTER ACTIONS
+    ========================== */
+
+    .chapter-card-actions {
+
+      display: flex;
+
+      gap: 8px;
+
+      flex-wrap: wrap;
+
+      margin-top: 13px;
+
+    }
+
+    .chapter-card-actions button {
+
+      padding: 8px 13px;
+
+      border-radius: 8px;
+
+      border: 1px solid #c9a24b;
+
+      background: transparent;
+
+      color: #d4af37;
+
+      cursor: pointer;
+
+    }
+
+    .chapter-card-actions button:hover {
+
+      background: #c9a24b;
+
+      color: #24101e;
+
+    }
+
+    .chapter-delete-button {
+
+      border-color: #9b4b5a !important;
+
+      color: #e28b99 !important;
+
+    }
+
+    .chapter-delete-button:hover {
+
+      background: #9b4b5a !important;
+
+      color: #fff !important;
+
+    }
+
+
+    /* =========================
+       CHAPTER EDITOR
+    ========================== */
+
+    .chapter-editor-divider {
+
+      height: 1px;
+
+      background: #4a1f3d;
+
+      margin: 25px 0;
+
+    }
+
+    .chapter-editor-buttons {
+
+      display: flex;
+
+      gap: 10px;
+
+      margin-top: 15px;
+
+    }
+
+    .chapter-editor-buttons button {
+
+      flex: 1;
+
+      padding: 12px;
+
+      border-radius: 9px;
+
+      cursor: pointer;
+
+      font-weight: bold;
+
+    }
+
+    .save-chapter-button {
+
+      border: 1px solid #c9a24b;
+
+      background: #c9a24b;
+
+      color: #24101e;
+
+    }
+
+    .save-chapter-button:hover {
+
+      background: #e0bd62;
+
+    }
+
+    .save-chapter-button:disabled {
+
+      opacity: .6;
+
+      cursor: wait;
+
+    }
+
+    .cancel-chapter-button {
+
+      border: 1px solid #5a4051;
+
+      background: transparent;
+
+      color: #d8c7d3;
+
+    }
+
+    .cancel-chapter-button:hover {
+
+      border-color: #c9a24b;
+
+      color: #c9a24b;
+
+    }
+
+
+    /* =========================
+       LOADING / EMPTY STATES
+    ========================== */
+
+    .chapter-loading,
+    .chapter-empty {
+
+      padding: 20px;
+
+      text-align: center;
+
+      color: #a999a5;
+
+    }
+
+
+    /* =========================
+       MOBILE
+    ========================== */
+
+    @media (max-width: 600px) {
+
+      .create-book-panel,
+      .chapter-modal-panel {
+
+        padding: 22px;
+
+      }
+
+      .chapter-editor-buttons {
+
+        flex-direction: column;
+
+      }
+
+    }
+
+  `;
+
+  document.head.appendChild(
+    dashboardStyle
+  );
+
+
+  /* =====================================================
+     CREATE BOOK ELEMENTS
+  ===================================================== */
+
+  const closeCreateBook =
+    document.getElementById(
+      'close-create-book'
+    );
+
+  const createBookOverlay =
+    createBookModal.querySelector(
+      '.create-book-overlay'
+    );
+
+  const createBookForm =
+    document.getElementById(
+      'create-book-form'
+    );
+
+  const bookTitleInput =
+    document.getElementById(
+      'new-book-title'
+    );
+
+  const bookDescriptionInput =
+    document.getElementById(
+      'new-book-description'
+    );
+
+  const bookGenreInput =
+    document.getElementById(
+      'new-book-genre'
+    );
+
+  const bookCoverInput =
+    document.getElementById(
+      'new-book-cover'
+    );
+
+  const createBookMessage =
+    document.getElementById(
+      'create-book-message'
+    );
+
+  const saveNewBookButton =
+    document.getElementById(
+      'save-new-book'
+    );
+
+
+  /* =====================================================
+     CHAPTER ELEMENTS
+  ===================================================== */
+
+  const closeChapterModal =
+    document.getElementById(
+      'close-chapter-modal'
+    );
+
+  const chapterModalOverlay =
+    chapterModal.querySelector(
+      '.chapter-modal-overlay'
+    );
+
+  const chapterModalTitle =
+    document.getElementById(
+      'chapter-modal-book-title'
+    );
+
+  const chapterList =
+    document.getElementById(
+      'chapter-list'
+    );
+
+  const addChapterButton =
+    document.getElementById(
+      'add-chapter-button'
+    );
+
+  const chapterEditor =
+    document.getElementById(
+      'chapter-editor'
+    );
+
+  const chapterEditorHeading =
+    document.getElementById(
+      'chapter-editor-heading'
+    );
+
+  const chapterForm =
+    document.getElementById(
+      'chapter-form'
+    );
+
+  const chapterNumberInput =
+    document.getElementById(
+      'chapter-number-input'
+    );
+
+  const chapterTitleInput =
+    document.getElementById(
+      'chapter-title-input'
+    );
+
+  const chapterContentInput =
+    document.getElementById(
+      'chapter-content-input'
+    );
+
+  const chapterStatusInput =
+    document.getElementById(
+      'chapter-status-input'
+    );
+
+  const chapterWordCount =
+    document.getElementById(
+      'chapter-word-count'
+    );
+
+  const chapterMessage =
+    document.getElementById(
+      'chapter-message'
+    );
+
+  const saveChapterButton =
+    document.getElementById(
+      'save-chapter-button'
+    );
+
+  const cancelChapterButton =
+    document.getElementById(
+      'cancel-chapter-button'
+    );
+
+
+  /* =====================================================
+     HTML ESCAPE
+  ===================================================== */
+
+  function escapeHtml(value) {
+
+    if (
+      value === null ||
+      value === undefined
+    ) {
+
+      return '';
+
+    }
+
+    return String(value)
+      .replace(/&/g, '&amp;')
+      .replace(
+        /</g,
+        '&lt;'
+      )
+      .replace(
+        />/g,
+        '&gt;'
+      )
+      .replace(
+        /"/g,
+        '&quot;'
+      )
+      .replace(
+        /'/g,
+        '&#039;'
+      );
+
+  }
+
+
+  /* =====================================================
+     GET CURRENT USER
+  ===================================================== */
+
+  async function getCurrentUser() {
+
+    const {
+      data: {
+        user
+      },
+      error
+    } =
+      await litdomSupabase.auth.getUser();
+
+
+    if (
+      error ||
+      !user
+    ) {
+
+      return null;
+
+    }
+
+
+    return user;
+
+  }
+
+
+  /* =====================================================
+     OPEN CREATE BOOK
+  ===================================================== */
+
+  createBookButton.addEventListener(
+    'click',
+    function () {
+
+      createBookModal.style.display =
+        'block';
+
+      createBookMessage.textContent =
+        '';
+
+      bookTitleInput.focus();
+
+    }
+  );
+
+
+  /* =====================================================
+     CLOSE CREATE BOOK
+  ===================================================== */
+
+  closeCreateBook.addEventListener(
+    'click',
+    function () {
+
+      createBookModal.style.display =
+        'none';
+
+    }
+  );
+
+
+  createBookOverlay.addEventListener(
+    'click',
+    function (event) {
+
+      if (
+        event.target ===
+        createBookOverlay
+      ) {
+
+        createBookModal.style.display =
+          'none';
+
+      }
+
+    }
+  );
+
+
+ /* =====================================================
+LOAD BOOKS
+===================================================== */
+
+async function loadBooks() {
+
+booksContainer.innerHTML = "<div class="writer-dashboard-loading"> Loading your books... </div>";
+
+const user = await getCurrentUser();
+
+if (!user) {
+
+booksContainer.innerHTML = `
+  <div class="no-books-message">
+    <p>Please log in to access your Writer Dashboard.</p>
+  </div>
+`;
+
+return;
+
+}
+
+const {
+data: books,
+error
+} = await litdomSupabase
+.from('books')
+.select("id, title, cover_url, description, genre, created_at, status")
+.eq(
+'author_id',
+user.id
+)
+.order(
+'created_at',
+{
+ascending: false
+}
+);
+
+if (error) {
+
+console.error(
+  'Writer books loading error:',
+  error
+);
+
+booksContainer.innerHTML = `
+  <div class="no-books-message">
+    <p>Unable to load your books.</p>
+  </div>
+`;
+
+return;
+
+}
+
+if (!books || books.length === 0) {
+
+booksContainer.innerHTML = `
+  <div class="no-books-message">
+
+    <p>
+      You haven't created any books yet.
+    </p>
+
+    <p>
+      Start your first story by clicking
+      "Create New Book".
+    </p>
+
+  </div>
+`;
+
+return;
+
+}
+
+booksContainer.innerHTML = '';
+
+books.forEach(function (book) {
+
+const card =
+  document.createElement('article');
+
+card.className =
+  'writer-book-card';
+
+
+const cover =
+  book.cover_url
+    ? `
+      <img
+        src="${escapeHtml(book.cover_url)}"
+        alt="${escapeHtml(
+          book.title || 'Book cover'
+        )}"
+        class="writer-book-cover"
+      >
+    `
+    : `
+      <div class="
+        writer-book-cover
+        writer-book-cover-placeholder
+      ">
+        No Cover
+      </div>
+    `;
+
+
+card.innerHTML = `
+
+  ${cover}
+
+  <div class="writer-book-content">
+
+    <h3>
+      ${escapeHtml(
+        book.title || 'Untitled Book'
+      )}
+    </h3>
+
+    ${
+      book.genre
+        ? `
+          <p class="writer-book-genre">
+            ${escapeHtml(book.genre)}
+          </p>
+        `
+        : ''
+    }
+
+    <span class="writer-book-status">
+      ${escapeHtml(
+        book.status || 'draft'
+      )}
+    </span>
+
+    <div class="writer-book-actions">
+
+      <button
+        type="button"
+        class="edit-book-button"
+        data-book-id="${escapeHtml(book.id)}">
+        Edit
+      </button>
+
+      <button
+        type="button"
+        class="manage-chapters-button"
+        data-book-id="${escapeHtml(book.id)}">
+        Chapters
+      </button>
+
+    </div>
+
+  </div>
+
+`;
+
+
+booksContainer.appendChild(card);
+
+});
+
+}
+
+/* =====================================================
+HTML ESCAPE
+===================================================== */
+
+function escapeHtml(value) {
+
+if (
+value === null ||
+value === undefined
+) {
+return '';
+}
+
+return String(value)
+.replace(/&/g, '&')
+.replace(/</g, '<')
+.replace(/>/g, '>')
+.replace(/"/g, '"')
+.replace(/'/g, ''');
+
+}
+
+/* =====================================================
+CHAPTER STATE
+===================================================== */
+
+let activeBookId = null;
+
+let activeChapterId = null;
+
+/* =====================================================
+CHAPTER ELEMENTS
+===================================================== */
+
+const closeChapterManager =
+document.getElementById(
+'close-chapter-manager'
+);
+
+const chapterManagerOverlay =
+chapterModal.querySelector(
+'.chapter-manager-overlay'
+);
+
+const chapterManagerBookTitle =
+document.getElementById(
+'chapter-manager-book-title'
+);
+
+const chapterList =
+document.getElementById(
+'chapter-list'
+);
+
+const newChapterButton =
+document.getElementById(
+'new-chapter-button'
+);
+
+const closeChapterEditor =
+document.getElementById(
+'close-chapter-editor'
+);
+
+const chapterEditorHeading =
+document.getElementById(
+'chapter-editor-heading'
+);
+
+const chapterForm =
+document.getElementById(
+'chapter-form'
+);
+
+const chapterNumberInput =
+document.getElementById(
+'chapter-number'
+);
+
+const chapterTitleInput =
+document.getElementById(
+'chapter-title'
+);
+
+const chapterContentInput =
+document.getElementById(
+'chapter-content'
+);
+
+const chapterWordCount =
+document.getElementById(
+'chapter-word-count'
+);
+
+const chapterMessage =
+document.getElementById(
+'chapter-message'
+);
+
+const saveChapterButton =
+document.getElementById(
+'save-chapter-button'
+);
+
+/* =====================================================
+OPEN CHAPTER MANAGER
+===================================================== */
+
+async function openChapterManager(
+bookId,
+bookTitle
+) {
+
+if (!bookId) {
+return;
+}
+
+const user =
+await getCurrentUser();
+
+if (!user) {
+
+alert(
+  'Please log in first.'
+);
+
+return;
+
+}
+
+/*
+
+* Verify that the current user owns
+* this book before opening it.
+  */
+
+const {
+data: book,
+error
+} =
+await litdomSupabase
+.from('books')
+.select("id, title, author_id")
+.eq(
+'id',
+bookId
+)
+.eq(
+'author_id',
+user.id
+)
+.maybeSingle();
+
+if (error) {
+
+console.error(
+  'Book ownership error:',
+  error
+);
+
+alert(
+  'Unable to open this book.'
+);
+
+return;
+
+}
+
+if (!book) {
+
+alert(
+  'You do not have permission to manage this book.'
+);
+
+return;
+
+}
+
+activeBookId =
+book.id;
+
+activeChapterId =
+null;
+
+chapterManagerBookTitle.textContent =
+book.title ||
+bookTitle ||
+'Book Chapters';
+
+chapterEditorModal.style.display =
+'none';
+
+chapterModal.style.display =
+'block';
+
+await loadChapters();
+
+}
+
+/* =====================================================
+LOAD CHAPTERS
+===================================================== */
+
+async function loadChapters() {
+
+if (!activeBookId) {
+
+chapterList.innerHTML = `
+  <p class="chapter-empty">
+    No book selected.
+  </p>
+`;
+
+return;
+
+}
+
+chapterList.innerHTML = "<p class="chapter-loading"> Loading chapters... </p>";
+
+const {
+data: chapters,
+error
+} =
+await litdomSupabase
+.from('chapters')
+.select("id, book_id, chapter_number, title, status, word_count, updated_at, created_at")
+.eq(
+'book_id',
+activeBookId
+)
+.order(
+'chapter_number',
+{
+ascending: true
+}
+);
+
+if (error) {
+
+console.error(
+  'Chapter loading error:',
+  error
+);
+
+chapterList.innerHTML = `
+  <p class="chapter-empty">
+    Unable to load chapters.
+  </p>
+`;
+
+return;
+
+}
+
+if (
+!chapters ||
+chapters.length === 0
+) {
+
+chapterList.innerHTML = `
+  <p class="chapter-empty">
+    No chapters yet.
+  </p>
+`;
+
+return;
+
+}
+
+chapterList.innerHTML = '';
+
+chapters.forEach(
+function (chapter) {
+
+  const item =
+    document.createElement('div');
+
+  item.className =
+    'chapter-item';
+
+
+  item.innerHTML = `
+
+    <div class="chapter-item-info">
+
+      <div class="chapter-item-number">
+        Chapter
+        ${escapeHtml(
+          chapter.chapter_number
+        )}
+      </div>
+
+      <div class="chapter-item-title">
+        ${escapeHtml(
+          chapter.title ||
+          'Untitled Chapter'
+        )}
+      </div>
+
+      <div class="chapter-item-meta">
+
+        ${Number(
+          chapter.word_count || 0
+        ).toLocaleString()}
+        words
+
+        ·
+
+        ${escapeHtml(
+          chapter.status || 'draft'
+        )}
+
+      </div>
+
+    </div>
+
+    <div class="chapter-item-actions">
+
+      <button
+        type="button"
+        class="chapter-edit-button"
+        data-chapter-id="${escapeHtml(
+          chapter.id
+        )}">
+        Edit
+      </button>
+
+      <button
+        type="button"
+        class="chapter-delete-button"
+        data-chapter-id="${escapeHtml(
+          chapter.id
+        )}">
+        Delete
+      </button>
+
+    </div>
+
+  `;
+
+
+  chapterList.appendChild(item);
+
+}
+
+);
+
+/*
+
+* EDIT BUTTONS
+  */
+
+chapterList
+.querySelectorAll(
+'.chapter-edit-button'
+)
+.forEach(
+function (button) {
+
+    button.addEventListener(
+      'click',
+      function () {
+
+        openChapterEditor(
+          button.dataset.chapterId
+        );
+
+      }
+    );
+
+  }
+);
+
+/*
+
+* DELETE BUTTONS
+  */
+
+chapterList
+.querySelectorAll(
+'.chapter-delete-button'
+)
+.forEach(
+function (button) {
+
+    button.addEventListener(
+      'click',
+      function () {
+
+        deleteChapter(
+          button.dataset.chapterId
+        );
+
+      }
+    );
+
+  }
+);
+
+}
+
+/* =====================================================
+GET NEXT CHAPTER NUMBER
+===================================================== */
+
+async function getNextChapterNumber() {
+
+if (!activeBookId) {
+return 1;
+}
+
+const {
+data,
+error
+} =
+await litdomSupabase
+.from('chapters')
+.select(
+'chapter_number'
+)
+.eq(
+'book_id',
+activeBookId
+)
+.order(
+'chapter_number',
+{
+ascending: false
+}
+)
+.limit(1);
+
+if (error) {
+
+console.error(
+  'Next chapter number error:',
+  error
+);
+
+return 1;
+
+}
+
+if (
+!data ||
+data.length === 0
+) {
+
+return 1;
+
+}
+
+return (
+Number(
+data[0].chapter_number
+) + 1
+);
+
+}
+
+/* =====================================================
+OPEN NEW CHAPTER
+===================================================== */
+
+newChapterButton.addEventListener(
+'click',
+async function () {
+
+if (!activeBookId) {
+
+  return;
+
+}
+
+
+activeChapterId =
+  null;
+
+
+chapterEditorHeading.textContent =
+  'New Chapter';
+
+
+chapterNumberInput.value =
+  await getNextChapterNumber();
+
+
+chapterTitleInput.value =
+  '';
+
+chapterContentInput.value =
+  '';
+
+chapterWordCount.textContent =
+  '0 words';
+
+chapterMessage.textContent =
+  '';
+
+
+chapterEditorModal.style.display =
+  'block';
+
+
+chapterTitleInput.focus();
+
+}
+);
+
+/* =====================================================
+OPEN EXISTING CHAPTER
+===================================================== */
+
+async function openChapterEditor(
+chapterId
+) {
+
+if (!chapterId) {
+return;
+}
+
+const {
+data: chapter,
+error
+} =
+await litdomSupabase
+.from('chapters')
+.select("id, book_id, chapter_number, title, content, status, word_count")
+.eq(
+'id',
+chapterId
+)
+.eq(
+'book_id',
+activeBookId
+)
+.maybeSingle();
+
+if (error) {
+
+console.error(
+  'Chapter editor loading error:',
+  error
+);
+
+alert(
+  'Unable to load chapter.'
+);
+
+return;
+
+}
+
+if (!chapter) {
+
+alert(
+  'Chapter not found.'
+);
+
+return;
+
+}
+
+activeChapterId =
+chapter.id;
+
+chapterEditorHeading.textContent =
+'Edit Chapter';
+
+chapterNumberInput.value =
+chapter.chapter_number;
+
+chapterTitleInput.value =
+chapter.title ||
+'';
+
+chapterContentInput.value =
+chapter.content ||
+'';
+
+updateChapterWordCount();
+
+chapterMessage.textContent =
+'';
+
+chapterEditorModal.style.display =
+'block';
+
+chapterTitleInput.focus();
+
+}
+
+/* =====================================================
+WORD COUNT
+===================================================== */
+
+function updateChapterWordCount() {
+
+const content =
+chapterContentInput.value.trim();
+
+if (!content) {
+
+chapterWordCount.textContent =
+  '0 words';
+
+return;
+
+}
+
+const count =
+content
+.split(/\s+/)
+.filter(
+function (word) {
+return word.length > 0;
+}
+)
+.length;
+
+chapterWordCount.textContent =
+"${count.toLocaleString()} words";
+
+}
+
+chapterContentInput.addEventListener(
+'input',
+updateChapterWordCount
+);
+
+/* =====================================================
+SAVE CHAPTER
+===================================================== */
+
+chapterForm.addEventListener(
+'submit',
+async function (event) {
+
+event.preventDefault();
+
+
+if (!activeBookId) {
+
+  chapterMessage.textContent =
+    'No book selected.';
+
+  return;
+}
+
+
+const user =
+  await getCurrentUser();
+
+
+if (!user) {
+
+  chapterMessage.textContent =
+    'Please log in first.';
+
+  return;
+}
+
+
+const chapterNumber =
+  Number(
+    chapterNumberInput.value
+  );
+
+
+const title =
+  chapterTitleInput.value.trim();
+
+
+const content =
+  chapterContentInput.value.trim();
+
+
+/*
+ * Since authors no longer control
+ * publication locking, the only
+ * chapter settings they control here
+ * are number, title and content.
+ *
+ * Status remains available so the author
+ * can save a draft or publish a chapter.
+ */
+
+const wordCount =
+  content
+    .split(/\s+/)
+    .filter(
+      function (word) {
+        return word.length > 0;
+      }
+    )
+    .length;
+
+
+if (
+  !chapterNumber ||
+  chapterNumber < 1
+) {
+
+  chapterMessage.textContent =
+    'Enter a valid chapter number.';
+
+  return;
+}
+
+
+if (!title) {
+
+  chapterMessage.textContent =
+    'Please enter a chapter title.';
+
+  return;
+}
+
+
+if (!content) {
+
+  chapterMessage.textContent =
+    'Please write your chapter content.';
+
+  return;
+}
+
+
+saveChapterButton.disabled =
+  true;
+
+
+saveChapterButton.textContent =
+  'Saving...';
+
+
+chapterMessage.textContent =
+  '';
+
+
+try {
+
+  /*
+   * VERIFY BOOK OWNERSHIP
+   */
+
+  const {
+    data: ownedBook,
+    error: ownershipError
+  } =
+    await litdomSupabase
+      .from('books')
+      .select(
+        'id'
+      )
+      .eq(
+        'id',
+        activeBookId
+      )
+      .eq(
+        'author_id',
+        user.id
+      )
+      .maybeSingle();
+
+
+  if (ownershipError) {
+
+    throw ownershipError;
+
+  }
+
+
+  if (!ownedBook) {
+
+    throw new Error(
+      'You do not have permission to edit this book.'
+    );
+
+  }
+
+
+  /*
+   * CHAPTER DATA
+   *
+   * IMPORTANT:
+   * No Ruby.
+   * No Diamonds.
+   * No unlock cost.
+   * No is_locked.
+   */
+
+  const chapterData = {
+
+    book_id:
+      activeBookId,
+
+    chapter_number:
+      chapterNumber,
+
+    title:
+      title,
+
+    content:
+      content,
+
+    status:
+      'draft',
+
+    word_count:
+      wordCount
+
+  };
+
+
+  /*
+   * UPDATE EXISTING CHAPTER
+   */
+
+  if (activeChapterId) {
+
+    const {
+      error
+    } =
+      await litdomSupabase
+        .from('chapters')
+        .update({
+
+          chapter_number:
+            chapterData.chapter_number,
+
+          title:
+            chapterData.title,
+
+          content:
+            chapterData.content,
+
+          word_count:
+            chapterData.word_count,
+
+          updated_at:
+            new Date().toISOString()
+
+        })
+        .eq(
+          'id',
+          activeChapterId
+        )
+        .eq(
+          'book_id',
+          activeBookId
+        );
+
+
+    if (error) {
+      throw error;
+    }
+
+
+    chapterMessage.textContent =
+      'Chapter updated successfully! 🎉';
+
+  }
+
+
+  /*
+   * CREATE NEW CHAPTER
+   */
+
+  else {
+
+    const {
+      error
+    } =
+      await litdomSupabase
+        .from('chapters')
+        .insert(
+          chapterData
+        );
+
+
+    if (error) {
+      throw error;
+    }
+
+
+    chapterMessage.textContent =
+      'Chapter created successfully! 🎉';
+
+  }
+
+
+  await loadChapters();
+
+
+  setTimeout(
+    function () {
+
+      chapterEditorModal.style.display =
+        'none';
+
+      chapterMessage.textContent =
+        '';
+
+      chapterForm.reset();
+
+      activeChapterId =
+        null;
+
+    },
+    700
+  );
+
+
+} catch (error) {
+
+  console.error(
+    'Chapter save error:',
+    error
+  );
+
+
+  chapterMessage.textContent =
+    error.message ||
+    'Unable to save chapter.';
+
+} finally {
+
+  saveChapterButton.disabled =
+    false;
+
+  saveChapterButton.textContent =
+    'Save Chapter';
+
+}
+
+}
+);
+
+/* =====================================================
+DELETE CHAPTER
+===================================================== */
+
+async function deleteChapter(
+chapterId
+) {
+
+if (!chapterId) {
+return;
+}
+
+const confirmed =
+window.confirm(
+'Delete this chapter? This cannot be undone.'
+);
+
+if (!confirmed) {
+return;
+}
+
+const user =
+await getCurrentUser();
+
+if (!user) {
+
+alert(
+  'Please log in first.'
+);
+
+return;
+
+}
+
+try {
+
+/*
+ * Verify book ownership first.
+ */
+
+const {
+  data: ownedBook,
+  error: ownershipError
+} =
+  await litdomSupabase
+    .from('books')
+    .select(
+      'id'
+    )
+    .eq(
+      'id',
+      activeBookId
+    )
+    .eq(
+      'author_id',
+      user.id
+    )
+    .maybeSingle();
+
+
+if (ownershipError) {
+  throw ownershipError;
+}
+
+
+if (!ownedBook) {
+
+  throw new Error(
+    'You do not have permission to delete this chapter.'
+  );
+
+}
+
+
+const {
+  error
+} =
+  await litdomSupabase
+    .from('chapters')
+    .delete()
+    .eq(
+      'id',
+      chapterId
+    )
+    .eq(
+      'book_id',
+      activeBookId
+    );
+
+
+if (error) {
+  throw error;
+}
+
+
+await loadChapters();
+
+} catch (error) {
+
+console.error(
+  'Chapter delete error:',
+  error
+);
+
+alert(
+  error.message ||
+  'Unable to delete chapter.'
+);
+
+}
+
+}
+
+/* =====================================================
+CLOSE CHAPTER MANAGER
+===================================================== */
+
+closeChapterManager.addEventListener(
+'click',
+function () {
+
+chapterModal.style.display =
+  'none';
+
+activeBookId =
+  null;
+
+activeChapterId =
+  null;
+
+}
+);
+
+chapterManagerOverlay.addEventListener(
+'click',
+function (event) {
+
+if (
+  event.target ===
+  chapterManagerOverlay
+) {
+
+  chapterModal.style.display =
+    'none';
+
+  activeBookId =
+    null;
+
+  activeChapterId =
+    null;
+
+}
+
+}
+);
+
+/* =====================================================
+CLOSE CHAPTER EDITOR
+===================================================== */
+
+closeChapterEditor.addEventListener(
+'click',
+function () {
+
+chapterEditorModal.style.display =
+  'none';
+
+chapterMessage.textContent =
+  '';
+
+activeChapterId =
+  null;
+
+}
+);
+
+chapterEditorOverlay.addEventListener(
+'click',
+function (event) {
+
+if (
+  event.target ===
+  chapterEditorOverlay
+) {
+
+  chapterEditorModal.style.display =
+    'none';
+
+  chapterMessage.textContent =
+    '';
+
+  activeChapterId =
+    null;
+
+}
+
+}
+);
+
+/* =====================================================
+CONNECT BOOK CHAPTER BUTTON
+===================================================== */
+
+booksContainer.addEventListener(
+'click',
+function (event) {
+
+const button =
+  event.target.closest(
+    '.manage-chapters-button'
+  );
+
+
+if (!button) {
+  return;
+}
+
+
+const bookId =
+  button.dataset.bookId;
+
+
+if (!bookId) {
+  return;
+}
+
+
+const bookTitle =
+  button
+    .closest('.writer-book-card')
+    ?.querySelector('h3')
+    ?.textContent
+    ?.trim() ||
+  'Book Chapters';
+
+
+openChapterManager(
+  bookId,
+  bookTitle
+);
+
+}
+);
+
+/* =====================================================
+INITIAL LOAD
+===================================================== */
+
+loadBooks();
+
+/* =====================================================
+END DASHBOARD SCRIPT
+===================================================== */
+
+});
+</script>
+            
