@@ -188,5 +188,159 @@ if (error) {
     /* =========================
        GET PROFILES
     ========================= */
+const {
+      data: profiles,
+      error: profileError
+    } = await litdomSupabase
+      .from('profiles')
+      .select(
+        'id, username, display_name'
+      )
+      .in(
+        'id',
+        userIds
+      );
+
+
+    if (profileError) {
+
+      console.error(
+        'Profile list error:',
+        profileError
+      );
+
+      container.innerHTML =
+        '<p>Unable to load profiles.</p>';
+
+      return;
+    }
+
+
+    if (
+      !profiles ||
+      profiles.length === 0
+    ) {
+
+      container.innerHTML =
+        '<p>Profiles could not be found.</p>';
+
+      return;
+
+}
+
+
+    /* =========================
+       DISPLAY USERS
+    ========================= */
+
+    container.innerHTML = '';
+
+
+    profiles.forEach(
+      function (profile) {
+
+        const name =
+          profile.display_name ||
+          profile.username ||
+          'Litdom User';
+
+
+        const username =
+          profile.username
+            ? '@' + profile.username
+            : '';
+
+
+        const item =
+          document.createElement('div');
+
+        item.className =
+          'litdom-follow-user';
+
+
+        item.innerHTML = `
+          <a href="/p/profile.html?id=${encodeURIComponent(profile.id)}">
+            <strong>${name}</strong>
+            <span>${username}</span>
+
+</a>
+        `;
+
+
+        container.appendChild(
+          item
+        );
+
+      }
+    );
+
+  }
+
+
+  /* =========================
+     FOLLOWERS BUTTON
+  ========================= */
+
+ 
+      if (isOpen) {
+
+        followersList.style.display =
+          'none';
+
+        return;
+      }
+
+
+      followersList.style.display =
+        'block';
+
+
+      await loadUsers(
+        'followers',
+        followersList
+      );
+}
+  );
+
+
+  /* =========================
+     FOLLOWING BUTTON
+  ========================= */
+
+  followingButton.addEventListener(
+    'click',
+    async function () {
+
+      const isOpen =
+        followingList.style.display !== 'none';
+
+
+      followersList.style.display =
+        'none';
+
+
+      if (isOpen) {
+
+        followingList.style.display =
+          'none';
+
+        return;
+      }
+
+
+      followingList.style.display =
+        'block';
+
+
+      await loadUsers(
+        'following',
+        followingList
+  );
+
+    }
+  );
+
+});
+</script>
 
 
