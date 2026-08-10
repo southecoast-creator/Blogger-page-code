@@ -1100,6 +1100,76 @@ if (!avatarResult.error && avatarResult.data) {
     profile.bio ||
     'No bio yet.';
 
-  
+  if (profileName) {
+    profileName.textContent =
+      displayName;
+  }
+
+  if (profileUsername) {
+    profileUsername.textContent =
+      '@' + username;
+  }
+
+  if (profileBio) {
+    profileBio.textContent =
+      bio;
+  }
+
+  if (authorName) {
+    authorName.textContent =
+      displayName;
+  }
+
+  if (avatarInitial) {
+    avatarInitial.textContent =
+      displayName
+        .charAt(0)
+        .toUpperCase();
+  }
+
+
+  /* =========================
+     FOLLOW AREA
+  ========================= */
+
+  let followArea =
+    document.getElementById('profile-follow-area');
+
+
+  /*
+     If Blogger failed to keep the
+     follow HTML, create it automatically.
+  */
+
+  if (!followArea) {
+
+    followArea =
+      document.createElement('div');
+
+    followArea.id =
+      'profile-follow-area';
+
+    followArea.innerHTML = `
+      <div id="profile-stats">
+
+        <span>
+          <strong id="follower-count">0</strong>
+          Followers
+        </span>
+
+        <span>
+          <strong id="following-count">0</strong>
+          Following
+        </span>
+
+      </div>
+
+      <button
+        id="follow-button"
+        type="button">
+        Follow
+      </button>
+
+      <p id="follow-message"></p>
 
 
