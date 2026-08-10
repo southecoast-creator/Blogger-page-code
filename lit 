@@ -1545,5 +1545,59 @@ document.addEventListener('DOMContentLoaded', async function () {
 
 
   /* =========================
+CHECK LOGIN
+  ========================= */
+
+  const {
+    data: { session },
+    error
+  } = await litdomSupabase.auth.getSession();
+
+
+  if (error) {
+
+    console.error(
+      'Session check error:',
+      error
+    );
+
+    loginGate.style.display =
+      'block';
+
+    profileContent.style.display =
+      'none';
+
+    return;
+  }
+
+
+  /* =========================
+     NOT LOGGED IN
+  ========================= */
+
+  if (!session || !session.user) {
+
+    loginGate.style.display =
+      'block';
+
+    profileContent.style.display =
+      'none';
+return;
+  }
+
+
+  /* =========================
+     LOGGED IN
+  ========================= */
+
+  loginGate.style.display =
+    'none';
+
+  profileContent.style.display =
+    'block';
+  
+});
+</script>
+  
 
 
