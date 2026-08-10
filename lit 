@@ -799,4 +799,77 @@ if (avatarInput) {
       const user =
         userResult.data.user;
 
+/* Check image type */
+
+      if (!file.type.startsWith('image/')) {
+
+        alert(
+          'Please choose an image file.'
+        );
+
+        avatarInput.value = '';
+        return;
+      }
+      
+      
+            /* Check image size */
+
+      if (file.size > 5 * 1024 * 1024) {
+
+        alert(
+          'Please choose an image smaller than 5 MB.'
+        );
+
+        avatarInput.value = '';
+        return;
+      }
+
+
+      /* Create a unique file name */
+
+      const fileExtension =
+        file.name.split('.').pop();
+
+      const fileName =
+        'profile-' +
+        Date.now() +
+        '.' +
+fileExtension;
+
+      const filePath =
+        user.id +
+        '/' +
+        fileName;
+      
+            /* Upload image */
+
+      const uploadResult =
+        await litdomSupabase
+          .storage
+          .from('avatar')
+          .upload(
+            filePath,
+            file
+          );
+
+
+      if (uploadResult.error) {
+
+        console.error(
+          'Avatar upload error:',
+          uploadResult.error
+        );
+
+        alert(
+          'Could not upload your profile picture: ' +
+          uploadResult.error.message
+        );
+
+        avatarInput.value = '';
+        return;
+      }
+
+
+      /* Get public image URL */
+
 
