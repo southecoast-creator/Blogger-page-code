@@ -1027,6 +1027,79 @@ const publicUrlResult =
     );
 
   const {
+data: {
+      user: loggedInUser
+    }
+  } = await litdomSupabase.auth.getUser();
+
+
+  if (
+    ownerArea &&
+    loggedInUser &&
+    profile.id === loggedInUser.id
+  ) {
+
+    ownerArea.style.display =
+      'block';
+
+  } else if (ownerArea) {
+
+    ownerArea.style.display =
+      'none';
+
+  }
+
+
+  /* =========================
+     PROFILE INFORMATION
+  ========================= */
+
+  const displayName =
+    profile.display_name ||
+    profile.username ||
+    'Litdom User';
+
+  const username =
+    profile.username ||
+    'username';
+  
+  /* =========================
+   LOAD PROFILE AVATAR
+========================= */
+
+const avatarResult =
+  await litdomSupabase
+    .from('profiles')
+    .select('avatar_url')
+    .eq('id', profileId)
+    .maybeSingle();
+
+if (!avatarResult.error && avatarResult.data) {
+
+  const savedAvatarUrl =
+    avatarResult.data.avatar_url;
+
+  if (savedAvatarUrl && avatarImage) {
+
+    avatarImage.src =
+      savedAvatarUrl;
+
+    avatarImage.style.display =
+      'block';
+
+    if (avatarInitial) {
+      avatarInitial.style.display =
+        'none';
+    }
+
+  }
+
+}
+
+  const bio =
+    profile.bio ||
+    'No bio yet.';
+
   
 
 
