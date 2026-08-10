@@ -1,0 +1,59 @@
+<script>
+document.addEventListener('DOMContentLoaded', async function () {
+
+  /* =========================
+     GET PROFILE ID
+  ========================= */
+
+  const params =
+    new URLSearchParams(window.location.search);
+
+  const urlProfileId =
+    params.get('id');
+
+  const savedProfileId =
+    localStorage.getItem('litdomProfileId');
+
+  const profileId =
+    urlProfileId || savedProfileId;
+
+
+  if (!profileId) {
+    return;
+  }
+
+
+  /* =========================
+     CREATE / GET LIST AREAS
+========================= */
+
+  let followersList =
+    document.getElementById('followers-list');
+
+  let followingList =
+    document.getElementById('following-list');
+
+
+  if (!followersList) {
+
+    followersList =
+      document.createElement('div');
+
+    followersList.id =
+      'followers-list';
+
+    followersList.style.display =
+      'none';
+
+    const followArea =
+      document.getElementById(
+        'profile-follow-area'
+      );
+
+    if (followArea) {
+      followArea.appendChild(
+        followersList
+      );
+    }
+  }
+
