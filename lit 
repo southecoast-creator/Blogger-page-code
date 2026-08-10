@@ -1282,5 +1282,118 @@ if (profileBio) {
 
   /* =========================
      LOGGED-OUT VISITOR
+========================= */
+
+  if (!currentUser) {
+
+    followButton.textContent =
+      'Log in to follow';
+
+    followButton.addEventListener(
+      'click',
+      function () {
+
+        window.location.href =
+          'https://litdom.blogspot.com/p/sign-up-for-litdom.html';
+
+      }
+    );
+
+    return;
+  }
+
+
+  /* =========================
+     OWN PROFILE
+  ========================= */
+
+  if (currentUser.id === profileId) {
+
+    followButton.style.display =
+      'none';
+
+    if (followMessage) {
+      followMessage.textContent =
+        'This is your profile.';
+    }
+
+    return;
+  }
+
+/* =========================
+     CHECK EXISTING FOLLOW
+  ========================= */
+
+  let existingFollow = null;
+
+  const {
+    data: followData,
+    error: followCheckError
+  } = await litdomSupabase
+    .from('follows')
+    .select('id')
+    .eq('follower_id', currentUser.id)
+    .eq('following_id', profileId)
+    .maybeSingle();
+
+
+  if (followCheckError) {
+
+    console.error(
+      'Follow check error:',
+      followCheckError
+    );
+
+  } else {
+
+    existingFollow =
+      followData;
+  }
+
+
+  /* =========================
+     SET BUTTON
+  ========================= */
+
+  if (existingFollow) {
+
+followButton.textContent =
+      'Following';
+
+  } else {
+
+    followButton.textContent =
+      'Follow';
+  }
+
+
+  /* =========================
+     FOLLOW / UNFOLLOW
+  ========================= */
+
+  followButton.addEventListener(
+    'click',
+    async function () {
+
+      followButton.disabled =
+        true;
+
+
+      /* =========================
+         UNFOLLOW
+      ========================= */
+
+      if (existingFollow) {
+
+        const {
+          error
+        } = await litdomSupabase
+          .from('follows')
+          .delete()
+          .eq('id', existingFollow.id);
+
+
+        if (error) {
+
 
 
