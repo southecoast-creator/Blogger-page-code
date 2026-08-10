@@ -1394,6 +1394,121 @@ followButton.textContent =
 
 
         if (error) {
+followButton.textContent =
+      'Following';
+
+  } else {
+
+    followButton.textContent =
+      'Follow';
+  }
+
+
+  /* =========================
+     FOLLOW / UNFOLLOW
+  ========================= */
+
+  followButton.addEventListener(
+    'click',
+    async function () {
+
+      followButton.disabled =
+        true;
+
+
+      /* =========================
+         UNFOLLOW
+      ========================= */
+
+      if (existingFollow) {
+
+        const {
+          error
+        } = await litdomSupabase
+          .from('follows')
+          .delete()
+          .eq('id', existingFollow.id);
+
+
+        if (error) {
+}
+
+
+      }
+
+      /* =========================
+         FOLLOW
+      ========================= */
+
+      else {
+
+        const {
+          data: newFollow,
+          error
+        } = await litdomSupabase
+          .from('follows')
+          .insert({
+            follower_id:
+              currentUser.id,
+
+            following_id:
+              profileId
+          })
+          .select('id')
+          .single();
+
+
+        if (error) {
+
+          console.error(
+            'Follow error:',
+            error
+          );
+
+          if (followMessage) {
+
+followMessage.textContent =
+              error.message;
+          }
+
+          followButton.disabled =
+            false;
+
+          return;
+        }
+
+
+        existingFollow =
+          newFollow;
+
+
+        followButton.textContent =
+          'Following';
+
+
+        followerCount.textContent =
+          Number(
+            followerCount.textContent
+          ) + 1;
+
+
+        if (followMessage) {
+          followMessage.textContent =
+            'Following this user.';
+        }
+
+      }
+
+
+      followButton.disabled =
+        false;
+
+    }
+
+);
+
+});
+</script>
 
 
 
