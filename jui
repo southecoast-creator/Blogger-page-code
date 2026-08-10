@@ -344,3 +344,124 @@ const {
 </script>
 
 
+
+
+
+
+
+/* =========================
+   LOAD AUTHOR'S PUBLISHED WORKS
+========================= */
+
+const authorBooks =
+  document.getElementById('author-books');
+
+if (authorBooks) {
+
+  authorBooks.innerHTML = `
+    <p class="profile-loading">
+      Loading works...
+    </p>
+  `;
+
+  const {
+    data: books,
+    error: booksError
+  } = await litdomSupabase
+    .from('books')
+    .select(`
+      id,
+      title,
+      cover_url,
+      description,
+      genre,
+      created_at,
+      status
+    `)
+    .eq('author_id', profileId)
+    .eq('status', 'published')
+    .order('created_at', {
+      ascending: false
+    });
+
+  if (booksError) {
+
+    console.error(
+      'Author books loading error:',
+      booksError
+    );
+
+    authorBooks.innerHTML = `
+      <p class="profile-loading">
+        Unable to load works.
+      </p>
+    `;
+
+  } else if (!books || books.length === 0) {
+
+    authorBooks.innerHTML = `
+      <p class="profile-loading">
+        No published works yet.
+      </p>
+    `;
+
+  } else {
+
+    authorBooks.innerHTML = '';
+
+    books.forEach(function (book) {
+
+      const card =
+        document.createElement('article');
+
+      card.className =
+        'profile-book-card';
+
+      const cover =
+        book.cover_url
+          ? `
+            <img
+              src="${book.cover_url}"
+              alt="${book.title || 'Book cover'}"
+              class="profile-book-cover"
+            >
+          `
+          : `
+            <div class="profile-book-cover profile-book-cover-placeholder">
+              No Cover
+            </div>
+          `;
+
+      card.innerHTML = `
+        ${cover}
+
+        <div class="profile-book-info">
+
+          <h3>
+            ${book.title || 'Untitled Book'}
+          </h3>
+
+          ${
+            book.genre
+              ? `<p class="profile-book-genre">${book.genre}</p>`
+              : ''
+          }
+
+          ${
+            book.description
+              ? `<p class="profile-book-description">
+                  ${book.description}
+                </p>`
+              : ''
+          }
+
+        </div>
+      `;
+
+      authorBooks.appendChild(card);
+
+    });
+
+  }
+
+}
