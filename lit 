@@ -83,3 +83,64 @@
 
   </div>
 </div>
+
+
+
+
+
+
+
+
+<script>
+/* =========================
+   PROFILE AVATAR OWNERSHIP
+========================= */
+
+const avatarContainer =
+  document.getElementById('profile-avatar-container');
+
+const avatarInput =
+  document.getElementById('profile-avatar-input');
+
+const currentUserId =
+  session && session.user
+    ? session.user.id
+    : null;
+
+const isProfileOwner =
+  currentUserId &&
+  profileId &&
+  currentUserId === profileId;
+
+
+/* =========================
+   ONLY OWNER CAN EDIT AVATAR
+========================= */
+
+if (avatarContainer && avatarInput) {
+
+  if (isProfileOwner) {
+
+    avatarContainer.style.cursor = 'pointer';
+
+    avatarContainer.addEventListener(
+      'click',
+      function () {
+        avatarInput.click();
+      }
+    );
+
+  } else {
+
+    /* Other users can see the picture,
+       but cannot interact with it. */
+
+    avatarContainer.style.cursor = 'default';
+
+    avatarInput.style.display = 'none';
+
+    avatarContainer.onclick = null;
+
+  }
+}
+</script>
