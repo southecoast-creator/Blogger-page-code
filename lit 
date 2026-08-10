@@ -905,6 +905,62 @@ const publicUrlResult =
           updateResult.error.message
         );
 
-        avatarInput.value = '
+        avatarInput.value = '';
+        return;
+      }
+      
+      
+            /* Display picture immediately */
+
+      if (avatarImage) {
+
+        avatarImage.src =
+          avatarUrl;
+
+        avatarImage.style.display =
+          'block';
+      }
+
+      if (avatarInitial) {
+
+        avatarInitial.style.display =
+          'none';
+      }
+
+
+      avatarInput.value = '';
+
+      alert(
+        'Profile picture updated! 🎉'
+      );
+
+    }
+  );
+
+}
+      
+  /* =========================
+     NO PROFILE ID
+  ========================= */
+
+  if (!profileId) {
+
+    if (profileName) {
+      profileName.textContent = 'Profile not found';
+    }
+
+    if (profileUsername) {
+      profileUsername.textContent = '';
+    }
+
+    if (profileBio) {
+      profileBio.textContent =
+        'No profile was specified.';
+    }
+
+    return;
+  }
+  
+  
 
 
