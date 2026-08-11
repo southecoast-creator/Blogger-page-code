@@ -1,0 +1,247 @@
+/* =====================================================
+   APPLY FOR PUBLICATION
+===================================================== */
+
+async function applyForPublication(bookId) {
+
+  if (!bookId) {
+    return;
+  }
+
+  const currentUser =
+    await getCurrentUser();
+
+  if (!currentUser) {
+
+    alert('Please log in first.');
+
+    return;
+
+  }
+
+
+  const confirmed =
+    window.confirm(
+      'Submit this book for publication review?'
+    );
+
+  if (!confirmed) {
+    return;
+  }
+
+
+  try {
+
+    /*
+       GET THE AUTHOR'S BOOK
+    */
+
+    const {
+      data: book,
+      error: bookError
+    } =
+      await supabase
+        .from('books')
+        .select(`
+          id,
+          author_id,
+          title,
+          description,
+          genre,
+          cover_url,
+          status
+        `)
+        .eq(
+          'id',
+          bookId
+        )
+        .eq(
+          'author_id',
+          currentUser.id
+        )
+        .maybeSingle();
+
+
+    if (bookError) {
+      throw bookError;
+    }
+
+
+    if (!book) {
+
+      throw new Error(
+        'Book not found or you do not have permission to submit it.'
+      );
+
+    }
+
+
+    /*
+       DON'T SUBMIT ALREADY PUBLISHED BOOKS
+    */
+
+    if (
+      book.status === 'published'
+    ) {
+
+      alert(
+        'This book has already been published.'
+      );
+
+      return;
+
+    }
+
+
+    /*
+       CHECK FOR AN EXISTING ACTIVE SUBMISSION
+    */
+
+    const {
+      data: existingSubmission,
+      error: submissionCheckError
+    } =
+      await supabase
+        .from('book_submissions')
+        .select(`
+          id,
+          status
+        `)
+        .eq(
+          'author_id',
+          currentUser.id
+        )
+        .eq(
+          'title',
+          book.title
+        )
+        .in(
+          'status',
+          [
+            'pending',
+            'under_review'
+          ]
+        )
+        .maybeSingle();
+
+
+    if (submissionCheckError) {
+      throw submissionCheckError;
+    }
+
+
+    if (existingSubmission) {
+
+      alert(
+        'This book already has a submission waiting for review.'
+      );
+
+      return;
+
+    }
+
+
+    /*
+       CREATE PUBLICATION SUBMISSION
+    */
+
+    const {
+      error: insertError
+    } =
+      await supabase
+        .from('book_submissions')
+        .insert({
+
+          author_id:
+            currentUser.id,
+
+          title:
+            book.title,
+
+          description:
+            book.description,
+
+          genre:
+            book.genre,
+
+          cover_url:
+            book.cover_url,
+
+          status:
+            'pending'
+
+        });
+
+
+    if (insertError) {
+      throw insertError;
+    }
+
+
+    /*
+       SUCCESS
+    */
+
+    alert(
+      'Your book has been submitted for publication review. ❤️'
+    );
+
+
+    await loadBooks();
+
+
+  } catch (error) {
+
+    console.error(
+      'Publication submission error:',
+      error
+    );
+
+
+    alert(
+      error.message ||
+      'Unable to submit this book for publication.'
+    );
+
+  }
+
+}
+/* =====================================================
+   APPLY FOR PUBLICATION BUTTON
+===================================================== */
+
+booksContainer.addEventListener(
+  'click',
+  function (event) {
+
+    const button =
+      event.target.closest(
+        '.ld-apply-publication'
+      );
+
+
+    if (!button) {
+      return;
+    }
+
+
+    const bookId =
+      button.dataset.bookId;
+
+
+    applyForPublication(
+      bookId
+    );
+
+  }
+);
+
+
+
+
+
+
+
+
+
+
