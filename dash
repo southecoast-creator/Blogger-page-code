@@ -1,0 +1,565 @@
+<!-- ============================================
+     LITDOM WRITER DASHBOARD — styled + wired
+     Paste this entire block into your Dashboard page in Blogger (HTML view)
+     ============================================ -->
+
+<style>
+  #litdom-dashboard-wrap, #litdom-not-writer {
+    font-family: 'Inter', sans-serif;
+    background: #241220;
+    color: #F3E9DC;
+    padding: 24px 16px 60px;
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
+  #litdom-dashboard-wrap h1, #litdom-dashboard-wrap h2, #litdom-dashboard-wrap h3 {
+    font-family: 'Fraunces', serif;
+    color: #F3E9DC;
+    font-weight: 600;
+    margin: 0 0 4px;
+  }
+
+  .litdom-dash-title {
+    font-size: 28px;
+    letter-spacing: 0.3px;
+    margin-bottom: 2px;
+  }
+
+  .litdom-dash-sub {
+    color: #B79DAE;
+    font-size: 14px;
+    margin-bottom: 28px;
+    font-style: italic;
+  }
+
+  .litdom-section {
+    background: #3A1F35;
+    border: 1px solid rgba(201, 162, 75, 0.25);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 24px;
+  }
+
+  .litdom-section h2 {
+    font-size: 20px;
+    border-bottom: 1px solid rgba(201, 162, 75, 0.3);
+    padding-bottom: 10px;
+    margin-bottom: 16px;
+  }
+
+  .litdom-section h3 {
+    font-size: 16px;
+    color: #C9A24B;
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+
+  #litdom-dashboard-wrap input,
+  #litdom-dashboard-wrap textarea {
+    width: 100%;
+    box-sizing: border-box;
+    background: #241220;
+    border: 1px solid rgba(201, 162, 75, 0.35);
+    color: #F3E9DC;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    padding: 10px 12px;
+    border-radius: 6px;
+    margin-bottom: 10px;
+  }
+
+  #litdom-dashboard-wrap input::placeholder,
+  #litdom-dashboard-wrap textarea::placeholder {
+    color: #7A6373;
+  }
+
+  #litdom-dashboard-wrap input:focus,
+  #litdom-dashboard-wrap textarea:focus {
+    outline: none;
+    border-color: #C9A24B;
+  }
+
+  #litdom-dashboard-wrap textarea {
+    min-height: 90px;
+    resize: vertical;
+  }
+
+  .litdom-checkbox-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #B79DAE;
+    font-size: 14px;
+    margin-bottom: 12px;
+  }
+
+  .litdom-checkbox-row input {
+    width: auto;
+    margin: 0;
+  }
+
+  .litdom-btn {
+    display: inline-block;
+    background: #A61E3D;
+    color: #F3E9DC;
+    border: none;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 0.2px;
+    padding: 11px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.15s ease;
+  }
+
+  .litdom-btn:hover {
+    background: #D42952;
+  }
+
+  .litdom-btn:active {
+    background: #8A1832;
+  }
+
+  .litdom-btn-small {
+    padding: 6px 12px;
+    font-size: 12px;
+    background: transparent;
+    border: 1px solid #C9A24B;
+    color: #C9A24B;
+  }
+
+  .litdom-btn-small:hover {
+    background: rgba(201, 162, 75, 0.15);
+  }
+
+  .litdom-message {
+    font-size: 13px;
+    color: #C9A24B;
+    margin-top: 8px;
+    min-height: 16px;
+  }
+
+  .litdom-submission-item, .litdom-book-item {
+    border-bottom: 1px solid rgba(201, 162, 75, 0.15);
+    padding: 12px 0;
+  }
+
+  .litdom-submission-item:last-child, .litdom-book-item:last-child {
+    border-bottom: none;
+  }
+
+  .litdom-submission-item strong, .litdom-book-item strong {
+    font-family: 'Fraunces', serif;
+    font-size: 16px;
+  }
+
+  .litdom-submission-item p {
+    color: #B79DAE;
+    font-size: 13px;
+    margin: 6px 0 0;
+  }
+
+  .litdom-status {
+    display: inline-block;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    padding: 2px 8px;
+    border-radius: 20px;
+    border: 1px solid currentColor;
+    margin-left: 6px;
+  }
+
+  .status-pending { color: #C9A24B; }
+  .status-approved, .status-published { color: #6FB37A; }
+  .status-rejected { color: #D42952; }
+  .status-draft { color: #B79DAE; }
+
+  .litdom-chapter-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(201, 162, 75, 0.12);
+    font-size: 14px;
+  }
+
+  .litdom-chapter-item:last-child {
+    border-bottom: none;
+  }
+
+  .litdom-chapter-seal {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    padding: 3px 9px;
+    border-radius: 20px;
+    font-weight: 600;
+  }
+
+  .seal-locked {
+    background: rgba(166, 30, 61, 0.25);
+    color: #E6A0AF;
+  }
+
+  .seal-free {
+    background: rgba(111, 179, 122, 0.2);
+    color: #9FD3A6;
+  }
+
+  .litdom-manage-btn {
+    margin-left: 10px;
+  }
+
+  #litdom-not-writer {
+    text-align: center;
+    padding-top: 80px;
+    color: #B79DAE;
+    font-style: italic;
+  }
+</style>
+
+
+<!-- ============================================
+     STRUCTURE
+     ============================================ -->
+
+<div id="litdom-not-writer" style="display:none;"></div>
+
+<div id="litdom-dashboard-wrap" style="display:none;">
+  <div id="litdom-dashboard">
+
+    <div class="litdom-dash-title">Writer's Desk</div>
+    <div class="litdom-dash-sub">Your manuscripts, chapters, and submissions — all in one place.</div>
+
+    <!-- SUBMISSIONS -->
+    <div class="litdom-section">
+      <h2>My Submissions</h2>
+      <div id="submissions-list"></div>
+
+      <h3>Submit a New Book</h3>
+      <input id="submission-title" placeholder="Book title" />
+      <textarea id="submission-description" placeholder="Description / synopsis"></textarea>
+      <input id="submission-genres" placeholder="Genres (e.g. Fantasy, Romance)" />
+      <input id="submission-cover-url" placeholder="Cover image URL" />
+      <button id="new-submission-button" class="litdom-btn">Submit for Review</button>
+      <div id="submission-message" class="litdom-message"></div>
+    </div>
+
+    <!-- BOOKS -->
+    <div class="litdom-section">
+      <h2>My Books</h2>
+      <div id="books-list"></div>
+    </div>
+
+    <!-- CHAPTERS -->
+    <div id="chapters-area" class="litdom-section" style="display:none;"></div>
+
+    <div class="litdom-section">
+      <h3 style="margin-top:0;">Add a Chapter</h3>
+      <input id="chapter-number" type="number" placeholder="Chapter number" />
+      <input id="chapter-title" placeholder="Chapter title" />
+      <textarea id="chapter-content" placeholder="Write your chapter here..."></textarea>
+      <div class="litdom-checkbox-row">
+        <input id="chapter-is-locked" type="checkbox" />
+        <label for="chapter-is-locked">Locked chapter (costs rubies to unlock)</label>
+      </div>
+      <input id="chapter-unlock-cost" type="number" placeholder="Ruby cost (if locked)" />
+      <button id="new-chapter-button" class="litdom-btn">Save Chapter</button>
+      <div id="chapter-message" class="litdom-message"></div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ============================================
+     SCRIPT
+     ============================================ -->
+
+<script>
+document.addEventListener('DOMContentLoaded', async function () {
+
+  const dashboardWrap = document.getElementById('litdom-dashboard-wrap');
+  const notWriterMessage = document.getElementById('litdom-not-writer');
+
+  const submissionsList = document.getElementById('submissions-list');
+  const booksList = document.getElementById('books-list');
+  const chaptersArea = document.getElementById('chapters-area');
+
+  const newSubmissionButton = document.getElementById('new-submission-button');
+  const submissionMessage = document.getElementById('submission-message');
+
+  const newChapterButton = document.getElementById('new-chapter-button');
+  const chapterMessage = document.getElementById('chapter-message');
+
+  const userResult = await litdomSupabase.auth.getUser();
+
+  if (userResult.error || !userResult.data.user) {
+    window.location.href = 'https://litdom.blogspot.com/p/login.html';
+    return;
+  }
+
+  const user = userResult.data.user;
+
+  const profileResult = await litdomSupabase
+    .from('profiles')
+    .select('role, username, display_name')
+    .eq('id', user.id)
+    .maybeSingle();
+
+  if (profileResult.error || !profileResult.data) {
+    console.log('Could not load profile:', profileResult.error);
+    return;
+  }
+
+  const profile = profileResult.data;
+
+  if (profile.role !== 'writer' && profile.role !== 'editor') {
+    if (dashboardWrap) dashboardWrap.style.display = 'none';
+    if (notWriterMessage) {
+      notWriterMessage.style.display = 'block';
+      notWriterMessage.textContent = 'This dashboard is only available to writer accounts.';
+    }
+    return;
+  }
+
+  if (dashboardWrap) dashboardWrap.style.display = 'block';
+  if (notWriterMessage) notWriterMessage.style.display = 'none';
+
+
+  async function loadSubmissions() {
+
+    const result = await litdomSupabase
+      .from('book_submissions')
+      .select('id, title, description, genres, cover_url, status, created_at')
+      .eq('author_id', user.id)
+      .order('created_at', { ascending: false });
+
+    if (result.error) {
+      console.log('Error loading submissions:', result.error.message);
+      return;
+    }
+
+    if (!submissionsList) return;
+
+    submissionsList.innerHTML = '';
+
+    if (result.data.length === 0) {
+      submissionsList.innerHTML = '<p style="color:#B79DAE;font-size:14px;">You have no submissions yet.</p>';
+      return;
+    }
+
+    result.data.forEach(function (submission) {
+
+      const item = document.createElement('div');
+      item.className = 'litdom-submission-item';
+      item.innerHTML =
+        '<strong>' + submission.title + '</strong>' +
+        '<span class="litdom-status status-' + submission.status + '">' + submission.status + '</span>' +
+        '<p>' + submission.description + '</p>';
+
+      submissionsList.appendChild(item);
+
+    });
+
+  }
+
+
+  if (newSubmissionButton) {
+
+    newSubmissionButton.addEventListener('click', async function () {
+
+      const title = document.getElementById('submission-title').value.trim();
+      const description = document.getElementById('submission-description').value.trim();
+      const genres = document.getElementById('submission-genres').value.trim();
+      const coverUrl = document.getElementById('submission-cover-url').value.trim();
+
+      if (!title || !description) {
+        submissionMessage.textContent = 'Please fill in at least a title and description.';
+        return;
+      }
+
+      submissionMessage.textContent = 'Submitting...';
+
+      const insertResult = await litdomSupabase
+        .from('book_submissions')
+        .insert({
+          author_id: user.id,
+          title: title,
+          description: description,
+          genres: genres,
+          cover_url: coverUrl,
+          status: 'pending'
+        });
+
+      if (insertResult.error) {
+        submissionMessage.textContent = 'Error: ' + insertResult.error.message;
+        return;
+      }
+
+      submissionMessage.textContent = 'Submitted! Your editor will review it soon.';
+
+      document.getElementById('submission-title').value = '';
+      document.getElementById('submission-description').value = '';
+      document.getElementById('submission-genres').value = '';
+      document.getElementById('submission-cover-url').value = '';
+
+      loadSubmissions();
+
+    });
+
+  }
+
+
+  let currentSelectedBookId = null;
+
+  async function loadBooks() {
+
+    const result = await litdomSupabase
+      .from('books')
+      .select('id, title, cover_url, status, genre, created_at')
+      .eq('author_id', user.id)
+      .order('created_at', { ascending: false });
+
+    if (result.error) {
+      console.log('Error loading books:', result.error.message);
+      return;
+    }
+
+    if (!booksList) return;
+
+    booksList.innerHTML = '';
+
+    if (result.data.length === 0) {
+      booksList.innerHTML = '<p style="color:#B79DAE;font-size:14px;">No published books yet. Once your editor approves a submission, it will appear here.</p>';
+      return;
+    }
+
+    result.data.forEach(function (book) {
+
+      const item = document.createElement('div');
+      item.className = 'litdom-book-item';
+      item.innerHTML =
+        '<strong>' + book.title + '</strong>' +
+        '<span class="litdom-status status-' + book.status + '">' + book.status + '</span>' +
+        '<div style="margin-top:8px;">' +
+        '<button class="litdom-btn litdom-btn-small manage-chapters-btn" data-book-id="' + book.id + '">Manage Chapters</button>' +
+        '</div>';
+
+      booksList.appendChild(item);
+
+    });
+
+    const buttons = booksList.querySelectorAll('.manage-chapters-btn');
+    buttons.forEach(function (button) {
+      button.addEventListener('click', function () {
+        currentSelectedBookId = button.getAttribute('data-book-id');
+        loadChapters(currentSelectedBookId);
+      });
+    });
+
+  }
+
+
+  async function loadChapters(bookId) {
+
+    if (!chaptersArea) return;
+
+    const result = await litdomSupabase
+      .from('chapters')
+      .select('id, chapter_number, title, status, word_count, is_locked, unlock_cost')
+      .eq('book_id', bookId)
+      .order('chapter_number', { ascending: true });
+
+    if (result.error) {
+      console.log('Error loading chapters:', result.error.message);
+      return;
+    }
+
+    chaptersArea.style.display = 'block';
+    chaptersArea.innerHTML = '<h2>Chapters</h2>';
+
+    if (result.data.length === 0) {
+      chaptersArea.innerHTML += '<p style="color:#B79DAE;font-size:14px;">No chapters yet. Add your first one below.</p>';
+    } else {
+      result.data.forEach(function (chapter) {
+        const row = document.createElement('div');
+        row.className = 'litdom-chapter-item';
+        row.innerHTML =
+          '<span>Ch. ' + chapter.chapter_number + ': <strong>' + chapter.title + '</strong></span>' +
+          '<span class="litdom-chapter-seal ' + (chapter.is_locked ? 'seal-locked' : 'seal-free') + '">' +
+          (chapter.is_locked ? chapter.unlock_cost + ' rubies' : 'Free') +
+          '</span>';
+        chaptersArea.appendChild(row);
+      });
+    }
+
+  }
+
+
+  if (newChapterButton) {
+
+    newChapterButton.addEventListener('click', async function () {
+
+      if (!currentSelectedBookId) {
+        chapterMessage.textContent = 'Select a book first by tapping "Manage Chapters".';
+        return;
+      }
+
+      const chapterNumber = parseInt(document.getElementById('chapter-number').value.trim(), 10);
+      const chapterTitle = document.getElementById('chapter-title').value.trim();
+      const chapterContent = document.getElementById('chapter-content').value.trim();
+      const isLocked = document.getElementById('chapter-is-locked').checked;
+      const unlockCost = parseInt(document.getElementById('chapter-unlock-cost').value.trim() || '0', 10);
+
+      if (!chapterNumber || !chapterTitle || !chapterContent) {
+        chapterMessage.textContent = 'Please fill in chapter number, title, and content.';
+        return;
+      }
+
+      const wordCount = chapterContent.split(/\s+/).filter(Boolean).length;
+
+      chapterMessage.textContent = 'Saving chapter...';
+
+      const insertResult = await litdomSupabase
+        .from('chapters')
+        .insert({
+          book_id: currentSelectedBookId,
+          chapter_number: chapterNumber,
+          title: chapterTitle,
+          content: chapterContent,
+          status: 'draft',
+          word_count: wordCount,
+          is_locked: isLocked,
+          unlock_cost: isLocked ? unlockCost : 0
+        });
+
+      if (insertResult.error) {
+        chapterMessage.textContent = 'Error: ' + insertResult.error.message;
+        return;
+      }
+
+      chapterMessage.textContent = 'Chapter saved!';
+
+      document.getElementById('chapter-number').value = '';
+      document.getElementById('chapter-title').value = '';
+      document.getElementById('chapter-content').value = '';
+      document.getElementById('chapter-is-locked').checked = false;
+      document.getElementById('chapter-unlock-cost').value = '';
+
+      loadChapters(currentSelectedBookId);
+
+    });
+
+  }
+
+
+  loadSubmissions();
+  loadBooks();
+
+});
+</script>
