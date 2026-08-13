@@ -1554,3 +1554,126 @@ if (typeDetailsError) {
 
   return;
 }
+
+
+
+
+
+
+
+
+
+    /* =========================
+       UPLOAD BOOK COVER
+    ========================= */
+
+    let coverFile = null;
+
+    if (type === "fiction") {
+
+      coverFile =
+        document.getElementById(
+          "fiction-book-cover"
+        ).files[0] || null;
+
+    } else {
+
+      coverFile =
+        document.getElementById(
+          "book-cover"
+        ).files[0] || null;
+
+    }
+
+
+    if (!coverFile) {
+
+      message.textContent =
+        "Please upload a book cover.";
+
+      return;
+
+    }
+
+
+    message.textContent =
+      "Uploading your book cover...";
+
+
+    const extension =
+      coverFile.name
+        .split(".")
+        .pop()
+        .toLowerCase();
+
+
+    const coverPath =
+      bookId + "." + extension;
+
+
+    const {
+      error: uploadError
+    } = await supabaseClient
+      .storage
+      .from("book-covers")
+      .upload(
+        coverPath,
+        coverFile,
+        {
+          upsert: true,
+          contentType: coverFile.type
+        }
+      );
+
+
+    if (uploadError) {
+
+      console.error(uploadError);
+
+      message.textContent =
+        "The book was created, but the cover could not be uploaded: " +
+        uploadError.message;
+
+      return;
+
+    }
+
+
+    const {
+      data: publicUrlData
+    } = supabaseClient
+      .storage
+      .from("book-covers")
+      .getPublicUrl(
+        coverPath
+      );
+
+
+    const coverUrl =
+      publicUrlData.publicUrl;
+
+
+    const {
+      error: coverUpdateError
+    } = await supabaseClient
+      .from("books")
+      .update({
+        cover_url: coverUrl
+      })
+      .eq(
+        "id",
+        bookId
+      );
+
+
+    if (coverUpdateError) {
+
+      console.error(coverUpdateError);
+
+      message.textContent =
+        "The cover uploaded, but its URL could not be saved: " +
+        coverUpdateError.message;
+
+      return;
+
+    }
