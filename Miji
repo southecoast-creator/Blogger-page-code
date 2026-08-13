@@ -1444,3 +1444,113 @@ form.addEventListener(
 
   }
 );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+const typeDetails = {};
+
+if (type === "fiction") {
+
+  const subgenre =
+    document.getElementById(
+      "fiction-subgenre"
+    ).value;
+
+  const tagsText =
+    document.getElementById(
+      "fiction-tags"
+    ).value.trim();
+
+  const tags =
+    tagsText
+      ? tagsText
+          .split(",")
+          .map(function (tag) {
+            return tag.trim();
+          })
+          .filter(Boolean)
+      : [];
+
+  typeDetails.subgenre =
+    subgenre || null;
+
+  typeDetails.tags =
+    tags;
+
+} else {
+
+  const subgenre =
+    document.getElementById(
+      "nonfiction-subgenre"
+    ).value;
+
+  const tagsText =
+    document.getElementById(
+      "nonfiction-tags"
+    ).value.trim();
+
+  const tags =
+    tagsText
+      ? tagsText
+          .split(",")
+          .map(function (tag) {
+            return tag.trim();
+          })
+          .filter(Boolean)
+      : [];
+
+  const intendedAudience =
+    document.getElementById(
+      "intended-audience"
+    ).value || null;
+
+  const contentLevel =
+    document.getElementById(
+      "nonfiction-content-level"
+    ).value || null;
+
+  typeDetails.subgenre =
+    subgenre || null;
+
+  typeDetails.tags =
+    tags;
+
+  typeDetails.intended_audience =
+    intendedAudience;
+
+  typeDetails.content_level =
+    contentLevel;
+}
+
+
+const {
+  error: typeDetailsError
+} = await supabaseClient
+  .from("books")
+  .update({
+    type_details: typeDetails
+  })
+  .eq("id", bookId);
+
+
+if (typeDetailsError) {
+
+  console.error(typeDetailsError);
+
+  message.textContent =
+    "Book was created, but the type details could not be saved: " +
+    typeDetailsError.message;
+
+  return;
+}
