@@ -255,3 +255,106 @@
   <p id="create-book-message"></p>
 
 </form>
+
+
+
+
+
+
+
+function validateCover(file, messageElement, previewElement, inputElement) {
+
+  messageElement.textContent = "";
+  previewElement.style.display = "none";
+  previewElement.src = "";
+
+  if (!file) {
+    return;
+  }
+
+  if (file.size >= 5 * 1024 * 1024) {
+
+    messageElement.textContent =
+      "Cover must be under 5 MB.";
+
+    inputElement.value = "";
+
+    return;
+  }
+
+  const image =
+    new Image();
+
+  image.onload = function () {
+
+    if (
+      image.width !== 600 ||
+      image.height !== 800
+    ) {
+
+      messageElement.textContent =
+        "Cover must be exactly 600 × 800 px.";
+
+      inputElement.value = "";
+
+      return;
+    }
+
+    previewElement.src =
+      URL.createObjectURL(file);
+
+    previewElement.style.display =
+      "block";
+
+    messageElement.textContent =
+      "Cover accepted ✓";
+
+  };
+
+  image.onerror = function () {
+
+    messageElement.textContent =
+      "Please select a valid image.";
+
+    inputElement.value = "";
+
+  };
+
+  image.src =
+    URL.createObjectURL(file);
+
+}
+
+
+coverInput.addEventListener("change", function () {
+
+  validateCover(
+    coverInput.files[0],
+    coverMessage,
+    document.getElementById("cover-preview"),
+    coverInput
+  );
+
+});
+
+
+const fictionCoverInput =
+  document.getElementById("fiction-book-cover");
+
+const fictionCoverMessage =
+  document.getElementById("fiction-cover-message");
+
+const fictionCoverPreview =
+  document.getElementById("fiction-cover-preview");
+
+
+fictionCoverInput.addEventListener("change", function () {
+
+  validateCover(
+    fictionCoverInput.files[0],
+    fictionCoverMessage,
+    fictionCoverPreview,
+    fictionCoverInput
+  );
+
+});
