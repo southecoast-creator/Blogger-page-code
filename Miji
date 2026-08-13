@@ -358,3 +358,130 @@ fictionCoverInput.addEventListener("change", function () {
   );
 
 });
+
+
+
+
+
+
+genreSelect.onchange = function () {
+
+  const selectedGenre =
+    genreSelect.value;
+
+
+  /* =========================
+     FICTION
+  ========================= */
+
+  if (type === "fiction") {
+
+    const fictionSubgenreSelect =
+      document.getElementById("fiction-subgenre");
+
+    fictionSubgenreSelect.innerHTML =
+      '<option value="">Select a subgenre</option>';
+
+    const subgenres =
+      fictionSubgenres[selectedGenre] || [];
+
+    subgenres.forEach(function (subgenre) {
+
+      const option =
+        document.createElement("option");
+
+      option.value = subgenre;
+      option.textContent = subgenre;
+
+      fictionSubgenreSelect.appendChild(option);
+
+    });
+
+    return;
+
+  }
+
+
+  /* =========================
+     NON-FICTION
+  ========================= */
+
+  const tagContainer =
+    document.getElementById("nonfiction-tag-chips");
+
+  const nicheSelect =
+    document.getElementById("nonfiction-subgenre");
+
+  tagContainer.innerHTML = "";
+
+  nicheSelect.innerHTML =
+    '<option value="">Select a niche</option>';
+
+  const tags =
+    nonfictionTags[selectedGenre] || [];
+
+  tags.forEach(function (tag) {
+
+    const tagButton =
+      document.createElement("button");
+
+    tagButton.type = "button";
+    tagButton.className =
+      "nonfiction-tag";
+
+    tagButton.textContent =
+      tag;
+
+    tagButton.addEventListener(
+      "click",
+      function () {
+
+        tagButton.classList.toggle(
+          "selected"
+        );
+
+        const selectedTags = [];
+
+        document
+          .querySelectorAll(
+            ".nonfiction-tag.selected"
+          )
+          .forEach(function (selectedTag) {
+
+            selectedTags.push(
+              selectedTag.textContent
+            );
+
+          });
+
+        document.getElementById(
+          "nonfiction-tags"
+        ).value =
+          selectedTags.join(", ");
+
+      }
+    );
+
+    tagContainer.appendChild(
+      tagButton
+    );
+
+  });
+
+
+  const niches =
+    nonfictionNiches[selectedGenre] || [];
+
+  niches.forEach(function (niche) {
+
+    const option =
+      document.createElement("option");
+
+    option.value = niche;
+    option.textContent = niche;
+
+    nicheSelect.appendChild(option);
+
+  });
+
+};
