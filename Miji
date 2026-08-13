@@ -485,3 +485,75 @@ genreSelect.onchange = function () {
   });
 
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+fictionSubgenreSelect.onchange = function () {
+
+  fictionTagContainer.innerHTML = "";
+
+  const selectedSubgenre =
+    fictionSubgenreSelect.value;
+
+  const tags =
+    fictionTags[selectedSubgenre] || [];
+
+  tags.forEach(function (tag) {
+
+    const tagButton =
+      document.createElement("button");
+
+    tagButton.type = "button";
+    tagButton.className =
+      "fiction-tag";
+
+    tagButton.textContent =
+      tag;
+
+    tagButton.addEventListener(
+      "click",
+      function () {
+
+        tagButton.classList.toggle(
+          "selected"
+        );
+
+        const selectedTags = [];
+
+        document
+          .querySelectorAll(
+            ".fiction-tag.selected"
+          )
+          .forEach(function (selectedTag) {
+
+            selectedTags.push(
+              selectedTag.textContent
+            );
+
+          });
+
+        document.getElementById(
+          "fiction-tags"
+        ).value =
+          selectedTags.join(", ");
+
+      }
+    );
+
+    fictionTagContainer.appendChild(
+      tagButton
+    );
+
+  });
+
+};
