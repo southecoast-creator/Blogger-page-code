@@ -1106,3 +1106,341 @@ if (type === "fiction") {
     "Coming of Age"
   ],
 }
+
+
+
+
+
+
+
+
+
+
+
+form.addEventListener(
+  "submit",
+  async function (event) {
+
+    event.preventDefault();
+
+    const title =
+      document.getElementById("book-title").value.trim();
+
+    const description =
+      document.getElementById("book-description").value.trim();
+
+    const type =
+      document.getElementById("selected-book-type").value;
+
+    const genre =
+      document.getElementById("book-genre").value;
+
+    const message =
+      document.getElementById("create-book-message");
+
+    if (!title) {
+      message.textContent =
+        "Please enter a book title.";
+      return;
+    }
+
+    if (!type) {
+      message.textContent =
+        "Please select a book type.";
+      return;
+    }
+
+    if (!genre) {
+      message.textContent =
+        "Please select a genre.";
+      return;
+    }
+
+    /* =========================
+       GET TYPE-SPECIFIC VALUES
+    ========================= */
+
+    let typeDetails = {};
+    let coverFile = null;
+    let ageRating = null;
+
+    if (type === "fiction") {
+
+      const subgenre =
+        document.getElementById(
+          "fiction-subgenre"
+        ).value;
+
+      const tagsText =
+        document.getElementById(
+          "fiction-tags"
+        ).value.trim();
+
+      const tags =
+        tagsText
+          ? tagsText
+              .split(",")
+              .map(function (tag) {
+                return tag.trim();
+              })
+              .filter(Boolean)
+          : [];
+
+      ageRating =
+        document.getElementById(
+          "age-rating"
+        ).value || null;
+
+      typeDetails = {
+        subgenre: subgenre || null,
+        tags: tags
+      };
+
+      coverFile =
+        document.getElementById(
+          "fiction-book-cover"
+        ).files[0] || null;
+
+    } else {
+
+      const subgenre =
+        document.getElementById(
+          "nonfiction-subgenre"
+        ).value;
+
+      const tagsText =
+        document.getElementById(
+          "nonfiction-tags"
+        ).value.trim();
+
+      const tags =
+        tagsText
+          ? tagsText
+              .split(",")
+              .map(function (tag) {
+                return tag.trim();
+              })
+              .filter(Boolean)
+          : [];
+
+      const intendedAudience =
+        document.getElementById(
+          "intended-audience"
+        ).value || null;
+
+      const contentLevel =
+        document.getElementById(
+          "nonfiction-content-level"
+        ).value || null;
+
+      typeDetails = {
+        subgenre: subgenre || null,
+        tags: tags,
+        intended_audience:
+          intendedAudience,
+        content_level:
+          contentLevel
+      };
+
+      coverFile =
+        document.getElementById(
+          "book-cover"
+        ).files[0] || null;
+    }
+
+
+    /* =========================
+       COVER REQUIRED
+    ========================= */
+
+    if (!coverFile) {
+
+      message.textContent =
+        "Please upload a book cover.";
+
+      return;
+    }
+
+
+    /* =========================
+       COVER SIZE CHECK
+    ========================= */
+
+    if (
+      coverFile.size >=
+      5 * 1024 * 1024
+    ) {
+
+      message.textContent =
+        "Cover must be under 5 MB.";
+
+      return;
+    }
+
+
+    message.textContent =
+      "Creating your book...";
+
+
+    /* =========================
+       CREATE DRAFT
+    ========================= */
+
+    const {
+      data: bookId,
+      error: createError
+    } = await supabaseClient.rpc(
+      "create_author_book",
+      {
+        p_title: title,
+        p_book_type: type
+      }
+    );
+
+
+    if (createError) {
+
+      console.error(createError);
+
+      message.textContent =
+        createError.message;
+
+      return;
+    }
+
+
+    if (!bookId) {
+
+      message.textContent =
+        "Book was created but no book ID was returned.";
+
+      return;
+    }
+
+
+    /* =========================
+       UPLOAD COVER
+    ========================= */
+
+    message.textContent =
+      "Uploading your book cover...";
+
+
+    const extension =
+      coverFile.name
+        .split(".")
+        .pop()
+        .toLowerCase();
+
+    const coverPath =
+      bookId + "." + extension;
+
+
+    const {
+      error: uploadError
+    } = await supabaseClient
+      .storage
+      .from("book-covers")
+      .upload(
+        coverPath,
+        coverFile,
+        {
+          upsert: true,
+          contentType: coverFile.type
+        }
+      );
+
+
+    if (uploadError) {
+
+      console.error(uploadError);
+
+      message.textContent =
+        "Book created, but the cover could not be uploaded: " +
+        uploadError.message;
+
+      return;
+    }
+
+
+    /* =========================
+       GET PUBLIC COVER URL
+    ========================= */
+
+    const {
+      data: publicUrlData
+    } = supabaseClient
+      .storage
+      .from("book-covers")
+      .getPublicUrl(
+        coverPath
+      );
+
+
+    const coverUrl =
+      publicUrlData.publicUrl;
+
+
+    /* =========================
+       UPDATE BOOK
+    ========================= */
+
+    message.textContent =
+      "Saving your book details...";
+
+
+    const {
+      error: updateError
+    } = await supabaseClient
+      .from("books")
+      .update({
+        description:
+          description || null,
+
+        genre:
+          genre,
+
+        age_rating:
+          ageRating,
+
+        cover_url:
+          coverUrl,
+
+        type_details:
+          typeDetails,
+
+        updated_at:
+          new Date().toISOString()
+      })
+      .eq(
+        "id",
+        bookId
+      );
+
+
+    if (updateError) {
+
+      console.error(updateError);
+
+      message.textContent =
+        "Book was created, but its details could not be saved: " +
+        updateError.message;
+
+      return;
+    }
+
+
+    /* =========================
+       SUCCESS
+    ========================= */
+
+    message.textContent =
+      "Book created successfully.";
+
+    modal.style.display =
+      "none";
+
+    await loadBooks();
+
+  }
+);
