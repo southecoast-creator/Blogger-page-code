@@ -1101,3 +1101,124 @@ saveChapterDraft.addEventListener(
 
   }
 );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+chaptersList.innerHTML =
+  "";
+
+chapters.forEach(
+  function (chapter) {
+
+    const chapterCard =
+      document.createElement(
+        "div"
+      );
+
+    chapterCard.className =
+      "chapter-card";
+
+
+    /* =========================
+       CLICK TO EDIT DRAFT
+    ========================= */
+
+    if (
+      chapter.status === "draft" ||
+      chapter.status === "changes_requested"
+    ) {
+
+      chapterCard.style.cursor =
+        "pointer";
+
+      chapterCard.addEventListener(
+        "click",
+        function () {
+
+          openEditChapter(
+            chapter
+          );
+
+        }
+      );
+
+    }
+
+
+    /* =========================
+       CHAPTER TITLE
+    ========================= */
+
+    const chapterTitle =
+      document.createElement(
+        "h3"
+      );
+
+    chapterTitle.textContent =
+      "Chapter " +
+      (
+        chapter.chapter_number ||
+        "\u2014"
+      ) +
+      (
+        chapter.title
+          ? " \u2014 " +
+            chapter.title
+          : ""
+      );
+
+
+    /* =========================
+       CHAPTER META
+    ========================= */
+
+    const chapterMeta =
+      document.createElement(
+        "div"
+      );
+
+    chapterMeta.className =
+      "chapter-meta";
+
+    chapterMeta.textContent =
+      (
+        Number(
+          chapter.word_count
+        ) || 0
+      ).toLocaleString() +
+      " words \u2022 " +
+      (
+        chapter.status ||
+        "draft"
+      );
+
+
+    /* =========================
+       BUILD CARD
+    ========================= */
+
+    chapterCard.appendChild(
+      chapterTitle
+    );
+
+    chapterCard.appendChild(
+      chapterMeta
+    );
+
+    chaptersList.appendChild(
+      chapterCard
+    );
+
+  }
+);
