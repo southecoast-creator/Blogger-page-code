@@ -582,3 +582,53 @@ books.forEach(function (book) {
   booksList.appendChild(card);
 
 });
+
+
+
+
+
+
+
+async function openEditBook(book) {
+
+  modalLabel.textContent =
+    "EDIT BOOK";
+
+  typeHeading.textContent =
+    book.book_type === "fiction"
+      ? "Edit Fiction Book"
+      : "Edit Non-fiction Book";
+
+  saveBookButton.textContent =
+    "Save Changes";
+
+
+  /* =========================
+     BASIC BOOK INFORMATION
+  ========================= */
+
+  titleInput.value =
+    book.title || "";
+
+  document
+    .getElementById("book-description")
+    .value =
+      book.description || "";
+
+  document
+    .getElementById("book-genre")
+    .value =
+      book.genre || "";
+
+  selectedType.value =
+    book.book_type || "";
+
+
+  /* =========================
+     OPEN THE MODAL
+  ========================= */
+
+  modal.style.display =
+    "flex";
+
+}
