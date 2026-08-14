@@ -1312,3 +1312,63 @@ deleteChapterRequest.addEventListener(
 
   }
 );
+
+
+
+
+
+
+
+
+
+actions.appendChild(editButton);
+
+actions.appendChild(
+  manageChaptersButton
+);
+
+
+/* =========================
+   APPLY FOR PUBLICATION
+========================= */
+
+const applyPublicationButton =
+  document.createElement("button");
+
+applyPublicationButton.type =
+  "button";
+
+applyPublicationButton.className =
+  "book-action-button";
+
+applyPublicationButton.textContent =
+  "Apply for Publication";
+
+applyPublicationButton.style.display =
+  "none";
+
+applyPublicationButton.dataset.bookId =
+  book.id;
+
+
+/*
+   The button will be enabled
+   by the eligibility check below.
+*/
+
+actions.appendChild(
+  applyPublicationButton
+);
+
+card.appendChild(actions);
+
+
+/* =========================
+   CHECK PUBLICATION
+   ELIGIBILITY
+========================= */
+
+checkPublicationEligibility(
+  book,
+  applyPublicationButton
+);
