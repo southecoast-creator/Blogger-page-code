@@ -419,3 +419,166 @@ form.addEventListener(
 
   }
 );
+
+
+
+
+
+
+
+
+
+
+
+books.forEach(function (book) {
+
+  const card =
+    document.createElement("div");
+
+  card.className =
+    "book-card";
+
+
+  /* =========================
+     BOOK HEADER
+  ========================= */
+
+  const bookHeader =
+    document.createElement("div");
+
+  bookHeader.className =
+    "book-card-header";
+
+
+  /* =========================
+     COVER
+  ========================= */
+
+  const cover =
+    document.createElement("img");
+
+  cover.className =
+    "book-card-cover";
+
+  cover.alt =
+    book.title + " cover";
+
+  if (book.cover_url) {
+
+    cover.src =
+      book.cover_url;
+
+  } else {
+
+    cover.style.display =
+      "none";
+
+  }
+
+
+  /* =========================
+     BOOK INFORMATION
+  ========================= */
+
+  const info =
+    document.createElement("div");
+
+  info.className =
+    "book-card-info";
+
+
+  const title =
+    document.createElement("h3");
+
+  title.textContent =
+    book.title;
+
+
+  const meta =
+    document.createElement("div");
+
+  meta.className =
+    "book-meta";
+
+  meta.textContent =
+    book.book_type === "non-fiction"
+      ? "Non-fiction"
+      : "Fiction";
+
+
+  /* =========================
+     TAGS
+  ========================= */
+
+  const tagsContainer =
+    document.createElement("div");
+
+  tagsContainer.className =
+    "book-card-tags";
+
+
+  const tags =
+    book.type_details &&
+    Array.isArray(book.type_details.tags)
+      ? book.type_details.tags
+      : [];
+
+
+  tags.slice(0, 3).forEach(function (tag) {
+
+    const tagElement =
+      document.createElement("span");
+
+    tagElement.className =
+      "book-tag";
+
+    tagElement.textContent =
+      tag;
+
+    tagsContainer.appendChild(
+      tagElement
+    );
+
+  });
+
+
+  /* =========================
+     STATUS
+  ========================= */
+
+  const status =
+    document.createElement("span");
+
+  status.className =
+    "book-status";
+
+  status.textContent =
+    (
+      book.submission_status ||
+      book.status ||
+      "draft"
+    ).toUpperCase();
+
+
+  info.appendChild(title);
+  info.appendChild(meta);
+  info.appendChild(tagsContainer);
+  info.appendChild(status);
+
+
+  bookHeader.appendChild(cover);
+  bookHeader.appendChild(info);
+
+
+  card.appendChild(bookHeader);
+
+
+  /* =========================
+     BUTTONS
+     WE WILL ADD THESE NEXT
+  ========================= */
+
+
+  booksList.appendChild(card);
+
+});
