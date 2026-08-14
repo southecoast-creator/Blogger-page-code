@@ -367,3 +367,108 @@ async function loadChapters(bookId) {
   );
 
 }
+
+
+
+
+
+
+
+
+<!-- CHAPTER EDITOR MODAL -->
+
+<div
+  id="chapter-editor-modal"
+  class="book-modal"
+  style="display:none;"
+>
+
+  <div class="book-modal-box chapter-editor-box">
+
+    <button
+      id="close-chapter-editor"
+      class="close-modal"
+      type="button"
+    >
+      ×
+    </button>
+
+    <p class="dashboard-label">
+      CHAPTER EDITOR
+    </p>
+
+    <h2 id="chapter-editor-book-title">
+      Chapter
+    </h2>
+
+
+    <div class="chapter-editor-number">
+
+      <label for="chapter-number">
+        Chapter Number
+      </label>
+
+      <input
+        id="chapter-number"
+        type="number"
+        min="1"
+        placeholder="e.g. 1"
+      >
+
+    </div>
+
+
+    <div class="chapter-editor-title">
+
+      <label for="chapter-title">
+        Chapter Title
+      </label>
+
+      <input
+        id="chapter-title"
+        type="text"
+        placeholder="Enter chapter title"
+      >
+
+    </div>
+
+
+    <div class="chapter-editor-content">
+
+      <label for="chapter-content">
+        Chapter Content
+      </label>
+
+      <textarea
+        id="chapter-content"
+        placeholder="Start writing your chapter..."
+      ></textarea>
+
+    </div>
+
+
+    <div class="chapter-editor-footer">
+
+      <span>
+        Words:
+        <strong id="chapter-editor-word-count">
+          0
+        </strong>
+      </span>
+
+      <button
+        id="save-chapter-draft"
+        type="button"
+        class="book-action-button"
+      >
+        Save Draft
+      </button>
+
+    </div>
+
+
+    <p id="chapter-editor-message"></p>
+
+  </div>
+
+</div>
