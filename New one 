@@ -123,3 +123,89 @@ async function openEditBook(book) {
     "flex";
 
 }
+
+
+
+
+
+
+
+
+
+
+
+<!-- MANAGE CHAPTERS MODAL -->
+
+<div
+  id="manage-chapters-modal"
+  class="book-modal"
+  style="display:none;"
+>
+
+  <div class="book-modal-box manage-chapters-box">
+
+    <button
+      id="close-manage-chapters"
+      class="close-modal"
+      type="button"
+    >
+      ×
+    </button>
+
+    <p class="dashboard-label">
+      MANAGE CHAPTERS
+    </p>
+
+    <h2 id="manage-chapters-book-title">
+      Book Chapters
+    </h2>
+
+    <div class="chapter-summary">
+
+      <div class="chapter-summary-item">
+
+        <strong id="chapter-count">
+          0
+        </strong>
+
+        <span>
+          Chapters
+        </span>
+
+      </div>
+
+      <div class="chapter-summary-item">
+
+        <strong id="chapter-word-count">
+          0
+        </strong>
+
+        <span>
+          Words
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <button
+      id="create-chapter-button"
+      type="button"
+      class="book-action-button"
+    >
+      + New Chapter
+    </button>
+
+
+    <div id="chapters-list">
+
+      <p class="empty-chapters">
+        No chapters yet.
+      </p>
+
+    </div>
+
+  </div>
+
+</div>
