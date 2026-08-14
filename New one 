@@ -909,3 +909,195 @@ let editingChapterId =
   }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+saveChapterDraft.addEventListener(
+  "click",
+  async function () {
+
+    chapterEditorMessage.textContent =
+      "Saving draft...";
+
+    const chapterNumber =
+      Number(
+        chapterNumberInput.value
+      );
+
+    const chapterTitle =
+      chapterTitleInput.value.trim();
+
+    const chapterContent =
+      chapterContentInput.innerHTML.trim();
+
+    const plainText =
+      chapterContentInput.innerText.trim();
+
+    const wordCount =
+      plainText
+        ? plainText
+            .split(/\s+/)
+            .filter(Boolean)
+            .length
+        : 0;
+
+
+    if (!managingBookId) {
+
+      chapterEditorMessage.textContent =
+        "The book could not be identified.";
+
+      return;
+
+    }
+
+
+    if (
+      !chapterNumber ||
+      chapterNumber < 1
+    ) {
+
+      chapterEditorMessage.textContent =
+        "Please enter a valid chapter number.";
+
+      return;
+
+    }
+
+
+    if (!plainText) {
+
+      chapterEditorMessage.textContent =
+        "Please write some chapter content.";
+
+      return;
+
+    }
+
+
+    saveChapterDraft.disabled =
+      true;
+
+
+    let error = null;
+
+
+    /* =========================
+       UPDATE EXISTING DRAFT
+    ========================= */
+
+    if (editingChapterId) {
+
+      const result =
+        await supabaseClient
+          .from("chapters")
+          .update({
+
+            chapter_number:
+              chapterNumber,
+
+            title:
+              chapterTitle || null,
+
+            content:
+              chapterContent,
+
+            word_count:
+              wordCount,
+
+            updated_at:
+              new Date().toISOString()
+
+          })
+          .eq(
+            "id",
+            editingChapterId
+          );
+
+      error =
+        result.error;
+
+    }
+
+
+    /* =========================
+       CREATE NEW DRAFT
+    ========================= */
+
+    else {
+
+      const result =
+        await supabaseClient
+          .from("chapters")
+          .insert({
+
+            book_id:
+              managingBookId,
+
+            chapter_number:
+              chapterNumber,
+
+            title:
+              chapterTitle || null,
+
+            content:
+              chapterContent,
+
+            status:
+              "draft",
+
+            word_count:
+              wordCount
+
+          });
+
+      error =
+        result.error;
+
+    }
+
+
+    saveChapterDraft.disabled =
+      false;
+
+
+    if (error) {
+
+      console.error(
+        "CHAPTER SAVE ERROR:",
+        error
+      );
+
+      chapterEditorMessage.textContent =
+        "Unable to save chapter: " +
+        error.message;
+
+      return;
+
+    }
+
+
+    chapterEditorMessage.textContent =
+      "Draft saved successfully.";
+
+    await loadChapters(
+      managingBookId
+    );
+
+  }
+);
