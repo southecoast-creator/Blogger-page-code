@@ -1,0 +1,125 @@
+async function openEditBook(book) {
+
+  modalLabel.textContent =
+    "EDIT BOOK";
+
+  typeHeading.textContent =
+    book.book_type === "fiction"
+      ? "Edit Fiction Book"
+      : "Edit Non-fiction Book";
+
+  saveBookButton.textContent =
+    "Save Changes";
+
+
+  selectedType.value =
+    book.book_type || "";
+
+
+  openCreateBook(
+    book.book_type === "fiction"
+      ? "fiction"
+      : "non-fiction"
+  );
+
+
+  /* IMPORTANT:
+     openCreateBook() resets editingBookId.
+     Restore the ID AFTER calling it.
+  */
+
+  editingBookId =
+    book.id;
+
+
+  /* =========================
+     BASIC INFORMATION
+  ========================= */
+
+  titleInput.value =
+    book.title || "";
+
+  document
+    .getElementById("book-description")
+    .value =
+      book.description || "";
+
+
+  /* =========================
+     GENRE
+  ========================= */
+
+  const genreSelect =
+    document.getElementById("book-genre");
+
+  genreSelect.value =
+    book.genre || "";
+
+
+  /* =========================
+     FICTION DETAILS
+  ========================= */
+
+  if (book.book_type === "fiction") {
+
+    document
+      .getElementById("age-rating")
+      .value =
+        book.age_rating || "";
+
+    const details =
+      book.type_details || {};
+
+    document
+      .getElementById("fiction-subgenre")
+      .value =
+        details.subgenre || "";
+
+    document
+      .getElementById("fiction-tags")
+      .value =
+        Array.isArray(details.tags)
+          ? details.tags.join(", ")
+          : "";
+
+  }
+
+
+  /* =========================
+     NON-FICTION DETAILS
+  ========================= */
+
+  if (book.book_type === "non-fiction") {
+
+    const details =
+      book.type_details || {};
+
+    document
+      .getElementById("nonfiction-subgenre")
+      .value =
+        details.subgenre || "";
+
+    document
+      .getElementById("nonfiction-tags")
+      .value =
+        Array.isArray(details.tags)
+          ? details.tags.join(", ")
+          : "";
+
+    document
+      .getElementById("intended-audience")
+      .value =
+        details.intended_audience || "";
+
+    document
+      .getElementById("nonfiction-content-level")
+      .value =
+        details.content_level || "";
+
+  }
+
+
+  modal.style.display =
+    "flex";
+
+}
