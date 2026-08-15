@@ -613,4 +613,258 @@ async function checkPublicationEligibility(
   </div>
 
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function openPublicationApplication(
+  book,
+  totalWords
+) {
+
+  const publicationModal =
+    document.getElementById(
+      "publication-application-modal"
+    );
+
+  const publicationBookName =
+    document.getElementById(
+      "publication-book-name"
+    );
+
+  const publicationBookType =
+    document.getElementById(
+      "publication-book-type"
+    );
+
+  const publicationWordCount =
+    document.getElementById(
+      "publication-word-count"
+    );
+
+  const publicationSubgenre =
+    document.getElementById(
+      "publication-subgenre"
+    );
+
+  const publicationTags =
+    document.getElementById(
+      "publication-tags"
+    );
+
+  const publicationDescription =
+    document.getElementById(
+      "publication-description"
+    );
+
+  const publicationOutline =
+    document.getElementById(
+      "publication-outline"
+    );
+
+
+  /*
+     =========================
+     BOOK INFORMATION
+     =========================
+  */
+
+  publicationBookName.textContent =
+    book.title || "Untitled Book";
+
+  publicationBookType.textContent =
+    book.book_type === "non-fiction"
+      ? "Non-fiction"
+      : "Fiction";
+
+  publicationWordCount.textContent =
+    Number(
+      totalWords
+    ).toLocaleString() +
+    " words";
+
+
+  /*
+     =========================
+     PRE-FILL BOOK DETAILS
+     =========================
+  */
+
+  publicationDescription.value =
+    book.description || "";
+
+  publicationSubgenre.value =
+    book.subgenre || "";
+
+  const tags =
+    book.type_details &&
+    Array.isArray(
+      book.type_details.tags
+    )
+      ? book.type_details.tags
+      : [];
+
+  publicationTags.value =
+    tags.join(", ");
+
+
+  /*
+     =========================
+     AUTHOR INFORMATION
+     =========================
+  */
+
+  const publicationFullName =
+    document.getElementById(
+      "publication-full-name"
+    );
+
+  const publicationPenName =
+    document.getElementById(
+      "publication-pen-name"
+    );
+
+  const publicationEmail =
+    document.getElementById(
+      "publication-email"
+    );
+
+  const publicationPhone =
+    document.getElementById(
+      "publication-phone"
+    );
+
+  const publicationBio =
+    document.getElementById(
+      "publication-bio"
+    );
+
+
+  /*
+     We know these from the
+     current authenticated user
+     and profile information.
+  */
+
+  if (
+    typeof session !== "undefined" &&
+    session &&
+    session.user
+  ) {
+
+    publicationEmail.value =
+      session.user.email || "";
+
+  }
+
+
+  /*
+     display_name is currently
+     the closest existing profile
+     field to the author's pen name.
+  */
+
+  if (
+    book.author_id
+  ) {
+
+    loadPublicationAuthorDetails(
+      book.author_id
+    );
+
+  }
+
+
+  /*
+     =========================
+     PAYMENT FIELDS
+     =========================
+     
+     These remain blank because
+     your profiles table does not
+     contain payment information.
+  */
+
+  document.getElementById(
+    "publication-phone"
+  ).value = "";
+
+  document.getElementById(
+    "publication-bank-name"
+  ).value = "";
+
+  document.getElementById(
+    "publication-account-name"
+  ).value = "";
+
+  document.getElementById(
+    "publication-account-number"
+  ).value = "";
+
+
+  /*
+     =========================
+     FICTION / NON-FICTION
+     =========================
+  */
+
+  updatePublicationFormByBookType(
+    book
+  );
+
+
+  /*
+     =========================
+     RESET APPLICATION MESSAGE
+     =========================
+  */
+
+  document.getElementById(
+    "publication-application-message"
+  ).textContent = "";
+
+
+  /*
+     =========================
+     RESET AGREEMENTS
+     =========================
+  */
+
+  document.getElementById(
+    "original-work-confirmation"
+  ).checked = false;
+
+  document.getElementById(
+    "publishing-terms-confirmation"
+  ).checked = false;
+
+  document.getElementById(
+    "review-period-confirmation"
+  ).checked = false;
+
+
+  /*
+     =========================
+     SHOW MODAL
+     =========================
+  */
+
+  publicationModal.style.display =
+    "flex";
+
 }
