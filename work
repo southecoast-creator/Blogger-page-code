@@ -409,3 +409,90 @@ if (!publicationChapterError) {
 
 }
 
+
+
+
+
+
+
+
+
+
+
+
+async function checkPublicationEligibility(
+  book,
+  applyButton
+) {
+
+  if (
+    book.status === "published"
+  ) {
+
+    applyButton.style.display =
+      "none";
+
+    return;
+
+  }
+
+
+  const {
+    data: chapters,
+    error
+  } = await supabaseClient
+    .from("chapters")
+    .select("word_count")
+    .eq(
+      "book_id",
+      book.id
+    );
+
+
+  if (error) {
+
+    console.error(
+      "PUBLICATION WORD COUNT ERROR:",
+      error
+    );
+
+    applyButton.style.display =
+      "none";
+
+    return;
+
+  }
+
+
+  const totalWords =
+    (chapters || []).reduce(
+      function (total, chapter) {
+
+        return total +
+          (
+            Number(
+              chapter.word_count
+            ) || 0
+          );
+
+      },
+      0
+    );
+
+
+  if (
+    totalWords >= 5000
+  ) {
+
+    applyButton.style.display =
+      "inline-flex";
+
+  } else {
+
+    applyButton.style.display =
+      "none";
+
+  }
+
+}
+
