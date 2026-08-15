@@ -190,4 +190,427 @@ async function checkPublicationEligibility(
     }
   );
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- PUBLICATION APPLICATION MODAL -->
+
+<div
+  id="publication-application-modal"
+  class="publication-modal"
+  style="display:none;"
+>
+
+  <div class="publication-modal-box">
+
+    <button
+      id="close-publication-application"
+      type="button"
+      class="publication-close"
+    >
+      ×
+    </button>
+
+    <p class="publication-label">
+      PUBLICATION APPLICATION
+    </p>
+
+    <h2>
+      Apply for Publication
+    </h2>
+
+    <p
+      id="publication-book-name"
+      class="publication-book-name"
+    ></p>
+
+
+    <!-- BOOK SUMMARY -->
+
+    <div class="publication-summary">
+
+      <div>
+        <span>Book Type</span>
+
+        <strong id="publication-book-type">
+          —
+        </strong>
+      </div>
+
+      <div>
+        <span>Word Count</span>
+
+        <strong id="publication-word-count">
+          —
+        </strong>
+      </div>
+
+    </div>
+
+
+    <form
+      id="publication-application-form"
+    >
+
+
+      <!-- =========================
+           AUTHOR INFORMATION
+      ========================== -->
+
+      <h3>
+        Author Information
+      </h3>
+
+      <p class="publication-section-note">
+        Please review your information carefully.
+        These details will be included with your
+        publication application.
+      </p>
+
+
+      <label for="publication-full-name">
+        Full Name
+      </label>
+
+      <input
+        id="publication-full-name"
+        type="text"
+        placeholder="Your full legal name"
+        required
+      >
+
+
+      <label for="publication-pen-name">
+        Pen Name
+      </label>
+
+      <input
+        id="publication-pen-name"
+        type="text"
+        placeholder="Your author/pen name"
+        required
+      >
+
+
+      <label for="publication-email">
+        Email Address
+      </label>
+
+      <input
+        id="publication-email"
+        type="email"
+        placeholder="Your email address"
+        required
+      >
+
+
+      <label for="publication-phone">
+        Phone Number
+      </label>
+
+      <input
+        id="publication-phone"
+        type="tel"
+        placeholder="Your phone number"
+        required
+      >
+
+
+      <label for="publication-bio">
+        Author Bio
+      </label>
+
+      <textarea
+        id="publication-bio"
+        rows="5"
+        placeholder="Tell us about yourself as an author..."
+        required
+      ></textarea>
+
+
+      <!-- =========================
+           PAYMENT INFORMATION
+      ========================== -->
+
+      <h3>
+        Payment Information
+      </h3>
+
+      <p class="publication-section-note">
+        These details are used for author payments.
+      </p>
+
+
+      <label for="publication-bank-name">
+        Bank Name
+      </label>
+
+      <input
+        id="publication-bank-name"
+        type="text"
+        placeholder="Bank name"
+        required
+      >
+
+
+      <label for="publication-account-name">
+        Account Name
+      </label>
+
+      <input
+        id="publication-account-name"
+        type="text"
+        placeholder="Name on the bank account"
+        required
+      >
+
+
+      <label for="publication-account-number">
+        Account Number
+      </label>
+
+      <input
+        id="publication-account-number"
+        type="text"
+        inputmode="numeric"
+        placeholder="Bank account number"
+        required
+      >
+
+
+      <!-- =========================
+           BOOK INFORMATION
+      ========================== -->
+
+      <h3>
+        Book Information
+      </h3>
+
+
+      <label for="publication-subgenre">
+        Subgenre
+      </label>
+
+      <input
+        id="publication-subgenre"
+        type="text"
+        placeholder="Enter the book's subgenre"
+        required
+      >
+
+
+      <label for="publication-tags">
+        Tags
+      </label>
+
+      <input
+        id="publication-tags"
+        type="text"
+        placeholder="e.g. Slow Burn, Mystery, Enemies to Lovers"
+      >
+
+      <small>
+        Separate multiple tags with commas.
+      </small>
+
+
+      <label for="publication-description">
+        Book Blurb
+      </label>
+
+      <textarea
+        id="publication-description"
+        rows="5"
+        placeholder="Tell readers what this book is about..."
+        required
+      ></textarea>
+
+
+      <label for="publication-outline">
+        Book Outline
+      </label>
+
+      <textarea
+        id="publication-outline"
+        rows="8"
+        placeholder="Provide the outline of your book..."
+        required
+      ></textarea>
+
+
+      <!-- =========================
+           FICTION ONLY
+      ========================== -->
+
+      <div
+        id="fiction-publication-fields"
+        style="display:none;"
+      >
+
+        <h3>
+          Main Protagonist
+        </h3>
+
+
+        <label for="protagonist-name">
+          Character Name
+        </label>
+
+        <input
+          id="protagonist-name"
+          type="text"
+        >
+
+
+        <label for="protagonist-profile">
+          Character Profile
+        </label>
+
+        <textarea
+          id="protagonist-profile"
+          rows="5"
+        ></textarea>
+
+
+        <label for="protagonist-traits">
+          Character Traits
+        </label>
+
+        <input
+          id="protagonist-traits"
+          type="text"
+          placeholder="e.g. brave, stubborn, intelligent"
+        >
+
+
+        <h3>
+          Main Antagonist
+        </h3>
+
+
+        <label for="antagonist-name">
+          Character Name
+        </label>
+
+        <input
+          id="antagonist-name"
+          type="text"
+        >
+
+
+        <label for="antagonist-profile">
+          Character Profile
+        </label>
+
+        <textarea
+          id="antagonist-profile"
+          rows="5"
+        ></textarea>
+
+
+        <label for="antagonist-traits">
+          Character Traits
+        </label>
+
+        <input
+          id="antagonist-traits"
+          type="text"
+          placeholder="e.g. manipulative, powerful, jealous"
+        >
+
+      </div>
+
+
+      <!-- =========================
+           AGREEMENTS
+      ========================== -->
+
+      <div class="publication-agreements">
+
+        <label class="publication-check">
+
+          <input
+            id="original-work-confirmation"
+            type="checkbox"
+            required
+          >
+
+          <span>
+            I confirm that this manuscript is my
+            original work.
+          </span>
+
+        </label>
+
+
+        <label class="publication-check">
+
+          <input
+            id="publishing-terms-confirmation"
+            type="checkbox"
+            required
+          >
+
+          <span>
+            I agree to Litdom's publishing terms
+            and submission guidelines.
+          </span>
+
+        </label>
+
+
+        <label class="publication-check">
+
+          <input
+            id="review-period-confirmation"
+            type="checkbox"
+            required
+          >
+
+          <span>
+            I understand that manuscript review
+            may take several weeks and submission
+            does not guarantee publication.
+          </span>
+
+        </label>
+
+      </div>
+
+
+      <!-- =========================
+           SUBMIT
+      ========================== -->
+
+      <button
+        id="submit-publication-application"
+        type="submit"
+      >
+        Submit for Review
+      </button>
+
+
+      <p
+        id="publication-application-message"
+      ></p>
+
+    </form>
+
+  </div>
+
+</div>
 }
