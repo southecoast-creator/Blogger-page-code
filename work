@@ -1,4 +1,4 @@
-q/* =====================================================
+/* =====================================================
    APPLY FOR PUBLICATION
 ===================================================== */
 
@@ -606,3 +606,42 @@ checkPublicationEligibility(
 
 
 card.appendChild(actions);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function openPublicationApplication(
+  book
+) {
+
+  const publicationModal =
+    document.getElementById(
+      "publication-application-modal"
+    );
+
+  if (!publicationModal) {
+
+    console.error(
+      "Publication application modal was not found."
+    );
+
+    return;
+
+  }
+
+  publicationModal.style.display =
+    "flex";
+
+}
