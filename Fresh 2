@@ -868,3 +868,72 @@ function openPublicationApplication(
     "flex";
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+async function loadPublicationAuthorDetails(
+  authorId
+) {
+
+  const {
+    data: profile,
+    error
+  } = await supabaseClient
+    .from("profiles")
+    .select(
+      "username,display_name,bio"
+    )
+    .eq(
+      "id",
+      authorId
+    )
+    .single();
+
+
+  if (error) {
+
+    console.error(
+      "PUBLICATION AUTHOR LOAD ERROR:",
+      error
+    );
+
+    return;
+
+  }
+
+
+  const publicationPenName =
+    document.getElementById(
+      "publication-pen-name"
+    );
+
+  const publicationBio =
+    document.getElementById(
+      "publication-bio"
+    );
+
+
+  publicationPenName.value =
+    profile.display_name ||
+    profile.username ||
+    "";
+
+  publicationBio.value =
+    profile.bio ||
+    "";
+
+}
