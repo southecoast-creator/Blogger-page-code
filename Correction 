@@ -1,0 +1,72 @@
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+
+document.addEventListener("DOMContentLoaded", async function () {
+  
+    const fictionGenres = [
+    "Romance",
+    "Fantasy",
+    "Paranormal",
+    "Mystery",
+    "Thriller",
+    "Science Fiction",
+    "Contemporary",
+    "Historical",
+    "Adventure",
+    "Crime",
+    "Horror",
+    "Young Adult"
+  ];
+
+  const fictionSubgenres = {
+
+  "Romance": [
+    "Contemporary Romance",
+    "Dark Romance",
+    "Billionaire Romance",
+    "Sports Romance",
+    "Historical Romance",
+    "Paranormal Romance",
+    "Romantic Suspense"
+  ],
+
+  "Paranormal": [
+    "Paranormal Romance",
+    "Vampire",
+    "Werewolf",
+    "Witchcraft",
+    "Supernatural",
+    "Urban Paranormal"
+  ],
+
+  "Mystery": [
+    "Cozy Mystery",
+    "Detective Mystery",
+    "Amateur Sleuth",
+    "Whodunit",
+    "Psychological Mystery"
+  ],
+    
+  "Thriller": [
+    "Psychological Thriller",
+    "Domestic Thriller",
+    "Legal Thriller",
+    "Crime Thriller",
+    "Suspense Thriller"
+  ],
+
+  "Science Fiction": [
+    "Dystopian",
+    "Space Opera",
+    "Cyberpunk",
+    "Time Travel",
+    "Post-Apocalyptic",
+    "Science Fiction Romance"
+  ],
+
+  "Contemporary": [
+    "Contemporary Romance",
+    "Coming of Age",
+    "Family Drama"
+  ]
