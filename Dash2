@@ -1,0 +1,599 @@
+const manageChaptersButton =
+  document.createElement("button");
+
+manageChaptersButton.type =
+  "button";
+
+manageChaptersButton.className =
+  "book-action-button";
+
+manageChaptersButton.textContent =
+  "Manage Chapters";
+
+manageChaptersButton.addEventListener(
+  "click",
+  function () {
+
+    openManageChapters(book);
+
+  }
+);
+     
+actions.appendChild(editButton);
+
+actions.appendChild(
+  manageChaptersButton
+);
+
+
+/* =========================
+   APPLY FOR PUBLICATION
+========================= */
+
+const applyPublicationButton =
+  document.createElement("button");
+
+applyPublicationButton.type =
+  "button";
+
+applyPublicationButton.className =
+  "book-action-button";
+
+applyPublicationButton.textContent =
+  "Apply for Publication";
+applyPublicationButton.style.display =
+  "none";
+
+applyPublicationButton.dataset.bookId =
+  book.id;
+     
+     
+     /*
+   The button will be enabled
+   by the eligibility check below.
+*/
+
+actions.appendChild(
+  applyPublicationButton
+);
+
+card.appendChild(actions);
+
+
+/* =========================
+   CHECK PUBLICATION
+   ELIGIBILITY
+========================= */
+
+checkPublicationEligibility(
+  book,
+  applyPublicationButton
+);
+
+
+booksList.appendChild(card);
+
+});
+    
+  }
+  
+  async function checkPublicationEligibility(
+  book,
+  applyButton
+) {
+
+  /*
+     Published books don't need
+     an application button.
+  */
+
+  if (
+    book.status === "published"
+  ) {
+
+    applyButton.style.display =
+      "none";
+
+    return;
+
+  }
+    
+   /*
+     Get all chapters belonging
+     to this book.
+  */
+
+  const {
+    data: chapters,
+    error: chaptersError
+  } = await supabaseClient
+    .from("chapters")
+    .select(
+ "word_count"
+    )
+    .eq(
+      "book_id",
+      book.id
+    );
+
+
+  if (chaptersError) {
+
+    console.error(
+      "PUBLICATION ELIGIBILITY ERROR:",
+      chaptersError
+    );
+
+    applyButton.style.display =
+      "none";
+
+    return;
+
+  }
+    
+   /*
+     Calculate total manuscript
+     words from the chapters.
+  */
+
+  const totalWords =
+    (chapters || []).reduce(
+      function (total, chapter) {
+
+        return total +
+          (
+            Number(
+              chapter.word_count
+            ) || 0
+ );
+
+      },
+      0
+    );
+
+
+  /*
+     Must have at least 5,000 words.
+  */
+
+  if (
+    totalWords < 5000
+  ) {
+
+    applyButton.style.display =
+      "none";
+
+    return;
+
+  }
+    
+    
+      /*
+     Check whether this book
+     already has a publication
+     application.
+  */
+
+  const {
+    data: submissions,
+    error: submissionError
+  } = await supabaseClient
+    .from("book_submissions")
+    .select(
+      "id,status"
+    )
+
+.eq(
+      "book_id",
+      book.id
+    )
+    .order(
+      "created_at",
+      {
+        ascending: false
+      }
+    )
+    .limit(1);
+
+
+  if (submissionError) {
+
+    console.error(
+      "SUBMISSION CHECK ERROR:",
+      submissionError
+    );
+
+    applyButton.style.display =
+      "none";
+
+    return;
+
+  }
+    
+    
+      const latestSubmission =
+    submissions &&
+    submissions.length
+      ? submissions[0]
+      : null;
+
+
+  /*
+     Don't allow another 
+application
+     while one is pending or already
+     approved.
+  */
+
+  if (
+    latestSubmission &&
+    (
+      latestSubmission.status ===
+        "pending" ||
+
+      latestSubmission.status ===
+        "approved"
+    )
+  ) {
+
+    applyButton.style.display =
+      "none";
+
+    return;
+
+  }
+
+
+  /*
+     Eligible.
+  */
+    
+      applyButton.style.display =
+    "inline-flex";
+
+
+  
+
+      openPublicationApplication(
+        book,
+        totalWords
+      );
+
+}
+  );
+
+}
+  
+  function updatePublicationFormByBookType(
+  book
+) {
+
+  const fictionFields =
+    document.getElementById(
+      "fiction-publication-fields"
+    );
+
+  if (!fictionFields) {
+    return;
+  }
+
+
+  if (
+    book.book_type === "fiction"
+  ) {
+
+    fictionFields.style.display =
+      "block";
+
+  } else {
+
+    fictionFields.style.display =
+      "none";
+
+  }
+
+}
+  
+function openPublicationApplication(
+  book,
+  totalWords
+) {
+    
+    const publicationModal =
+    document.getElementById(
+      "publication-application-modal"
+    );
+
+  if (!publicationModal) {
+
+  console.error(
+    "PUBLICATION APPLICATION MODAL NOT FOUND."
+  );
+
+  return;
+
+}
+
+publicationModal.style.display =
+  "flex";
+
+  const publicationBookName =
+    document.getElementById(
+      "publication-book-name"
+    );
+
+  const publicationBookType =
+    document.getElementById(
+      "publication-book-type"
+    );
+
+  const publicationWordCount =
+    document.getElementById(
+      "publication-word-count"
+    );
+
+const publicationSubgenre =
+    document.getElementById(
+      "publication-subgenre"
+    );
+    
+      const publicationTags =
+    document.getElementById(
+      "publication-tags"
+    );
+
+  const publicationDescription =
+    document.getElementById(
+      "publication-description"
+    );
+
+  const publicationOutline =
+    document.getElementById(
+      "publication-outline"
+    );
+
+
+  /*
+     =========================
+     BOOK INFORMATION
+     =========================
+  */
+
+  publicationBookName.textContent =
+    book.title || "Untitled Book";
+
+  publicationBookType.textContent =
+    book.book_type === "non-fiction"
+      ? "Non-fiction"
+      : "Fiction";
+
+  publicationWordCount.textContent
+=
+    Number(
+      totalWords
+    ).toLocaleString() +
+    " words";
+
+
+  /*
+     =========================
+     PRE-FILL BOOK DETAILS
+     =========================
+  */
+    
+      publicationDescription.value =
+    book.description || "";
+
+  publicationSubgenre.value =
+    book.subgenre || "";
+
+  const tags =
+    book.type_details &&
+    Array.isArray(
+      book.type_details.tags
+    )
+      ? book.type_details.tags
+      : [];
+
+  publicationTags.value =
+    tags.join(", ");
+
+
+  /*
+     =========================
+     AUTHOR INFORMATION
+     =========================
+  */
+
+  const publicationFullName =
+document.getElementById(
+      "publication-full-name"
+    );
+    
+      const publicationPenName =
+    document.getElementById(
+      "publication-pen-name"
+    );
+
+  const publicationEmail =
+    document.getElementById(
+      "publication-email"
+    );
+
+  const publicationPhone =
+    document.getElementById(
+      "publication-phone"
+    );
+
+  const publicationBio =
+    document.getElementById(
+      "publication-bio"
+    );
+
+
+  /*
+     We know these from the
+     current authenticated user
+     and profile information.
+  */
+    
+      if (
+    typeof session !== "undefined" &&
+    session &&
+    session.user
+  ) {
+publicationEmail.value =
+      session.user.email || "";
+
+  }
+
+
+  /*
+     display_name is currently
+     the closest existing profile
+     field to the author's pen name.
+  */
+
+  if (
+    book.author_id
+  ) {
+
+    loadPublicationAuthorDetails(
+      book.author_id
+    );
+
+  }
+
+
+  /*
+     =========================
+     PAYMENT FIELDS
+     =========================
+
+     These remain blank because
+     your profiles table does not
+     contain payment information.
+  */
+    
+      document.getElementById(
+    "publication-phone"
+  ).value = "";
+
+document.getElementById(
+    "publication-bank-name"
+  ).value = "";
+
+  document.getElementById(
+    "publication-account-name"
+  ).value = "";
+
+  document.getElementById(
+    "publication-account-number"
+  ).value = "";
+
+
+  /*
+     =========================
+     FICTION / NON-FICTION
+     =========================
+  */
+
+  updatePublicationFormByBookType(
+    book
+  );
+    
+    /*
+     =========================
+     RESET APPLICATION MESSAGE
+     =========================
+  */
+
+  document.getElementById(
+    "publication-application-message"
+  ).textContent = "";
+
+
+  /*
+     =========================
+     RESET AGREEMENTS
+     =========================
+  */
+
+  document.getElementById(
+    "original-work-confirmation"
+  ).checked = false;
+
+  document.getElementById(
+    "publishing-terms-confirmation"
+  ).checked = false;
+
+  document.getElementById(
+    "review-period-confirmation"
+  ).checked = false;
+
+
+  /*
+     =========================
+     SHOW MODAL
+     =========================
+  */
+}
+  
+  async function loadPublicationAuthorDetails(
+  authorId
+) {
+
+  const {
+    data: profile,
+    error
+  } = await supabaseClient
+    .from("profiles")
+    .select(
+      "username,display_name,bio"
+    )
+    .eq(
+      "id",
+      authorId
+    )
+    .single();
+
+
+  if (error) {
+
+    console.error( "PUBLICATION AUTHOR LOAD ERROR:",
+      error
+    );
+
+    return;
+
+  }
+    
+      const publicationPenName =
+    document.getElementById(
+      "publication-pen-name"
+    );
+
+  const publicationBio =
+    document.getElementById(
+      "publication-bio"
+    );
+
+
+  publicationPenName.value =
+    profile.display_name ||
+    profile.username ||
+    "";
+
+  publicationBio.value =
+    profile.bio ||
+    "";
+
+}
+  const manageChaptersModal =
+  document.getElementById(
+    "manage-chapters-modal"
+  );
+
+const closeManageChapters =
+  document.getElementById(
+    "close-manage-chapters"
