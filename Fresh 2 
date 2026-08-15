@@ -394,3 +394,336 @@ async function checkPublicationEligibility(
     };
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function updatePublicationFormByBookType(
+  book
+) {
+
+  const fictionFields =
+    document.getElementById(
+      "fiction-publication-fields"
+    );
+
+  if (!fictionFields) {
+    return;
+  }
+
+
+  if (
+    book.book_type === "fiction"
+  ) {
+
+    fictionFields.style.display =
+      "block";
+
+  } else {
+
+    fictionFields.style.display =
+      "none";
+
+  }
+
+}
+
+
+function openPublicationApplication(
+  book,
+  totalWords
+) {
+
+  const publicationModal =
+    document.getElementById(
+      "publication-application-modal"
+    );
+
+  if (!publicationModal) {
+
+    console.error(
+      "PUBLICATION APPLICATION MODAL NOT FOUND."
+    );
+
+    return;
+
+  }
+
+
+  const publicationBookName =
+    document.getElementById(
+      "publication-book-name"
+    );
+
+  const publicationBookType =
+    document.getElementById(
+      "publication-book-type"
+    );
+
+  const publicationWordCount =
+    document.getElementById(
+      "publication-word-count"
+    );
+
+  const publicationSubgenre =
+    document.getElementById(
+      "publication-subgenre"
+    );
+
+  const publicationTags =
+    document.getElementById(
+      "publication-tags"
+    );
+
+  const publicationDescription =
+    document.getElementById(
+      "publication-description"
+    );
+
+  const publicationOutline =
+    document.getElementById(
+      "publication-outline"
+    );
+
+
+  /*
+     BOOK INFORMATION
+  */
+
+  if (publicationBookName) {
+
+    publicationBookName.textContent =
+      book.title || "Untitled Book";
+
+  }
+
+
+  if (publicationBookType) {
+
+    publicationBookType.textContent =
+      book.book_type === "non-fiction"
+        ? "Non-fiction"
+        : "Fiction";
+
+  }
+
+
+  if (publicationWordCount) {
+
+    publicationWordCount.textContent =
+      Number(
+        totalWords
+      ).toLocaleString() +
+      " words";
+
+  }
+
+
+  /*
+     PRE-FILL BOOK DETAILS
+  */
+
+  if (publicationDescription) {
+
+    publicationDescription.value =
+      book.description || "";
+
+  }
+
+
+  if (publicationSubgenre) {
+
+    publicationSubgenre.value =
+      book.subgenre || "";
+
+  }
+
+
+  const tags =
+    book.type_details &&
+    Array.isArray(
+      book.type_details.tags
+    )
+      ? book.type_details.tags
+      : [];
+
+
+  if (publicationTags) {
+
+    publicationTags.value =
+      tags.join(", ");
+
+  }
+
+
+  /*
+     AUTHOR EMAIL
+  */
+
+  const publicationEmail =
+    document.getElementById(
+      "publication-email"
+    );
+
+
+  if (
+    publicationEmail &&
+    typeof session !== "undefined" &&
+    session &&
+    session.user
+  ) {
+
+    publicationEmail.value =
+      session.user.email || "";
+
+  }
+
+
+  /*
+     AUTHOR PROFILE
+  */
+
+  if (
+    book.author_id
+  ) {
+
+    loadPublicationAuthorDetails(
+      book.author_id
+    );
+
+  }
+
+
+  /*
+     PAYMENT FIELDS
+  */
+
+  const publicationPhone =
+    document.getElementById(
+      "publication-phone"
+    );
+
+  const publicationBankName =
+    document.getElementById(
+      "publication-bank-name"
+    );
+
+  const publicationAccountName =
+    document.getElementById(
+      "publication-account-name"
+    );
+
+  const publicationAccountNumber =
+    document.getElementById(
+      "publication-account-number"
+    );
+
+
+  if (publicationPhone) {
+
+    publicationPhone.value = "";
+
+  }
+
+  if (publicationBankName) {
+
+    publicationBankName.value = "";
+
+  }
+
+  if (publicationAccountName) {
+
+    publicationAccountName.value = "";
+
+  }
+
+  if (publicationAccountNumber) {
+
+    publicationAccountNumber.value = "";
+
+  }
+
+
+  /*
+     FICTION / NON-FICTION
+  */
+
+  updatePublicationFormByBookType(
+    book
+  );
+
+
+  /*
+     RESET MESSAGE
+  */
+
+  const message =
+    document.getElementById(
+      "publication-application-message"
+    );
+
+  if (message) {
+
+    message.textContent = "";
+
+  }
+
+
+  /*
+     RESET AGREEMENTS
+  */
+
+  const originalWork =
+    document.getElementById(
+      "original-work-confirmation"
+    );
+
+  const publishingTerms =
+    document.getElementById(
+      "publishing-terms-confirmation"
+    );
+
+  const reviewPeriod =
+    document.getElementById(
+      "review-period-confirmation"
+    );
+
+
+  if (originalWork) {
+
+    originalWork.checked = false;
+
+  }
+
+  if (publishingTerms) {
+
+    publishingTerms.checked = false;
+
+  }
+
+  if (reviewPeriod) {
+
+    reviewPeriod.checked = false;
+
+  }
+
+
+  /*
+     SHOW MODAL
+  */
+
+  publicationModal.style.display =
+    "flex";
+
+}
