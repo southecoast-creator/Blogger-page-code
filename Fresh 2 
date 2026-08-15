@@ -1,0 +1,193 @@
+async function checkPublicationEligibility(
+  book,
+  applyButton
+) {
+
+  /*
+     Published books don't need
+     an application button.
+  */
+
+  if (
+    book.status === "published"
+  ) {
+
+    applyButton.style.display =
+      "none";
+
+    return;
+
+  }
+
+
+  /*
+     Get all chapters belonging
+     to this book.
+  */
+
+  const {
+    data: chapters,
+    error: chaptersError
+  } = await supabaseClient
+    .from("chapters")
+    .select(
+      "word_count"
+    )
+    .eq(
+      "book_id",
+      book.id
+    );
+
+
+  if (chaptersError) {
+
+    console.error(
+      "PUBLICATION ELIGIBILITY ERROR:",
+      chaptersError
+    );
+
+    applyButton.style.display =
+      "none";
+
+    return;
+
+  }
+
+
+  /*
+     Calculate total manuscript
+     words from the chapters.
+  */
+
+  const totalWords =
+    (chapters || []).reduce(
+      function (total, chapter) {
+
+        return total +
+          (
+            Number(
+              chapter.word_count
+            ) || 0
+          );
+
+      },
+      0
+    );
+
+
+  /*
+     Must have at least 5,000 words.
+  */
+
+  if (
+    totalWords < 5000
+  ) {
+
+    applyButton.style.display =
+      "none";
+
+    return;
+
+  }
+
+
+  /*
+     Check whether this book
+     already has a publication
+     application.
+  */
+
+  const {
+    data: submissions,
+    error: submissionError
+  } = await supabaseClient
+    .from("book_submissions")
+    .select(
+      "id,status"
+    )
+    .eq(
+      "book_id",
+      book.id
+    )
+    .order(
+      "created_at",
+      {
+        ascending: false
+      }
+    )
+    .limit(1);
+
+
+  if (submissionError) {
+
+    console.error(
+      "SUBMISSION CHECK ERROR:",
+      submissionError
+    );
+
+    applyButton.style.display =
+      "none";
+
+    return;
+
+  }
+
+
+  const latestSubmission =
+    submissions &&
+    submissions.length
+      ? submissions[0]
+      : null;
+
+
+  /*
+     Don't allow another application
+     while one is pending or already
+     approved.
+  */
+
+  if (
+    latestSubmission &&
+    (
+      latestSubmission.status ===
+        "pending" ||
+
+      latestSubmission.status ===
+        "approved"
+    )
+  ) {
+
+    applyButton.style.display =
+      "none";
+
+    return;
+
+  }
+
+
+  /*
+     Eligible.
+  */
+
+  applyButton.style.display =
+    "inline-flex";
+
+
+  applyButton.addEventListener(
+    "click",
+    function () {
+
+      console.log(
+        "APPLY BUTTON CLICKED",
+        book.id
+      );
+
+      openPublicationApplication(
+        book,
+        totalWords
+      );
+
+    }
+  );
+
+}
