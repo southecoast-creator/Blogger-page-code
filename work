@@ -331,3 +331,81 @@ document.addEventListener("DOMContentLoaded", async function () {
 
 
 
+
+
+
+
+
+
+
+/* =========================
+   APPLY FOR PUBLICATION
+========================= */
+
+const applyPublicationButton =
+  document.createElement("button");
+
+applyPublicationButton.type =
+  "button";
+
+applyPublicationButton.className =
+  "book-action-button";
+
+applyPublicationButton.textContent =
+  "Apply for Publication";
+
+applyPublicationButton.style.display =
+  "none";
+
+actions.appendChild(
+  applyPublicationButton
+);
+
+
+/* =========================
+   CHECK 5,000 WORD
+   ELIGIBILITY
+========================= */
+
+const {
+  data: publicationChapters,
+  error: publicationChapterError
+} = await supabaseClient
+  .from("chapters")
+  .select("word_count")
+  .eq(
+    "book_id",
+    book.id
+  );
+
+
+if (!publicationChapterError) {
+
+  const publicationTotalWords =
+    (publicationChapters || []).reduce(
+      function (total, chapter) {
+
+        return total +
+          (
+            Number(
+              chapter.word_count
+            ) || 0
+          );
+
+      },
+      0
+    );
+
+
+  if (
+    publicationTotalWords >= 5000 &&
+    book.status !== "published"
+  ) {
+
+    applyPublicationButton.style.display =
+      "inline-flex";
+
+  }
+
+}
+
