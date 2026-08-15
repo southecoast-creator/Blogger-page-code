@@ -645,3 +645,115 @@ function openPublicationApplication(
     "flex";
 
 }
+
+
+
+
+
+
+
+
+
+
+
+<!-- =========================
+     FICTION ONLY
+========================= -->
+
+<div
+  id="fiction-publication-fields"
+  style="display:none;"
+>
+
+  <h3>
+    Fiction Information
+  </h3>
+
+  <p class="publication-section-note">
+    These details help our editorial team understand
+    the main characters in your story.
+  </p>
+
+
+  <!-- =========================
+       PROTAGONIST
+  ========================== -->
+
+  <h4>
+    Main Protagonist
+  </h4>
+
+  <label for="protagonist-name">
+    Character Name
+  </label>
+
+  <input
+    id="protagonist-name"
+    type="text"
+    placeholder="Main protagonist's name"
+  >
+
+
+  <label for="protagonist-profile">
+    Character Profile
+  </label>
+
+  <textarea
+    id="protagonist-profile"
+    rows="5"
+    placeholder="Describe the protagonist..."
+  ></textarea>
+
+
+  <label for="protagonist-traits">
+    Character Traits
+  </label>
+
+  <input
+    id="protagonist-traits"
+    type="text"
+    placeholder="e.g. brave, stubborn, intelligent"
+  >
+
+
+  <!-- =========================
+       ANTAGONIST
+  ========================== -->
+
+  <h4>
+    Main Antagonist
+  </h4>
+
+  <label for="antagonist-name">
+    Character Name
+  </label>
+
+  <input
+    id="antagonist-name"
+    type="text"
+    placeholder="Main antagonist's name"
+  >
+
+
+  <label for="antagonist-profile">
+    Character Profile
+  </label>
+
+  <textarea
+    id="antagonist-profile"
+    rows="5"
+    placeholder="Describe the antagonist..."
+  ></textarea>
+
+
+  <label for="antagonist-traits">
+    Character Traits
+  </label>
+
+  <input
+    id="antagonist-traits"
+    type="text"
+    placeholder="e.g. manipulative, powerful, jealous"
+  >
+
+</div>
