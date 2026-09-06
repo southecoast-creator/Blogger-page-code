@@ -1,1335 +1,826 @@
-form.addEventListener(
-  "submit",
-  async function (event) {
+<script>
+document.addEventListener('DOMContentLoaded', async function () {
 
-    event.preventDefault();
+  /* =====================================================
+     ELEMENTS
+  ===================================================== */
 
-    const title =
-      titleInput.value.trim();
+  const profileName =
+    document.getElementById('public-profile-name');
 
-    const type =
-      selectedType.value;
+  const profileUsername =
+    document.getElementById('public-profile-username');
 
-    const message =
-      document.getElementById(
-        "create-book-message"
-      );
+  const profileBio =
+    document.getElementById('public-profile-bio');
 
-    if (!title) {
+  const authorName =
+    document.getElementById('works-author-name');
 
-      message.textContent =
-        "Please enter a book title.";
+  const avatarInitial =
+    document.getElementById('public-profile-initial');
 
-      return;
+  const avatarContainer =
+    document.getElementById('profile-avatar-container');
 
-    }
+  const avatarImage =
+    document.getElementById('profile-avatar-image');
 
-    if (!type) {
+  const avatarInput =
+    document.getElementById('profile-avatar-input');
 
-      message.textContent =
-        "Please select a book type.";
+  const ownerArea =
+    document.getElementById('profile-owner-area');
 
-      return;
+  const loginGate =
+    document.getElementById('profile-login-gate');
 
-    }
-
-    message.textContent =
-      "Creating your book...";
+  const profileContent =
+    document.getElementById('profile-content');
 
 
-    /* =========================
-       CREATE DRAFT
-    ========================= */
+  /* =====================================================
+     CACHE CONFIG
+  ===================================================== */
 
-    const {
-      data: bookId,
-      error: createError
-    } = await supabaseClient.rpc(
-      "create_author_book",
-      {
-        p_title: title,
-        p_book_type: type
+  const PROFILE_CACHE_PREFIX = 'litdomProfileCache_';
+  const PROFILE_CACHE_TTL_MS = 5 * 60 * 1000; // 5 minutes
+
+  function getCachedProfile(id) {
+    try {
+      const raw = localStorage.getItem(PROFILE_CACHE_PREFIX + id);
+      if (!raw) return null;
+
+      const parsed = JSON.parse(raw);
+
+      if (Date.now() - parsed.cachedAt > PROFILE_CACHE_TTL_MS) {
+        localStorage.removeItem(PROFILE_CACHE_PREFIX + id);
+        return null;
       }
+
+      return parsed.data;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  function setCachedProfile(id, data) {
+    try {
+      localStorage.setItem(
+        PROFILE_CACHE_PREFIX + id,
+        JSON.stringify({ cachedAt: Date.now(), data: data })
+      );
+    } catch (e) {
+      // storage full or unavailable - fail silently, not critical
+    }
+  }
+
+
+  /* =====================================================
+     HELPERS
+  ===================================================== */
+
+  function formatCount(number) {
+
+    if (number < 1000) {
+      return number;
+    }
+
+    if (number < 1000000) {
+      return (
+        number / 1000
+      ).toFixed(1).replace('.0', '') + 'K';
+    }
+
+    if (number < 1000000000) {
+      return (
+        number / 1000000
+      ).toFixed(1).replace('.0', '') + 'M';
+    }
+
+    return (
+      number / 1000000000
+    ).toFixed(1).replace('.0', '') + 'B';
+  }
+
+
+  /* =====================================================
+     GET PROFILE ID FROM URL (if viewing someone else)
+  ===================================================== */
+
+  const params =
+    new URLSearchParams(
+      window.location.search
     );
 
+  const urlProfileId =
+    params.get('id');
 
-    if (createError) {
 
-      console.error(createError);
+  /* =====================================================
+     CHECK LOGIN
+  ===================================================== */
 
-      message.textContent =
-        createError.message;
+  const {
+    data: { session },
+    error: sessionError
+  } =
+    await litdomSupabase.auth.getSession();
 
-      return;
 
+  if (sessionError) {
+
+    console.error(
+      'Session check error:',
+      sessionError
+    );
+
+    if (loginGate) {
+      loginGate.style.display = 'block';
     }
 
-
-    if (!bookId) {
-
-      message.textContent =
-        "The book was created, but no book ID was returned.";
-
-      return;
-
+    if (profileContent) {
+      profileContent.style.display = 'none';
     }
 
-
-    /* =========================
-       BASIC BOOK DETAILS
-    ========================= */
-
-    const description =
-      document.getElementById(
-        "book-description"
-      ).value.trim();
-
-    const genre =
-      document.getElementById(
-        "book-genre"
-      ).value;
-
-    const ageRating =
-      type === "fiction"
-        ? document.getElementById(
-            "age-rating"
-          ).value || null
-        : null;
-
-
-    const {
-      data: updatedBook,
-      error: updateError
-    } = await supabaseClient
-      .from("books")
-      .update({
-        description:
-          description || null,
-
-        genre:
-          genre || null,
-
-        age_rating:
-          ageRating,
-
-        updated_at:
-          new Date().toISOString()
-      })
-      .eq(
-        "id",
-        bookId
-      )
-      .select("id");
-
-
-    if (updateError) {
-
-      console.error(updateError);
-
-      message.textContent =
-        "Book was created, but its details could not be saved: " +
-        updateError.message;
-
-      return;
-
-    }
-
-
-    if (
-      !updatedBook ||
-      updatedBook.length === 0
-    ) {
-
-      console.error(
-        "BOOK UPDATE MATCHED NO ROWS",
-        bookId
-      );
-
-      message.textContent =
-        "The draft was created, but the book details update matched no book.";
-
-      return;
-
-    }
-
-
-    /* =========================
-       SAVE TYPE DETAILS
-    ========================= */
-
-    const typeDetails = {};
-
-
-    if (type === "fiction") {
-
-      const subgenre =
-        document.getElementById(
-          "fiction-subgenre"
-        ).value;
-
-      const tagsText =
-        document.getElementById(
-          "fiction-tags"
-        ).value.trim();
-
-      const tags =
-        tagsText
-          ? tagsText
-              .split(",")
-              .map(function (tag) {
-                return tag.trim();
-              })
-              .filter(Boolean)
-          : [];
-
-
-      typeDetails.subgenre =
-        subgenre || null;
-
-      typeDetails.tags =
-        tags;
-
-
-    } else {
-
-      const subgenre =
-        document.getElementById(
-          "nonfiction-subgenre"
-        ).value;
-
-      const tagsText =
-        document.getElementById(
-          "nonfiction-tags"
-        ).value.trim();
-
-      const tags =
-        tagsText
-          ? tagsText
-              .split(",")
-              .map(function (tag) {
-                return tag.trim();
-              })
-              .filter(Boolean)
-          : [];
-
-
-      const intendedAudience =
-        document.getElementById(
-          "intended-audience"
-        ).value || null;
-
-      const contentLevel =
-        document.getElementById(
-          "nonfiction-content-level"
-        ).value || null;
-
-
-      typeDetails.subgenre =
-        subgenre || null;
-
-      typeDetails.tags =
-        tags;
-
-      typeDetails.intended_audience =
-        intendedAudience;
-
-      typeDetails.content_level =
-        contentLevel;
-
-    }
-
-
-    const {
-      error: typeDetailsError
-    } = await supabaseClient
-      .from("books")
-      .update({
-        type_details:
-          typeDetails,
-
-        updated_at:
-          new Date().toISOString()
-      })
-      .eq(
-        "id",
-        bookId
-      );
-
-
-    if (typeDetailsError) {
-
-      console.error(typeDetailsError);
-
-      message.textContent =
-        "Book was created, but the type details could not be saved: " +
-        typeDetailsError.message;
-
-      return;
-
-    }
-
-
-    /* =========================
-       GET COVER
-    ========================= */
-
-    let coverFile = null;
-
-
-    if (type === "fiction") {
-
-      coverFile =
-        document.getElementById(
-          "fiction-book-cover"
-        ).files[0] || null;
-
-    } else {
-
-      coverFile =
-        document.getElementById(
-          "book-cover"
-        ).files[0] || null;
-
-    }
-
-
-    if (!coverFile) {
-
-      message.textContent =
-        "Please upload a book cover.";
-
-      return;
-
-    }
-
-
-    /* =========================
-       UPLOAD COVER
-    ========================= */
-
-    message.textContent =
-      "Uploading your book cover...";
-
-
-    const extension =
-      coverFile.name
-        .split(".")
-        .pop()
-        .toLowerCase();
-
-
-    const coverPath =
-      bookId + "." + extension;
-
-
-    const {
-      error: uploadError
-    } = await supabaseClient
-      .storage
-      .from("book-covers")
-      .upload(
-        coverPath,
-        coverFile,
-        {
-          upsert: true,
-          contentType:
-            coverFile.type
-        }
-      );
-
-
-    if (uploadError) {
-
-      console.error(uploadError);
-
-      message.textContent =
-        "The book was created, but the cover could not be uploaded: " +
-        uploadError.message;
-
-      return;
-
-    }
-
-
-    /* =========================
-       GET PUBLIC COVER URL
-    ========================= */
-
-    const {
-      data: publicUrlData
-    } = supabaseClient
-      .storage
-      .from("book-covers")
-      .getPublicUrl(
-        coverPath
-      );
-
-
-    const coverUrl =
-      publicUrlData.publicUrl;
-
-
-    /* =========================
-       SAVE COVER URL
-    ========================= */
-
-    const {
-      error: coverUpdateError
-    } = await supabaseClient
-      .from("books")
-      .update({
-        cover_url:
-          coverUrl,
-
-        updated_at:
-          new Date().toISOString()
-      })
-      .eq(
-        "id",
-        bookId
-      );
-
-
-    if (coverUpdateError) {
-
-      console.error(
-        coverUpdateError
-      );
-
-      message.textContent =
-        "The cover uploaded, but its URL could not be saved: " +
-        coverUpdateError.message;
-
-      return;
-
-    }
-
-
-    /* =========================
-       SUCCESS
-    ========================= */
-
-    message.textContent =
-      "Book created successfully.";
-
-    modal.style.display =
-      "none";
-
-    await loadBooks();
-
+    return;
   }
-);
 
 
+  /* =====================================================
+     LOGIN GATE
+  ===================================================== */
+
+  if (!session || !session.user) {
+
+    if (loginGate) {
+      loginGate.style.display = 'block';
+    }
+
+    if (profileContent) {
+      profileContent.style.display = 'none';
+    }
+
+    return;
+  }
 
 
+  /* =====================================================
+     LOGGED-IN USER
+  ===================================================== */
+
+  if (loginGate) {
+    loginGate.style.display = 'none';
+  }
+
+  if (profileContent) {
+    profileContent.style.display = 'block';
+  }
 
 
+  const currentUser = session.user;
 
 
+  /* =====================================================
+     RESOLVE PROFILE ID
+     - URL id present -> viewing someone else's profile
+     - otherwise -> viewing our own profile
+  ===================================================== */
+
+  const profileId =
+    urlProfileId ||
+    currentUser.id;
 
 
+  if (!profileId) {
 
-books.forEach(function (book) {
+    if (profileName) {
+      profileName.textContent = 'Profile not found';
+    }
 
-  const card =
-    document.createElement("div");
+    if (profileUsername) {
+      profileUsername.textContent = '';
+    }
 
-  card.className =
-    "book-card";
+    if (profileBio) {
+      profileBio.textContent = 'No profile was specified.';
+    }
 
-
-  /* =========================
-     BOOK HEADER
-  ========================= */
-
-  const bookHeader =
-    document.createElement("div");
-
-  bookHeader.className =
-    "book-card-header";
+    return;
+  }
 
 
-  /* =========================
-     COVER
-  ========================= */
+  /* =====================================================
+     LOAD PROFILE (cache-first)
+  ===================================================== */
 
-  const cover =
-    document.createElement("img");
+  let profile = getCachedProfile(profileId);
 
-  cover.className =
-    "book-card-cover";
+  if (!profile) {
 
-  cover.alt =
-    book.title + " cover";
+    const {
+      data: fetchedProfile,
+      error: profileError
+    } =
+      await litdomSupabase
+        .from('profiles')
+        .select(
+          'id, username, display_name, bio, avatar_url'
+        )
+        .eq('id', profileId)
+        .maybeSingle();
 
-  if (book.cover_url) {
 
-    cover.src =
-      book.cover_url;
+    if (profileError) {
+
+      console.error(
+        'Profile loading error:',
+        profileError
+      );
+
+      if (profileName) {
+        profileName.textContent = 'Unable to load profile';
+      }
+
+      return;
+    }
+
+    profile = fetchedProfile;
+
+    if (profile) {
+      setCachedProfile(profileId, profile);
+    }
+  }
+
+
+  /* =====================================================
+     PROFILE NOT FOUND
+  ===================================================== */
+
+  if (!profile) {
+
+    if (profileName) {
+      profileName.textContent = 'Profile not found';
+    }
+
+    if (profileUsername) {
+      profileUsername.textContent = '';
+    }
+
+    if (profileBio) {
+      profileBio.textContent = 'This profile does not exist.';
+    }
+
+    return;
+  }
+
+
+  /* =====================================================
+     OWNER CHECK
+  ===================================================== */
+
+  const isProfileOwner =
+    currentUser.id === profile.id;
+
+
+  if (ownerArea) {
+
+    ownerArea.style.display =
+      isProfileOwner ? 'block' : 'none';
+  }
+
+
+  /* =====================================================
+     PROFILE INFORMATION
+  ===================================================== */
+
+  const displayName =
+    profile.display_name ||
+    profile.username ||
+    'Litdom User';
+
+  const username =
+    profile.username ||
+    'username';
+
+  const bio =
+    profile.bio ||
+    'No bio yet.';
+
+
+  if (profileName) {
+    profileName.textContent = displayName;
+  }
+
+  if (profileUsername) {
+    profileUsername.textContent = '@' + username;
+  }
+
+  if (profileBio) {
+    profileBio.textContent = bio;
+  }
+
+  if (authorName) {
+    authorName.textContent = displayName;
+  }
+
+
+  /* =====================================================
+     LOAD AUTHOR'S PUBLISHED WORKS (cache-first)
+  ===================================================== */
+
+  const authorBooks =
+    document.getElementById('profile-books');
+
+  if (authorBooks) {
+
+    const BOOKS_CACHE_KEY =
+      'litdomAuthorBooksCache_' + profileId;
+
+    let books = null;
+
+    try {
+      const rawBooks = localStorage.getItem(BOOKS_CACHE_KEY);
+      if (rawBooks) {
+        const parsedBooks = JSON.parse(rawBooks);
+        if (Date.now() - parsedBooks.cachedAt <= PROFILE_CACHE_TTL_MS) {
+          books = parsedBooks.data;
+        } else {
+          localStorage.removeItem(BOOKS_CACHE_KEY);
+        }
+      }
+    } catch (e) {
+      books = null;
+    }
+
+    if (!books) {
+
+      authorBooks.innerHTML = `
+        <p class="profile-loading">
+          Loading works...
+        </p>
+      `;
+
+      const {
+        data: fetchedBooks,
+        error: booksError
+      } = await litdomSupabase
+        .from('books')
+        .select(`
+          id,
+          title,
+          cover_url,
+          description,
+          genre,
+          created_at,
+          status
+        `)
+        .eq('author_id', profileId)
+        .eq('status', 'published')
+        .order('created_at', { ascending: false });
+
+      if (booksError) {
+
+        console.error(
+          'Author books loading error:',
+          booksError
+        );
+
+        authorBooks.innerHTML = `
+          <p class="profile-loading">
+            Unable to load works.
+          </p>
+        `;
+
+        books = null;
+
+      } else {
+
+        books = fetchedBooks || [];
+
+        try {
+          localStorage.setItem(
+            BOOKS_CACHE_KEY,
+            JSON.stringify({ cachedAt: Date.now(), data: books })
+          );
+        } catch (e) {
+          // ignore storage errors
+        }
+      }
+    }
+
+    if (books) {
+
+      if (books.length === 0) {
+
+        authorBooks.innerHTML = `
+          <p class="profile-loading">
+            No published works yet.
+          </p>
+        `;
+
+      } else {
+
+        authorBooks.innerHTML = '';
+
+        books.forEach(function (book) {
+
+          const card =
+            document.createElement('a');
+
+          card.className =
+            'profile-book-card';
+
+          card.href =
+            '/p/books.html?book=' +
+            encodeURIComponent(book.id);
+
+          card.style.textDecoration = 'none';
+
+          const cover =
+            book.cover_url
+              ? `
+                <img
+                  src="${book.cover_url}"
+                  alt="${book.title || 'Book cover'}"
+                  class="profile-book-cover"
+                >
+              `
+              : `
+                <div class="profile-book-cover profile-book-cover-placeholder">
+                  No Cover
+                </div>
+              `;
+
+          card.innerHTML = `
+            ${cover}
+
+            <div class="profile-book-info">
+
+              <h3>
+                ${book.title || 'Untitled Book'}
+              </h3>
+
+              ${
+                book.genre
+                  ? `<p class="profile-book-genre">${book.genre}</p>`
+                  : ''
+              }
+
+              ${
+                book.description
+                  ? `<p class="profile-book-description">
+                      ${book.description}
+                    </p>`
+                  : ''
+              }
+
+            </div>
+          `;
+
+          authorBooks.appendChild(card);
+
+        });
+      }
+    }
+  }
+
+
+  /* =====================================================
+     PROFILE INITIAL
+  ===================================================== */
+
+  if (avatarInitial) {
+
+    avatarInitial.textContent =
+      displayName.charAt(0).toUpperCase();
+  }
+
+
+  /* =====================================================
+     LOAD PROFILE AVATAR
+  ===================================================== */
+
+  if (profile.avatar_url && avatarImage) {
+
+    avatarImage.src = profile.avatar_url;
+    avatarImage.style.display = 'block';
+
+    if (avatarInitial) {
+      avatarInitial.style.display = 'none';
+    }
+  }
+
+
+  /* =====================================================
+     AVATAR OWNERSHIP
+  ===================================================== */
+
+  if (avatarContainer && avatarInput) {
+
+    if (isProfileOwner) {
+
+      avatarContainer.style.cursor = 'pointer';
+
+      avatarContainer.onclick = function () {
+        avatarInput.click();
+      };
+
+    } else {
+
+      avatarContainer.style.cursor = 'default';
+      avatarInput.style.display = 'none';
+      avatarContainer.onclick = null;
+    }
+  }
+
+
+  /* =====================================================
+     AVATAR UPLOAD
+  ===================================================== */
+
+  if (avatarInput && isProfileOwner) {
+
+    avatarInput.addEventListener('change', async function () {
+
+      const file = avatarInput.files[0];
+
+      if (!file) {
+        return;
+      }
+
+      if (!file.type.startsWith('image/')) {
+        alert('Please choose an image file.');
+        avatarInput.value = '';
+        return;
+      }
+
+      if (file.size > 5 * 1024 * 1024) {
+        alert('Please choose an image smaller than 5 MB.');
+        avatarInput.value = '';
+        return;
+      }
+
+      const fileExtension =
+        file.name.split('.').pop();
+
+      const fileName =
+        'profile-' + Date.now() + '.' + fileExtension;
+
+      const filePath =
+        currentUser.id + '/' + fileName;
+
+      const uploadResult =
+        await litdomSupabase
+          .storage
+          .from('avatar')
+          .upload(filePath, file);
+
+      if (uploadResult.error) {
+
+        console.error(
+          'Avatar upload error:',
+          uploadResult.error
+        );
+
+        alert(
+          'Could not upload your profile picture: ' +
+          uploadResult.error.message
+        );
+
+        avatarInput.value = '';
+        return;
+      }
+
+      const publicUrlResult =
+        litdomSupabase
+          .storage
+          .from('avatar')
+          .getPublicUrl(filePath);
+
+      const avatarUrl =
+        publicUrlResult.data.publicUrl;
+
+      const updateResult =
+        await litdomSupabase
+          .from('profiles')
+          .update({ avatar_url: avatarUrl })
+          .eq('id', currentUser.id);
+
+      if (updateResult.error) {
+
+        console.error(
+          'Avatar profile update error:',
+          updateResult.error
+        );
+
+        alert(
+          'The picture uploaded, but the profile could not be updated: ' +
+          updateResult.error.message
+        );
+
+        avatarInput.value = '';
+        return;
+      }
+
+      /* invalidate cache since profile changed */
+      localStorage.removeItem(PROFILE_CACHE_PREFIX + currentUser.id);
+
+      if (avatarImage) {
+        avatarImage.src = avatarUrl;
+        avatarImage.style.display = 'block';
+      }
+
+      if (avatarInitial) {
+        avatarInitial.style.display = 'none';
+      }
+
+      avatarInput.value = '';
+
+      alert('Profile picture updated! 🎉');
+    });
+  }
+
+
+  /* =====================================================
+     FOLLOW AREA
+  ===================================================== */
+
+  let followArea =
+    document.getElementById('profile-follow-area');
+
+  if (!followArea) {
+
+    followArea = document.createElement('div');
+    followArea.id = 'profile-follow-area';
+
+    followArea.innerHTML = `
+      <div id="profile-stats">
+        <span>
+          <strong id="follower-count">0</strong>
+          Followers
+        </span>
+        <span>
+          <strong id="following-count">0</strong>
+          Following
+        </span>
+      </div>
+
+      <button id="follow-button" type="button">
+        Follow
+      </button>
+
+      <p id="follow-message"></p>
+    `;
+
+    if (profileBio) {
+      profileBio.parentNode.appendChild(followArea);
+    }
+  }
+
+
+  /* =====================================================
+     FOLLOW ELEMENTS
+  ===================================================== */
+
+  const followButton =
+    document.getElementById('follow-button');
+
+  const followerCount =
+    document.getElementById('follower-count');
+
+  const followingCount =
+    document.getElementById('following-count');
+
+  const followMessage =
+    document.getElementById('follow-message');
+
+
+  /* =====================================================
+     FOLLOW COUNTS
+  ===================================================== */
+
+  if (followerCount && followingCount) {
+
+    const {
+      count: followers,
+      error: followerError
+    } =
+      await litdomSupabase
+        .from('follows')
+        .select('*', { count: 'exact', head: true })
+        .eq('following_id', profileId);
+
+    if (followerError) {
+      console.error('Follower count error:', followerError);
+    } else {
+      followerCount.textContent = formatCount(followers || 0);
+    }
+
+    const {
+      count: following,
+      error: followingError
+    } =
+      await litdomSupabase
+        .from('follows')
+        .select('*', { count: 'exact', head: true })
+        .eq('follower_id', profileId);
+
+    if (followingError) {
+      console.error('Following count error:', followingError);
+    } else {
+      followingCount.textContent = formatCount(following || 0);
+    }
+  }
+
+
+  /* =====================================================
+     FOLLOW BUTTON
+  ===================================================== */
+
+  if (!followButton || isProfileOwner) {
+
+    if (followButton && isProfileOwner) {
+      followButton.style.display = 'none';
+    }
 
   } else {
 
-    cover.style.display =
-      "none";
+    let existingFollow = null;
 
+    const {
+      data: followData,
+      error: followCheckError
+    } =
+      await litdomSupabase
+        .from('follows')
+        .select('id')
+        .eq('follower_id', currentUser.id)
+        .eq('following_id', profileId)
+        .maybeSingle();
+
+    if (followCheckError) {
+      console.error('Follow check error:', followCheckError);
+    } else {
+      existingFollow = followData;
+    }
+
+    followButton.textContent =
+      existingFollow ? 'Following' : 'Follow';
+
+    followButton.addEventListener('click', async function () {
+
+      followButton.disabled = true;
+
+      if (existingFollow) {
+
+        const { error } =
+          await litdomSupabase
+            .from('follows')
+            .delete()
+            .eq('id', existingFollow.id);
+
+        if (error) {
+          console.error('Unfollow error:', error);
+          followButton.disabled = false;
+          return;
+        }
+
+        existingFollow = null;
+        followButton.textContent = 'Follow';
+
+      } else {
+
+        const { data: newFollow, error } =
+          await litdomSupabase
+            .from('follows')
+            .insert({
+              follower_id: currentUser.id,
+              following_id: profileId
+            })
+            .select('id')
+            .single();
+
+        if (error) {
+          console.error('Follow error:', error);
+          if (followMessage) {
+            followMessage.textContent = error.message;
+          }
+          followButton.disabled = false;
+          return;
+        }
+
+        existingFollow = newFollow;
+        followButton.textContent = 'Following';
+
+        if (followMessage) {
+          followMessage.textContent = 'Following this user.';
+        }
+      }
+
+      followButton.disabled = false;
+    });
   }
-
-
-  /* =========================
-     BOOK INFORMATION
-  ========================= */
-
-  const info =
-    document.createElement("div");
-
-  info.className =
-    "book-card-info";
-
-
-  const title =
-    document.createElement("h3");
-
-  title.textContent =
-    book.title;
-
-
-  const meta =
-    document.createElement("div");
-
-  meta.className =
-    "book-meta";
-
-  meta.textContent =
-    book.book_type === "non-fiction"
-      ? "Non-fiction"
-      : "Fiction";
-
-
-  /* =========================
-     TAGS
-  ========================= */
-
-  const tagsContainer =
-    document.createElement("div");
-
-  tagsContainer.className =
-    "book-card-tags";
-
-
-  const tags =
-    book.type_details &&
-    Array.isArray(book.type_details.tags)
-      ? book.type_details.tags
-      : [];
-
-
-  tags.slice(0, 3).forEach(function (tag) {
-
-    const tagElement =
-      document.createElement("span");
-
-    tagElement.className =
-      "book-tag";
-
-    tagElement.textContent =
-      tag;
-
-    tagsContainer.appendChild(
-      tagElement
-    );
-
-  });
-
-
-  /* =========================
-     STATUS
-  ========================= */
-
-  const status =
-    document.createElement("span");
-
-  status.className =
-    "book-status";
-
-  status.textContent =
-    (
-      book.submission_status ||
-      book.status ||
-      "draft"
-    ).toUpperCase();
-
-
-  info.appendChild(title);
-  info.appendChild(meta);
-  info.appendChild(tagsContainer);
-  info.appendChild(status);
-
-
-  bookHeader.appendChild(cover);
-  bookHeader.appendChild(info);
-
-
-  card.appendChild(bookHeader);
-
-
-  /* =========================
-     BUTTONS
-     WE WILL ADD THESE NEXT
-  ========================= */
-
-
-  booksList.appendChild(card);
 
 });
-
-
-
-
-
-
-
-async function openEditBook(book) {
-
-  modalLabel.textContent =
-    "EDIT BOOK";
-
-  typeHeading.textContent =
-    book.book_type === "fiction"
-      ? "Edit Fiction Book"
-      : "Edit Non-fiction Book";
-
-  saveBookButton.textContent =
-    "Save Changes";
-
-
-  /* =========================
-     BASIC BOOK INFORMATION
-  ========================= */
-
-  titleInput.value =
-    book.title || "";
-
-  document
-    .getElementById("book-description")
-    .value =
-      book.description || "";
-
-  document
-    .getElementById("book-genre")
-    .value =
-      book.genre || "";
-
-  selectedType.value =
-    book.book_type || "";
-
-
-  /* =========================
-     OPEN THE MODAL
-  ========================= */
-
-  modal.style.display =
-    "flex";
-
-}
-
-
-
-async function openEditBook(book) {
-
-  modalLabel.textContent =
-    "EDIT BOOK";
-
-  typeHeading.textContent =
-    book.book_type === "fiction"
-      ? "Edit Fiction Book"
-      : "Edit Non-fiction Book";
-
-  saveBookButton.textContent =
-    "Save Changes";
-
-
-  /* =========================
-     SET BOOK TYPE
-  ========================= */
-
-  selectedType.value =
-    book.book_type || "";
-
-
-  /* =========================
-     INITIALIZE BOOK TYPE FIELDS
-  ========================= */
-
-  openCreateBook(
-    book.book_type === "fiction"
-      ? "fiction"
-      : "non-fiction"
-  );
-
-
-  /* =========================
-     BASIC INFORMATION
-  ========================= */
-
-  titleInput.value =
-    book.title || "";
-
-  document
-    .getElementById("book-description")
-    .value =
-      book.description || "";
-
-
-  /* =========================
-     GENRE
-  ========================= */
-
-  const genreSelect =
-    document.getElementById("book-genre");
-
-  genreSelect.value =
-    book.genre || "";
-
-
-  /* =========================
-     FICTION DETAILS
-  ========================= */
-
-  if (book.book_type === "fiction") {
-
-    document
-      .getElementById("age-rating")
-      .value =
-        book.age_rating || "";
-
-
-    const details =
-      book.type_details || {};
-
-
-    document
-      .getElementById("fiction-subgenre")
-      .value =
-        details.subgenre || "";
-
-
-    document
-      .getElementById("fiction-tags")
-      .value =
-        Array.isArray(details.tags)
-          ? details.tags.join(", ")
-          : "";
-
-  }
-
-
-  /* =========================
-     NON-FICTION DETAILS
-  ========================= */
-
-  if (book.book_type === "non-fiction") {
-
-    const details =
-      book.type_details || {};
-
-
-    document
-      .getElementById("nonfiction-subgenre")
-      .value =
-        details.subgenre || "";
-
-
-    document
-      .getElementById("nonfiction-tags")
-      .value =
-        Array.isArray(details.tags)
-          ? details.tags.join(", ")
-          : "";
-
-
-    document
-      .getElementById("intended-audience")
-      .value =
-        details.intended_audience || "";
-
-
-    document
-      .getElementById("nonfiction-content-level")
-      .value =
-        details.content_level || "";
-
-  }
-
-
-  /* =========================
-     OPEN MODAL
-  ========================= */
-
-  modal.style.display =
-    "flex";
-
-}
-
-
-
-
-
-
-
-
-
-form.addEventListener(
-  "submit",
-  async function (event) {
-
-    event.preventDefault();
-
-    const title =
-      titleInput.value.trim();
-
-    const type =
-      selectedType.value;
-
-    const message =
-      document.getElementById(
-        "create-book-message"
-      );
-
-
-    /* =========================
-       BASIC VALIDATION
-    ========================= */
-
-    if (!title) {
-
-      message.textContent =
-        "Please enter a book title.";
-
-      return;
-
-    }
-
-
-    if (!type) {
-
-      message.textContent =
-        "Please select a book type.";
-
-      return;
-
-    }
-
-
-    const isEditing =
-      editingBookId !== null;
-
-
-    message.textContent =
-      isEditing
-        ? "Saving your changes..."
-        : "Creating your book...";
-
-
-    /* =========================
-       CREATE OR IDENTIFY BOOK
-    ========================= */
-
-    let bookId;
-
-
-    if (isEditing) {
-
-      bookId =
-        editingBookId;
-
-    } else {
-
-      const {
-        data: createdBookId,
-        error: createError
-      } = await supabaseClient.rpc(
-        "create_author_book",
-        {
-          p_title: title,
-          p_book_type: type
-        }
-      );
-
-
-      if (createError) {
-
-        console.error(createError);
-
-        message.textContent =
-          createError.message;
-
-        return;
-
-      }
-
-
-      if (!createdBookId) {
-
-        message.textContent =
-          "The book was created, but no book ID was returned.";
-
-        return;
-
-      }
-
-
-      bookId =
-        createdBookId;
-
-    }
-
-
-    /* =========================
-       BASIC BOOK DETAILS
-    ========================= */
-
-    const description =
-      document
-        .getElementById(
-          "book-description"
-        )
-        .value
-        .trim();
-
-
-    const genre =
-      document
-        .getElementById(
-          "book-genre"
-        )
-        .value;
-
-
-    const ageRating =
-      type === "fiction"
-        ? document
-            .getElementById(
-              "age-rating"
-            )
-            .value || null
-        : null;
-
-
-    const {
-      data: updatedBook,
-      error: updateError
-    } = await supabaseClient
-      .from("books")
-      .update({
-
-        title:
-          title,
-
-        description:
-          description || null,
-
-        genre:
-          genre || null,
-
-        age_rating:
-          ageRating,
-
-        updated_at:
-          new Date().toISOString()
-
-      })
-      .eq(
-        "id",
-        bookId
-      )
-      .select("id");
-
-
-    if (updateError) {
-
-      console.error(updateError);
-
-      message.textContent =
-        isEditing
-          ? "The book was not updated: " +
-            updateError.message
-          : "Book was created, but its details could not be saved: " +
-            updateError.message;
-
-      return;
-
-    }
-
-
-    if (
-      !updatedBook ||
-      updatedBook.length === 0
-    ) {
-
-      console.error(
-        "BOOK UPDATE MATCHED NO ROWS",
-        bookId
-      );
-
-      message.textContent =
-        "The book details could not be saved.";
-
-      return;
-
-    }
-
-
-    /* =========================
-       SAVE TYPE DETAILS
-    ========================= */
-
-    const typeDetails = {};
-
-
-    if (type === "fiction") {
-
-      const subgenre =
-        document
-          .getElementById(
-            "fiction-subgenre"
-          )
-          .value;
-
-
-      const tagsText =
-        document
-          .getElementById(
-            "fiction-tags"
-          )
-          .value
-          .trim();
-
-
-      const tags =
-        tagsText
-          ? tagsText
-              .split(",")
-              .map(function (tag) {
-                return tag.trim();
-              })
-              .filter(Boolean)
-          : [];
-
-
-      typeDetails.subgenre =
-        subgenre || null;
-
-      typeDetails.tags =
-        tags;
-
-
-    } else {
-
-      const subgenre =
-        document
-          .getElementById(
-            "nonfiction-subgenre"
-          )
-          .value;
-
-
-      const tagsText =
-        document
-          .getElementById(
-            "nonfiction-tags"
-          )
-          .value
-          .trim();
-
-
-      const tags =
-        tagsText
-          ? tagsText
-              .split(",")
-              .map(function (tag) {
-                return tag.trim();
-              })
-              .filter(Boolean)
-          : [];
-
-
-      const intendedAudience =
-        document
-          .getElementById(
-            "intended-audience"
-          )
-          .value || null;
-
-
-      const contentLevel =
-        document
-          .getElementById(
-            "nonfiction-content-level"
-          )
-          .value || null;
-
-
-      typeDetails.subgenre =
-        subgenre || null;
-
-      typeDetails.tags =
-        tags;
-
-      typeDetails.intended_audience =
-        intendedAudience;
-
-      typeDetails.content_level =
-        contentLevel;
-
-    }
-
-
-    const {
-      error: typeDetailsError
-    } = await supabaseClient
-      .from("books")
-      .update({
-
-        type_details:
-          typeDetails,
-
-        updated_at:
-          new Date().toISOString()
-
-      })
-      .eq(
-        "id",
-        bookId
-      );
-
-
-    if (typeDetailsError) {
-
-      console.error(
-        typeDetailsError
-      );
-
-      message.textContent =
-        isEditing
-          ? "The book was updated, but its type details could not be saved: " +
-            typeDetailsError.message
-          : "Book was created, but its type details could not be saved: " +
-            typeDetailsError.message;
-
-      return;
-
-    }
-
-
-    /* =========================
-       GET COVER
-    ========================= */
-
-    let coverFile =
-      null;
-
-
-    if (type === "fiction") {
-
-      coverFile =
-        document
-          .getElementById(
-            "fiction-book-cover"
-          )
-          .files[0] || null;
-
-    } else {
-
-      coverFile =
-        document
-          .getElementById(
-            "book-cover"
-          )
-          .files[0] || null;
-
-    }
-
-
-    /*
-      IMPORTANT:
-
-      Creating a book requires a cover.
-
-      Editing a book does NOT require
-      selecting a new cover.
-    */
-
-    if (
-      !coverFile &&
-      !isEditing
-    ) {
-
-      message.textContent =
-        "Please upload a book cover.";
-
-      return;
-
-    }
-
-
-    /* =========================
-       UPLOAD NEW COVER
-       ONLY IF ONE WAS SELECTED
-    ========================= */
-
-    if (coverFile) {
-
-      message.textContent =
-        "Uploading your book cover...";
-
-
-      const extension =
-        coverFile.name
-          .split(".")
-          .pop()
-          .toLowerCase();
-
-
-      const {
-        data: {
-          user
-        }
-      } =
-        await supabaseClient
-          .auth
-          .getUser();
-
-
-      if (!user) {
-
-        message.textContent =
-          "Your login session could not be verified.";
-
-        return;
-
-      }
-
-
-      const coverPath =
-        user.id +
-        "/" +
-        bookId +
-        "." +
-        extension;
-
-
-      const {
-        error: uploadError
-      } = await supabaseClient
-        .storage
-        .from("book-covers")
-        .upload(
-          coverPath,
-          coverFile,
-          {
-            upsert: true,
-            contentType:
-              coverFile.type
-          }
-        );
-
-
-      if (uploadError) {
-
-        console.error(
-          uploadError
-        );
-
-        message.textContent =
-          "UPLOAD ERROR: " +
-          uploadError.message +
-          " | " +
-          uploadError.statusCode;
-
-        return;
-
-      }
-
-
-      /* =========================
-         GET PUBLIC COVER URL
-      ========================= */
-
-      const {
-        data: publicUrlData
-      } =
-        supabaseClient
-          .storage
-          .from("book-covers")
-          .getPublicUrl(
-            coverPath
-          );
-
-
-      const coverUrl =
-        publicUrlData.publicUrl;
-
-
-      /* =========================
-         SAVE COVER URL
-      ========================= */
-
-      const {
-        error: coverUpdateError
-      } = await supabaseClient
-        .from("books")
-        .update({
-
-          cover_url:
-            coverUrl,
-
-          updated_at:
-            new Date().toISOString()
-
-        })
-        .eq(
-          "id",
-          bookId
-        );
-
-
-      if (coverUpdateError) {
-
-        console.error(
-          coverUpdateError
-        );
-
-        message.textContent =
-          "The cover uploaded, but its URL could not be saved: " +
-          coverUpdateError.message;
-
-        return;
-
-      }
-
-    }
-
-
-    /* =========================
-       SUCCESS
-    ========================= */
-
-    message.textContent =
-      isEditing
-        ? "Book updated successfully."
-        : "Book created successfully.";
-
-
-    modal.style.display =
-      "none";
-
-
-    editingBookId =
-      null;
-
-
-    await loadBooks();
-
-  }
-);
+</script>
